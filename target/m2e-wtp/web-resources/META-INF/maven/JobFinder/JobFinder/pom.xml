@@ -182,14 +182,6 @@
 			<version>3.0.8</version>
 		</dependency>
 
-		<!-- paypal -->
-		<dependency>
-			<groupId>com.paypal.sdk</groupId>
-			<artifactId>rest-api-sdk</artifactId>
-			<version>1.4.2</version>
-		</dependency>
-		<!-- end paypal -->
-
 	</dependencies>
 
 	<build>

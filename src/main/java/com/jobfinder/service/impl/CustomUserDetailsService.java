@@ -1,4 +1,4 @@
-package com.jobfinder.service.imp;
+package com.jobfinder.service.impl;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -35,9 +35,8 @@ public class CustomUserDetailsService implements UserDetailsService {
 		}
 		MyUser myUser = new MyUser(Long.toString(userEntity.getId()), userEntity.getUserName(), userEntity.getPassword(), 
 							true, true, true, true, authorities);
-		myUser.setFullName(userEntity.getFullName());
+		myUser.setFullName(userEntity.getLastName()+userEntity.getFirstName());
 		myUser.setId(Long.toString(userEntity.getId()));
-		//Long.toString(userEntity.getId());
 		return myUser;
 	}
 
