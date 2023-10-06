@@ -56,7 +56,7 @@
         <dispatcher>REQUEST</dispatcher>
         <dispatcher>FORWARD</dispatcher>
     </filter-mapping>
-
+    
 	<!-- Welcome File List -->
 	<welcome-file-list>
 		<welcome-file>index.jsp</welcome-file>

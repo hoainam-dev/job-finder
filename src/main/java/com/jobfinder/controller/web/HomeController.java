@@ -92,4 +92,9 @@ public class HomeController {
 		}
 		return mav;
 	}
+	
+	@RequestMapping(value = "/accessDenied", method = RequestMethod.GET)
+	public ModelAndView accessDenied() {
+		return new ModelAndView("redirect:/dang-nhap?accessDenied");
+	}
 }

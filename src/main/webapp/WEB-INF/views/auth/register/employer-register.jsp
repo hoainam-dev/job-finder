@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Employer Register</title>
+<title>Đăng ký Nhà Tuyển Dụng</title>
 </head>
 <body>
 	<main>

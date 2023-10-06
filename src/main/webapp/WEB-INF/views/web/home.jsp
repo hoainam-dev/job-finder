@@ -5,10 +5,13 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Trang chu</title>
+<title>Trang chủ</title>
 </head>
 <body>
 	<main>
+		<!-- Navigation -->
+		<%@ include file="/common/web/home-header.jsp" %>
+	
 		<!-- slider Area Start-->
 		<div class="slider-area ">
 			<!-- Mobile Menu -->
@@ -318,6 +321,9 @@
 			</div>
 		</div>
 		<!-- Blog Area End -->
+		
+		<!-- Footer -->
+		<%@ include file="/common/web/home-footer.jsp" %>
 	</main>
 	
 </body>
