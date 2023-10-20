@@ -51,10 +51,19 @@
 							<!-- Header-btn -->
 							<div class="header-btn d-none f-right d-lg-block">
 								<security:authorize access="isAnonymous()">
-									<a href="dang-ky" class="btn head-btn1">Register</a> 
+									<a href="dang-ky" class="btn head-btn1">Register</a>
 									<a href="dang-nhap" class="btn head-btn2">Login</a>
 								</security:authorize>
 								<security:authorize access="isAuthenticated()">
+									<c:forEach items="${users}" var="user">
+										<c:if
+											test="${applicant.userName==SecurityUtils.getPrincipal().getUsername()}">
+											<a class="nav-link"
+												href="<c:url value='/thong-tin-ca-nhan?id=${user.id}'/>">
+												<%=SecurityUtils.getPrincipal().getUsername()%>
+											</a>
+										</c:if>
+									</c:forEach>
 									<a href="thoat" class="btn head-btn2">Thoát</a>
 								</security:authorize>
 							</div>

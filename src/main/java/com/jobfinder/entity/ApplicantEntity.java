@@ -1,7 +1,9 @@
 package com.jobfinder.entity;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -15,10 +17,11 @@ public class ApplicantEntity extends BaseEntity{
 	@Column(name = "experience", columnDefinition = "TEXT")
 	private String experience;
 	
-	@Column(name = "education")
+	@Column(name = "education", columnDefinition = "TEXT")
 	private String education;
 	
-	@OneToOne(mappedBy = "applicant")
+	@OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "user_id", referencedColumnName = "id")
     private UserEntity user;
 	
 	

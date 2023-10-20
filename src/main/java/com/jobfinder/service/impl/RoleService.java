@@ -37,6 +37,7 @@ public class RoleService implements IRoleService {
 		return models;
 	}
 	
+	
 	@Override
 	public int getTotalItem() {
 		return (int) roleRepository.count();
@@ -46,6 +47,12 @@ public class RoleService implements IRoleService {
 	public RoleDTO findById(long id) {
 		RoleEntity entity = roleRepository.findOne(id);
 		return roleConverter.toDto(entity);
+	}
+	
+	@Override
+	public List<RoleEntity> findByIds(List<Long> ids) {
+//		RoleEntity entity = roleRepository.findOne(ids);
+		return roleRepository.findAllById(ids);
 	}
 	
 	@Override

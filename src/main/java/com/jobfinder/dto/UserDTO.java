@@ -3,16 +3,15 @@ package com.jobfinder.dto;
 public class UserDTO extends AbstractDTO<UserDTO>{
 	private String userName;
 	private String password;
-	private String email;
 	private String firstName;
 	private String lastName;
+	private String email;
 	private String address;
 	private String phone;
 	private Integer status;
+	private Long roleId;
 	private	Long applicant_id;
 	private	Long employer_id;
-	private String applicantName;
-	private String employerName;
 	
 	public String getUserName() {
 		return userName;
@@ -26,12 +25,6 @@ public class UserDTO extends AbstractDTO<UserDTO>{
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	public String getEmail() {
-		return email;
-	}
-	public void setEmail(String email) {
-		this.email = email;
-	}
 	public String getFirstName() {
 		return firstName;
 	}
@@ -43,6 +36,12 @@ public class UserDTO extends AbstractDTO<UserDTO>{
 	}
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
+	}
+	public String getEmail() {
+		return email;
+	}
+	public void setEmail(String email) {
+		this.email = email;
 	}
 	public String getAddress() {
 		return address;
@@ -62,6 +61,12 @@ public class UserDTO extends AbstractDTO<UserDTO>{
 	public void setStatus(Integer status) {
 		this.status = status;
 	}
+	public Long getRoleId() {
+		return roleId;
+	}
+	public void setRoleId(Long roleId) {
+		this.roleId = roleId;
+	}
 	public Long getApplicant_id() {
 		return applicant_id;
 	}
@@ -73,18 +78,6 @@ public class UserDTO extends AbstractDTO<UserDTO>{
 	}
 	public void setEmployer_id(Long employer_id) {
 		this.employer_id = employer_id;
-	}
-	public String getApplicantName() {
-		return applicantName;
-	}
-	public void setApplicantName(String applicantName) {
-		this.applicantName = applicantName;
-	}
-	public String getEmployerName() {
-		return employerName;
-	}
-	public void setEmployerName(String employerName) {
-		this.employerName = employerName;
 	}
 	
 }

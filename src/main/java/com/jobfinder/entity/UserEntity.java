@@ -13,6 +13,8 @@ import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+
+
 @Entity
 @Table(name = "user")
 public class UserEntity extends BaseEntity {
@@ -41,15 +43,8 @@ public class UserEntity extends BaseEntity {
 	@Column
 	private Integer status;
 	
-	@OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "applicant_id", referencedColumnName = "id")
-    private ApplicantEntity applicant;
 	
-	@OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "employer_id", referencedColumnName = "id")
-    private EmployerEntity employer;
-	
-	@ManyToMany(fetch = FetchType.LAZY)
+	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"), 
 								  inverseJoinColumns = @JoinColumn(name = "role_id"))
 	private List<RoleEntity> roles = new ArrayList<>();
@@ -117,23 +112,6 @@ public class UserEntity extends BaseEntity {
 
 	public void setStatus(Integer status) {
 		this.status = status;
-	}
-	
-	
-	public ApplicantEntity getApplicant() {
-		return applicant;
-	}
-
-	public void setApplicant(ApplicantEntity applicant) {
-		this.applicant = applicant;
-	}
-
-	public EmployerEntity getEmployer() {
-		return employer;
-	}
-
-	public void setEmployer(EmployerEntity employer) {
-		this.employer = employer;
 	}
 
 	public List<RoleEntity> getRoles() {

@@ -17,22 +17,7 @@ public class HomeController {
 
 	@RequestMapping(value = "/trang-chu", method = RequestMethod.GET)
 	public ModelAndView homePage() {
-//	public ModelAndView homePage(@RequestParam(name="paypat", required = false) String message,@RequestParam(name="subject", required = false) String subjectCode) {
 		ModelAndView mav = new ModelAndView("web/home");
-//		List<TeacherDTO> teachers = new ArrayList<>();
-//		List<WebXuDTO> webXu = webXuService.findAll();
-//		List<SubjectDTO> subjects = new ArrayList<>();
-//		for (String item : subjectService.findAll().keySet()) {
-//			subjects.add(subjectConverter.toDto(subjectRepository.findOneByCode(item)));
-//		}
-//		mav.addObject("webXu", webXu);
-//		mav.addObject("evaluates", evaluateService.findAll());
-//		mav.addObject("saveTeachers", teacherStudentService.findAll());
-//		mav.addObject("subjects", subjects);
-//		mav.addObject("teachers", teacherService.findAll());
-//		mav.addObject("students", studentService.findAll());
-//		mav.addObject("teacherForSubjects", teachers);
-//		mav.addObject("message", message);
 		return mav;
 	}
 	
@@ -80,14 +65,23 @@ public class HomeController {
 	 *
 	 */
 	@RequestMapping(value = "/dang-ky", method = RequestMethod.GET)
-	public ModelAndView registerPage(@RequestParam(value = "role", required = false) String role) {
+	public ModelAndView registerPage(@RequestParam(value = "type", required = false) String type,
+			@RequestParam(value = "message", required = false) String message){
 		ModelAndView mav = new ModelAndView("auth/register/register");
-		if (role != null) {
-			if(role.equals("nha-tuyen-dung")) {
+		if (type != null) {
+			if(type.equals("nha-tuyen-dung")) {
 				mav = new ModelAndView("auth/register/employer-register");
+				if (message != null) {
+					mav.addObject("message", message);
+					mav.addObject("alert", "success");
+				}
 			}
-			if(role.equals("nguoi-tim-viec")) {
+			if(type.equals("nguoi-tim-viec")) {
 				mav = new ModelAndView("auth/register/applicant-register");
+				if (message != null) {
+					mav.addObject("message", message);
+					mav.addObject("alert", "success");
+				}
 			}
 		}
 		return mav;
