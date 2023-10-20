@@ -20,9 +20,9 @@
 							<div class="row">
 								<div class="col-lg-8 col-md-8">
 									<h2 class="mb-30">Bạn là ai?</h2>
-									<a href="/dang-ky?role=nha-tuyen-dung" class="genric-btn primary-border circle arrow">Nhà tuyển dụng<span
+									<a href="/dang-ky?type=nha-tuyen-dung" class="genric-btn primary-border circle arrow">Nhà tuyển dụng<span
 											class="lnr lnr-arrow-right"></span></a>
-									<a href="/dang-ky?role=nguoi-tim-viec" class="genric-btn primary-border circle arrow">Người tìm việc<span
+									<a href="/dang-ky?type=nguoi-tim-viec" class="genric-btn primary-border circle arrow">Người tìm việc<span
 											class="lnr lnr-arrow-right"></span></a>
 								</div>
 

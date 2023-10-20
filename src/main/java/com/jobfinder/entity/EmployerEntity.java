@@ -1,7 +1,9 @@
 package com.jobfinder.entity;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -15,7 +17,11 @@ public class EmployerEntity extends BaseEntity {
 	@Column(name = "company_address")
 	private String companyAddress;
 	
-	@OneToOne(mappedBy = "employer")
+	@Column(name = "position")
+	private String position;
+	
+	@OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "user_id", referencedColumnName = "id")
     private UserEntity user;
 
 	public String getCompanyName() {
@@ -32,6 +38,15 @@ public class EmployerEntity extends BaseEntity {
 
 	public void setCompanyAddress(String companyAddress) {
 		this.companyAddress = companyAddress;
+	}
+	
+
+	public String getPosition() {
+		return position;
+	}
+
+	public void setPosition(String position) {
+		this.position = position;
 	}
 
 	public UserEntity getUser() {

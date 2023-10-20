@@ -5,9 +5,12 @@
 		<pattern>/*</pattern>
 	</decorator>
 
+	<decorator name="employer" page="employer.jsp">
+		<pattern>/nha-tuyen-dung*</pattern>
+	</decorator>
+	
 	<decorator name="admin" page="admin.jsp">
 		<pattern>/quan-tri*</pattern>
-		
 	</decorator>
 
 	<decorator name="login" page="login.jsp">
