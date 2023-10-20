@@ -35,7 +35,7 @@
 								<nav class="d-none d-lg-block">
 									<ul id="navigation">
 										<li><a href="/">Home</a></li>
-										<li><a href="job_listing.html">Find a Jobs </a></li>
+										<li><a href="/viec-lam/danh-sach">Find a Jobs </a></li>
 										<li><a href="about.html">About</a></li>
 										<li><a href="#">Page</a>
 											<ul class="submenu">
@@ -57,10 +57,10 @@
 								<security:authorize access="isAuthenticated()">
 									<c:forEach items="${users}" var="user">
 										<c:if
-											test="${applicant.userName==SecurityUtils.getPrincipal().getUsername()}">
-											<a class="nav-link"
+											test="${user.userName==SecurityUtils.getPrincipal().getUsername()}">
+											<a style="color: #000"
 												href="<c:url value='/thong-tin-ca-nhan?id=${user.id}'/>">
-												<%=SecurityUtils.getPrincipal().getUsername()%>
+												Wellcome <%=SecurityUtils.getPrincipal().getUsername()%>
 											</a>
 										</c:if>
 									</c:forEach>
