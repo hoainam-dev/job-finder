@@ -22,7 +22,7 @@
 						<div class="row">
 							<div class="col-xl-6 col-lg-9 col-md-10">
 								<div class="hero__caption">
-									<h1>Find the most exciting startup jobs</h1>
+									<h1>the most exciting startup jobs</h1>
 								</div>
 							</div>
 						</div>
@@ -278,7 +278,7 @@
 									Excghcepteur signjnt occa cupidatat non inulpadeserunt mollit
 									aboru. temnthp incididbnt ut labore mollit anim laborum suis
 									aute.</p>
-								<a href="/formPostJob" class="btn post-btn">Post a job</a>
+								<a href="/viec-lam/tao-viec-lam" class="btn post-btn">Post a job</a>
 							</div>
 						</div>
 					</div>

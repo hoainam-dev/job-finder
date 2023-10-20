@@ -16,7 +16,7 @@
 	</div> 
 	<div class="panel-body">
 	  
-	<form:form action="createPost" class="form-horizontal" modelAttribute="jobs" role="form">
+	<form:form action="/viec-lam/tao-viec-lam" class="form-horizontal" modelAttribute="jobs" role="form">
 
 	
 		   <div class="form-group">

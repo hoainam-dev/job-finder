@@ -33,43 +33,9 @@ public class HomeController {
 		List<JobEntity> jobs = jobService.getAllJobs();
 		ModelAndView mav = new ModelAndView("web/home");
 		mav.addObject("jobs", jobs);
-		//	public ModelAndView homePage(@RequestParam(name="paypat", required = false) String message,@RequestParam(name="subject", required = false) String subjectCode) {
-//		List<TeacherDTO> teachers = new ArrayList<>();
-//		List<WebXuDTO> webXu = webXuService.findAll();
-//		List<SubjectDTO> subjects = new ArrayList<>();
-//		for (String item : subjectService.findAll().keySet()) {
-//			subjects.add(subjectConverter.toDto(subjectRepository.findOneByCode(item)));
-//		}
-//		mav.addObject("webXu", webXu);
-//		mav.addObject("evaluates", evaluateService.findAll());
-//		mav.addObject("saveTeachers", teacherStudentService.findAll());
-//		mav.addObject("subjects", subjects);
-//		mav.addObject("teachers", teacherService.findAll());
-//		mav.addObject("students", studentService.findAll());
-//		mav.addObject("teacherForSubjects", teachers);	
-//		mav.addObject("message", message);
 		return mav;
 	}
 	
-	@RequestMapping(value = "/jobs", method = RequestMethod.GET)
-	public String jobsList(Model model) {
-		List<JobEntity> jobs = jobService.getAllJobs();
-		model.addAttribute("jobs", jobs);
-		return "web/list-job";
-	}
-	
-	@RequestMapping(value = "/formPostJob", method = RequestMethod.GET)
-	public String formPostJob(Model model) {
-		JobEntity jobs = new JobEntity();
-		model.addAttribute("jobs", jobs);
-		return "web/post-form";
-	}
-	
-	@RequestMapping(value = "/createPost", method = RequestMethod.POST)
-	public String createPost(@ModelAttribute("jobs") JobEntity jobEntity) {
-		jobService.createPost(jobEntity);
-		return "redirect:/jobs";
-	}
 	
 	/**
 	 * View login page
