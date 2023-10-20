@@ -13,3 +13,4 @@ public interface IRoleService {
 	RoleDTO save(RoleDTO dto);
 	void delete(long[] ids);
 }
+

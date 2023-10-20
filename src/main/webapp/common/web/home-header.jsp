@@ -35,7 +35,7 @@
 								<nav class="d-none d-lg-block">
 									<ul id="navigation">
 										<li><a href="/">Home</a></li>
-										<li><a href="job_listing.html">Find a Jobs </a></li>
+										<li><a href="/jobs">Find a Jobs </a></li>
 										<li><a href="about.html">About</a></li>
 										<li><a href="#">Page</a>
 											<ul class="submenu">

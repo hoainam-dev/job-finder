@@ -97,6 +97,20 @@
 		</div>
 		<!-- Our Services End -->
 		
+		<h1>Danh sách công việc cho loại danh mục </h1>
+			<table>
+				<tr>
+					<th>Tiêu đề</th>
+					<th>Mô tả</th>
+				</tr>
+				<c:forEach var="job" items="${jobs}">
+					<tr>
+						<td>${job.title}</td>
+						<td>${job.description}</td>
+					</tr>
+				</c:forEach>
+			</table>
+		
 		<!-- Online CV Area Start -->
 		<div class="online-cv cv-bg section-overly pt-90 pb-120"
 			data-background="./template/web/img/gallery/cv_bg.jpg">
@@ -264,7 +278,7 @@
 									Excghcepteur signjnt occa cupidatat non inulpadeserunt mollit
 									aboru. temnthp incididbnt ut labore mollit anim laborum suis
 									aute.</p>
-								<a href="about.html" class="btn post-btn">Post a job</a>
+								<a href="/formPostJob" class="btn post-btn">Post a job</a>
 							</div>
 						</div>
 					</div>
