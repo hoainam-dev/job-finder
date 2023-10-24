@@ -2,6 +2,7 @@ package com.jobfinder.controller.web;
 
 import java.util.List;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,6 +22,8 @@ public class HomeController {
 	
 	@Autowired
 	private IUserService userService;
+	
+	private Logger LOGGER = Logger.getLogger(HomeController.class);
 
 	@RequestMapping(value = "/trang-chu", method = RequestMethod.GET)
 	public ModelAndView homePage() {
@@ -33,4 +36,14 @@ public class HomeController {
 		
 		return mav;
 	}
+	
+	/**
+     * @Desc return default page
+     * @return
+     */
+    @RequestMapping(path = "/**", method = RequestMethod.GET)
+    public String fallBackMethod() {
+        LOGGER.info("FALLBACK-METHOD");
+        return "errors/fallback-page";
+    }
 }

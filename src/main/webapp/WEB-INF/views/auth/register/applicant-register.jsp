@@ -4,8 +4,8 @@
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>Đăng ký Người Tìm Việc</title>
+	<meta charset="UTF-8">
+	<title>Đăng ký Người Tìm Việc</title>
 </head>
 <body>
 <style>

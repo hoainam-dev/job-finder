@@ -1,17 +1,14 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-<%@ include file="/common/taglib.jsp"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@include file="/common/taglib.jsp"%>
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>Trang chủ</title>
+	<meta charset="UTF-8">
+	<title>Trang chủ</title>
 </head>
 <body>
 	<main>
-		<!-- Navigation -->
-		<%@ include file="/common/web/home-header.jsp" %>
-	
+		
 		<!-- slider Area Start-->
 		<div class="slider-area ">
 			<!-- Mobile Menu -->
@@ -321,9 +318,6 @@
 			</div>
 		</div>
 		<!-- Blog Area End -->
-		
-		<!-- Footer -->
-		<%@ include file="/common/web/home-footer.jsp" %>
 	</main>
 	
 </body>

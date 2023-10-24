@@ -1,15 +1,15 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="/common/taglib.jsp"%>
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>Đăng nhập</title>
+	<meta charset="UTF-8">
+	<title>Đăng nhập</title>
 </head>
 <body>
-	<main>
+	<main> 
 		<!-- slider Area Start-->
+		
 		<div class="slider-area ">
 			<!-- Mobile Menu -->
 			<div class="slider-active">
@@ -31,16 +31,17 @@
 										<c:if test="${not empty message}">
 											<div class="alert alert-${alert}">${message}</div>
 										</c:if>
-										<form action="j_spring_security_check" id="formLogin" method="post">
+										<form action="j_spring_security_check" id="formLogin"
+											method="post">
 											<div class="mt-10">
-												<input type="text" id="userName" name="j_username" placeholder="UserName"
-													onfocus="this.placeholder = ''"
+												<input type="text" id="userName" name="j_username"
+													placeholder="UserName" onfocus="this.placeholder = ''"
 													onblur="this.placeholder = 'Email'" required
 													class="single-input">
 											</div>
 											<div class="mt-10">
-												<input type="password" id="password" name="j_password" placeholder="Password"
-													onfocus="this.placeholder = ''"
+												<input type="password" id="password" name="j_password"
+													placeholder="Password" onfocus="this.placeholder = ''"
 													onblur="this.placeholder = 'Password'" required
 													class="single-input">
 											</div>
@@ -58,12 +59,13 @@
 												</div>
 											</div>
 											<div class="mt-10">
-												<button type="submit" class="btn btn-primary" >Đăng nhập</button>
+												<button type="submit" class="btn btn-primary">Đăng
+													nhập</button>
 											</div>
 										</form>
 									</blockquote>
 								</div>
-
+	
 							</div>
 						</div>
 					</div>
@@ -71,7 +73,6 @@
 			</div>
 		</div>
 		<!-- slider Area End-->
-
 	</main>
 
 </body>
