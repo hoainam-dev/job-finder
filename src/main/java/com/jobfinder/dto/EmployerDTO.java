@@ -11,6 +11,7 @@ public class EmployerDTO extends AbstractDTO<UserDTO>{
 	private Long roleId;
 	private String userName;
 	private String password;
+	private String confirmPassword;
 	private	Long user_id;
 	
 	
@@ -80,7 +81,10 @@ public class EmployerDTO extends AbstractDTO<UserDTO>{
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	
-	
-	
+	public String getConfirmPassword() {
+		return confirmPassword;
+	}
+	public void setConfirmPassword(String confirmPassword) {
+		this.confirmPassword = confirmPassword;
+	}
 }

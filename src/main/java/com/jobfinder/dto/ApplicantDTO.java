@@ -1,16 +1,29 @@
 package com.jobfinder.dto;
 
 public class ApplicantDTO extends AbstractDTO<UserDTO>{
+	
 	private String skills;
+	
 	private String experience;
+	
 	private String education;
+	
 	private String firstName;
+	
 	private String lastName;
+	
 	private String email;
+	
 	private Integer status;
+	
 	private Long roleId;
+	
 	private String userName;
+	
 	private String password;
+	
+	private String confirmPassword;
+	
 	private	Long user_id;
 	
 	public String getSkills() {
@@ -79,7 +92,11 @@ public class ApplicantDTO extends AbstractDTO<UserDTO>{
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	
-	
+	public String getConfirmPassword() {
+		return confirmPassword;
+	}
+	public void setConfirmPassword(String confirmPassword) {
+		this.confirmPassword = confirmPassword;
+	}
 	
 }
