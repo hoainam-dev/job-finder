@@ -3,7 +3,7 @@
 <!DOCTYPE html">
 <html>
 <head>
-    <title><dec:title default="Trang chủ" /></title>
+    <title><dec:title default="Auth" /></title>
 	<meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="manifest" href="site.webmanifest">

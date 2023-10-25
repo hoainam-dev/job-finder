@@ -13,6 +13,8 @@
 		color: red;
 	}
 </style>
+	<!-- Header -->
+	<%@ include file="/common/auth/header.jsp" %>
 	<!-- slider Area Start-->
 	<div class="slider-area ">
 		<!-- Mobile Menu -->
@@ -117,5 +119,7 @@
 			</div>
 		</div>
 	</div>
+	<!-- Footer -->
+	<%@ include file="/common/auth/footer.jsp" %>
 </body>
 </html>

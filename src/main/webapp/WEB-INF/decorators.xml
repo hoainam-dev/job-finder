@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<decorators defaultdir="/decorators">
+<decorators defaultdir="/decorators/">
 
 	<decorator name="web" page="web.jsp">
 		<pattern>/*</pattern>
@@ -13,11 +13,8 @@
 		<pattern>/quan-tri*</pattern>
 	</decorator>
 
-	<decorator name="login" page="login.jsp">
+	<decorator name="auth" page="auth.jps">
 		<pattern>/dang-nhap</pattern>
-	</decorator>
-
-	<decorator name="register" page="register.jsp">
 		<pattern>/dang-ky</pattern>
 		<pattern>/dang-ky-nha-tuyen-dung</pattern>
 		<pattern>/dang-ky-nguoi-tim-viec</pattern>
