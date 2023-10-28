@@ -15,6 +15,9 @@ public class EmployerConverter {
 		result.setPosition(entity.getPosition());
 		if (entity.getUser() != null) {
 			result.setUser_id(entity.getUser().getId());
+			result.setEmail(entity.getUser().getEmail());
+			result.setFirstName(entity.getUser().getFirstName());
+			result.setLastName(entity.getUser().getLastName());
 		}
 		return result;
 	}

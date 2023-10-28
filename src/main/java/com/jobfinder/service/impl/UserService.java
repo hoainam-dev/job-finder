@@ -94,4 +94,27 @@ public class UserService implements IUserService {
 			userRepository.delete(id);
 		}
 	}
+	
+	@Override
+	@Transactional
+    public UserEntity blockUser(Long userId) {
+		UserEntity entity = userRepository.findOne(userId);
+        if (entity != null) {
+        	entity.setStatus(0);
+            return userRepository.save(entity);
+        }
+        return null;
+    }
+	
+	@Override
+	@Transactional
+    public UserEntity unblockUser(Long userId) {
+		UserEntity entity = userRepository.findOne(userId);
+        if (entity != null) {
+        	entity.setStatus(1);
+            return userRepository.save(entity);
+        }
+        return null;
+    }
+
 }

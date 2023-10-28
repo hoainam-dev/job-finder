@@ -3,6 +3,7 @@ package com.jobfinder.service;
 import java.util.List;
 
 import com.jobfinder.dto.UserDTO;
+import com.jobfinder.entity.UserEntity;
 
 public interface IUserService {
 	UserDTO findById(long id);
@@ -11,4 +12,8 @@ public interface IUserService {
 	UserDTO findOneByEmailAndStatus(String email, int status);
 	UserDTO save(UserDTO dto);
 	void delete(long[] ids);
+	UserEntity blockUser(Long userId);
+	UserEntity unblockUser(Long userId);
+	
+
 }
