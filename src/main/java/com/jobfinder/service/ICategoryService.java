@@ -2,9 +2,9 @@ package com.jobfinder.service;
 
 import java.util.List;
 
-import com.jobfinder.entity.CategoryEntity;
+import com.jobfinder.dto.CategoryDTO;
 
 public interface ICategoryService {
-	List<CategoryEntity> getAllCategories();
-	public CategoryEntity getCategoryById(Long categoryId);
+	List<CategoryDTO> findAll();
+	public CategoryDTO findById(Long id);
 }

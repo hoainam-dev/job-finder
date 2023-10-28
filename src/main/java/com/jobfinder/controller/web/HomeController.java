@@ -10,29 +10,29 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.jobfinder.dto.CategoryDTO;
+import com.jobfinder.dto.JobDTO;
 import com.jobfinder.dto.UserDTO;
-import com.jobfinder.entity.CategoryEntity;
-import com.jobfinder.entity.JobEntity;
+import com.jobfinder.service.ICategoryService;
+import com.jobfinder.service.IJobService;
 import com.jobfinder.service.IUserService;
-import com.jobfinder.service.impl.CategoryService;
-import com.jobfinder.service.impl.JobService;
 
 @Controller(value = "homeControllerOfWeb")
 public class HomeController {
 	
 	@Autowired
-	private JobService jobService;
+	private IJobService jobService;
 	
 	@Autowired
 	private IUserService userService;
 	
 	@Autowired
-	private CategoryService categoryService;
+	private ICategoryService categoryService;
 
 	@RequestMapping(value = "/trang-chu", method = RequestMethod.GET)
 	public ModelAndView homePage() {
-		List<JobEntity> jobs = jobService.getAllJobs();
-		List<CategoryEntity> categories = categoryService.getAllCategories();
+		List<JobDTO> jobs = jobService.findAll();
+		List<CategoryDTO> categories = categoryService.findAll();
 		List<UserDTO> users = userService.findAll();
 		
 		ModelAndView mav = new ModelAndView("web/home");
@@ -45,8 +45,8 @@ public class HomeController {
 	
 	@RequestMapping(value = "/search", method = RequestMethod.GET)
 	public String searchByTitle(@RequestParam("keyword") String keyword, Model model) {
-		List<JobEntity> jobs = jobService.findByTitle(keyword);
-		List<CategoryEntity> categories = categoryService.getAllCategories();
+		List<JobDTO> jobs = jobService.findByTitle(keyword);
+		List<CategoryDTO> categories = categoryService.findAll();
 		model.addAttribute("jobs", jobs);
 		model.addAttribute("categories", categories);
 		return "web/home";

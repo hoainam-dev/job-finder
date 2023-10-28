@@ -1,14 +1,9 @@
 package com.jobfinder	.entity;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
@@ -31,11 +26,15 @@ public class JobEntity extends BaseEntity{
 	@Column(name = "location")
 	private String location;
 	
-	//manytomany
+
+	@Column(name = "position")
+	private String position;
+	
+	
 	@ManyToOne
 	@JoinColumn(name = "employer_id")
-	private EmployerEntity employerEntity;
-	//thêm một trường vị trí ứng tuyển (postion)
+	private EmployerEntity employer;
+	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "category_id")
 	private CategoryEntity category;
@@ -79,13 +78,21 @@ public class JobEntity extends BaseEntity{
 	public void setLocation(String location) {
 		this.location = location;
 	}
-
-	public EmployerEntity getEmployerEntity() {
-		return employerEntity;
+	
+	public String getPosition() {
+		return position;
 	}
 
-	public void setEmployerEntity(EmployerEntity employerEntity) {
-		this.employerEntity = employerEntity;
+	public void setPosition(String position) {
+		this.position = position;
+	}
+
+	public EmployerEntity getEmployer() {
+		return employer;
+	}
+
+	public void setEmployer(EmployerEntity employer) {
+		this.employer = employer;
 	}
 
 	public CategoryEntity getCategory() {

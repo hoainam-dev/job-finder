@@ -3,7 +3,7 @@
 
 	<decorator name="web" page="web.jsp">
 		<pattern>/*</pattern>
-		<pattern>/viec-lam*</pattern>
+		<pattern>/viec-lam/*</pattern>
 	</decorator>
 
 	<decorator name="employer" page="employer.jsp">

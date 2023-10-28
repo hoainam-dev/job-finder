@@ -103,11 +103,11 @@
 													</div>
 													<div class="job-tittle">
 														<a href="/viec-lam/chi-tiet-bai-viet/${job.id}"><h4>${job.title}</h4></a>
-														${job.create_by }
+														${job.createBy }
 														<ul>
 															<li><i class="fas fa-map-marker-alt"></i>${job.location }</li>
 															<li>$ ${job.salary}</li>
-															<li><i class="fa fa-regular fa-clock"></i>${job.create_at}</li>
+															<li><i class="fa fa-regular fa-clock"></i>${job.createAt}</li>
 														</ul>
 													</div>
 												</div>

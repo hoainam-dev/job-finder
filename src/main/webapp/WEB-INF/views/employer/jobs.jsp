@@ -30,6 +30,9 @@
 											class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Ngành/Vị
 											trí</th>
 										<th
+											class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Tên công ty
+											</th>
+										<th
 											class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Địa
 											chỉ</th>
 										<th
@@ -53,14 +56,20 @@
 															class="avatar avatar-sm me-3" alt="user1">
 													</div>
 													<div class="d-flex flex-column justify-content-center">
-														<h6 class="mb-0 text-sm">${job.title}</h6>
-														<p class="text-xs text-secondary mb-0">aaa</p>
+														<c:forEach var="category" items="${categories}">
+															<c:if test="${category.id==job.category_id}">
+																<h6 class="mb-0 text-sm">${category.name}</h6>
+															</c:if>
+														</c:forEach>
+														<p class="text-xs text-secondary mb-0">${job.position}</p>
 													</div>
 												</div>
 											</td>
 											<td>
+												<p class="text-xs font-weight-bold mb-0">${employer.companyName}</p>
+											</td>
+											<td>
 												<p class="text-xs font-weight-bold mb-0">${job.location}</p>
-												<p class="text-xs text-secondary mb-0">aaaaa</p>
 											</td>
 											<td class="align-middle text-center"><span
 												class="text-secondary text-xs font-weight-bold">${job.salary}</span>

@@ -1,7 +1,7 @@
+=\=\=\=\=\=\=
+<<<<<<<=HEAD
+>>>>>>>=dev
 eclipse.preferences.version=1
-<<<<<<< HEAD
-encoding//src/main/webapp/WEB-INF/views/web/job-detail.jsp=UTF-8
-encoding//src/main/webapp/WEB-INF/views/web/post-form.jsp=UTF-8
-=======
 encoding//src/main/java/com/jobfinder/controller/admin/HomeController.java=UTF-8
->>>>>>> dev
+encoding//src/main/webapp/WEB-INF/views/employer/create-job.jsp=UTF-8
+encoding//src/main/webapp/WEB-INF/views/web/job-detail.jsp=UTF-8

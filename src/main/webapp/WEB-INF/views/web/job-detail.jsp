@@ -40,7 +40,7 @@
                                     <ul>
                                         <li><i class="fas fa-map-marker-alt"></i>${job.location }</li>
                                         <li>$ ${job.salary }</li>
-                                        <li><i class="fa fa-regular fa-clock"></i>${job.create_at}</li>
+                                        <li><i class="fa fa-regular fa-clock"></i>${job.createAt}</li>
                                     </ul>
                                 </div>
                             </div>
@@ -76,7 +76,7 @@
                                <h4>Job Overview</h4>
                            </div>
                           <ul>
-                              <li>Posted date time : <span>${job.create_at }</span></li>
+                              <li>Posted date time : <span>${job.createAt }</span></li>
                               <li>Location : <span>${job.location }</span></li>
                               <li>Salary :  <span>$ ${job.salary }</span></li>
                               <li>Application date : <span></span></li>

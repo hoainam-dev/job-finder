@@ -11,10 +11,7 @@ import com.jobfinder.entity.JobEntity;
 @Repository
 public interface JobRepository extends JpaRepository<JobEntity, Long>{
 
-	
 	List<JobEntity> findByCategoryId(Long categoryId);
-
-	JobEntity findJobById(Long jobId);
 	
 	List<JobEntity> findByTitleContaining(String title);
 	

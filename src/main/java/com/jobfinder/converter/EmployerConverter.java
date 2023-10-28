@@ -1,5 +1,7 @@
 package com.jobfinder.converter;
 
+import java.text.SimpleDateFormat;
+
 import org.springframework.stereotype.Component;
 
 import com.jobfinder.dto.EmployerDTO;
@@ -8,6 +10,7 @@ import com.jobfinder.entity.EmployerEntity;
 @Component
 public class EmployerConverter {
 	public EmployerDTO toDto(EmployerEntity entity) {
+		SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy"); 
 		EmployerDTO result = new EmployerDTO();
 		result.setId(entity.getId());
 		result.setCompanyName(entity.getCompanyName());
@@ -19,6 +22,8 @@ public class EmployerConverter {
 			result.setFirstName(entity.getUser().getFirstName());
 			result.setLastName(entity.getUser().getLastName());
 		}
+		result.setCreateAt(formatter.format(entity.getCreate_at().getTime()));
+		result.setUpdateAt(formatter.format(entity.getUpdate_at().getTime()));
 		return result;
 	}
 	

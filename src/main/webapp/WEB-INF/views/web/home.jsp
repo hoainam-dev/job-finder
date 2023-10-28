@@ -67,12 +67,13 @@
 												src="./template/web/img/icon/job-list1.png" alt=""></a>
 										</div>
 										<div class="job-tittle">
-											<a href="job_details.html"><h4>${job.title}</h4></a>
-											${job.create_by }
+											<a href="job_details.html">
+												<h4>${job.title}</h4>
+											</a> ${job.createBy }
 											<ul>
 												<li><i class="fas fa-map-marker-alt"></i>${job.location }</li>
 												<li>$ ${job.salary}</li>
-												<li><i class="fa fa-regular fa-clock"></i>${job.create_at}</li>
+												<li><i class="fa fa-regular fa-clock"></i>${job.createAt}</li>
 											</ul>
 										</div>
 									</div>
@@ -80,7 +81,6 @@
 										<a href="/viec-lam/chi-tiet-bai-viet/${job.id}">Show Detail</a>
 									</div>
 								</div>
-						
 						</div>
 					</div>
 				</c:forEach>
