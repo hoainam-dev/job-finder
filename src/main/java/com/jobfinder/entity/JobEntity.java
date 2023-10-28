@@ -9,6 +9,7 @@ import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -30,14 +31,14 @@ public class JobEntity extends BaseEntity{
 	@Column(name = "location")
 	private String location;
 	
-//	@OneToOne(cascade = CascadeType.ALL)
-//	@JoinColumn(name = "company_id", referencedColumnName = "id")
-//	private CompanyEntity companyEntity;
-
-	@ManyToMany(fetch = FetchType.LAZY)
-	@JoinTable(name = "job_categories", joinColumns = @JoinColumn(name = "job_id"),
-			inverseJoinColumns = @JoinColumn(name = "category_id"))
-	private List<CategoryEntity> categories = new ArrayList<>();
+	//manytomany
+	@ManyToOne
+	@JoinColumn(name = "employer_id")
+	private EmployerEntity employerEntity;
+	//thêm một trường vị trí ứng tuyển (postion)
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "category_id")
+	private CategoryEntity category;
 
 	public String getTitle() {
 		return title;
@@ -79,20 +80,23 @@ public class JobEntity extends BaseEntity{
 		this.location = location;
 	}
 
-//	public CompanyEntity getCompanyEntity() {
-//		return companyEntity;
-//	}
-//
-//	public void setCompanyEntity(CompanyEntity companyEntity) {
-//		this.companyEntity = companyEntity;
-//	}
-
-	public List<CategoryEntity> getCategories() {
-		return categories;
+	public EmployerEntity getEmployerEntity() {
+		return employerEntity;
 	}
 
-	public void setCategories(List<CategoryEntity> categories) {
-		this.categories = categories;
+	public void setEmployerEntity(EmployerEntity employerEntity) {
+		this.employerEntity = employerEntity;
 	}
+
+	public CategoryEntity getCategory() {
+		return category;
+	}
+
+	public void setCategory(CategoryEntity category) {
+		this.category = category;
+	}
+	
+	
+	
 	
 }
