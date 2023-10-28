@@ -3,6 +3,7 @@ package com.jobfinder.service;
 import java.util.List;
 
 import com.jobfinder.entity.CategoryEntity;
+import com.jobfinder.dto.JobDTO;
 import com.jobfinder.entity.JobEntity;
 
 public interface IJobService {
@@ -23,4 +24,5 @@ public interface IJobService {
 	
 	List<JobEntity> search(String keyword, Long categoryId);
 
+	List<JobDTO> findAll();
 }

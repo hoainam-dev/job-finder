@@ -1,5 +1,6 @@
 package com.jobfinder.service.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -8,6 +9,9 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.jobfinder.entity.CategoryEntity;
+
+import com.jobfinder.converter.JobConverter;
+import com.jobfinder.dto.JobDTO;
 import com.jobfinder.entity.JobEntity;
 import com.jobfinder.repository.JobRepository;
 import com.jobfinder.service.IJobService;
@@ -21,6 +25,9 @@ public class JobService implements IJobService{
 	
 	@Autowired
 	private JobRepository jobRepository;
+	
+	@Autowired
+	private JobConverter jobConverter;
 
 	public JobService(JobRepository jobRepository) {
 		this.jobRepository = jobRepository;
@@ -81,4 +88,13 @@ public class JobService implements IJobService{
 	}
 
 
+	public List<JobDTO> findAll() {
+		List<JobDTO> models = new ArrayList<>();
+		List<JobEntity> entities = jobRepository.findAll();
+		for (JobEntity item : entities) {
+			JobDTO userModel = jobConverter.toDto(item);
+			models.add(userModel);
+		}
+		return models;
+	}
 }

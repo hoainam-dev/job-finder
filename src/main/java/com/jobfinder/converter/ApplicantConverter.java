@@ -15,7 +15,16 @@ public class ApplicantConverter {
 		result.setEducation(entity.getEducation());
 		if (entity.getUser() != null) {
 			result.setUser_id(entity.getUser().getId());
+			result.setEmail(entity.getUser().getEmail());
+			result.setPhone(entity.getUser().getPhone());
+			result.setAddress(entity.getUser().getAddress());
+			result.setUserName(entity.getUser().getUserName());
+			result.setFirstName(entity.getUser().getFirstName());
+			result.setLastName(entity.getUser().getLastName());
+			result.setStatus(entity.getUser().getStatus());
 		}
+	
+
 		return result;
 	}
 	

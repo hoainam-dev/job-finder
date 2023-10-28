@@ -1,13 +1,18 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@include file="/common/taglib.jsp"%>
-<c:url var="employerURL" value="/api/employer" />
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Đăng ký Nhà tuyển dụng</title>
 </head>
 <body>
+	<style>
+.error {
+	color: red;
+}
+</style>
 	<!-- slider Area Start-->
 	<div class="slider-area ">
 		<!-- Mobile Menu -->
@@ -16,7 +21,7 @@
 				data-background="./template/web/img/hero/h1_hero.jpg">
 				<div class="container">
 					<div class="section-top-border">
-						<form id="formCreate">
+						<form:form action="dang-ky-nha-tuyen-dung" method="POST" modelAttribute="employerDTO">
 							<div class="row">
 								<div class="col-lg-8 col-md-8">
 									<h3 class="mb-30">Tài khoản</h3>
@@ -32,32 +37,29 @@
 									</c:if>
 									<div class="mt-10">
 										<div class="mt-10">
-											<label>Tên đăng nhập</label> <input type="text"
-												name="userName" placeholder="Tên đăng nhập"
-												onfocus="this.placeholder = ''"
-												onblur="this.placeholder = 'Tên đăng nhập'" required
-												class="single-input">
+											<label>Tên đăng nhập (*)</label>
+											<form:input type="text" class="single-input" path="userName"
+												placeholder="Tên đăng nhập" />
+											<span><form:errors cssClass="error" path="userName" /></span>
 										</div>
 										<div class="mt-10">
-											<label>Enail</label> <input type="email" name="email"
-												placeholder="nguyenvana@gmail.com"
-												onfocus="this.placeholder = ''"
-												onblur="this.placeholder = 'nguyenvana@gmail.com'" required
-												class="single-input">
+											<label>Email (*)</label>
+											<form:input type="email" class="single-input" path="email"
+												placeholder="Email" />
+											<span><form:errors cssClass="error" path="email" /></span>
 										</div>
 										<div class="mt-10">
-											<label>Mật khẩu</label> <input type="password"
-												name="password" placeholder="Mật khẩu"
-												onfocus="this.placeholder = ''"
-												onblur="this.placeholder = 'Mật khẩu'" required
-												class="single-input">
+											<label>Mật khẩu (*)</label>
+											<form:input type="password" class="single-input"
+												path="password" />
+											<span><form:errors cssClass="error" path="password" /></span>
 										</div>
 										<div class="mt-10">
-											<label>Xác nhận mật khẩu</label> <input type="password"
-												name="password" placeholder="Xác nhận mật khẩu"
-												onfocus="this.placeholder = ''"
-												onblur="this.placeholder = 'Xác nhận mật khẩu'" required
-												class="single-input">
+											<label>Xác nhận mật khẩu (*)</label>
+											<form:input type="password" class="single-input"
+												path="confirmPassword" />
+											<span><form:errors cssClass="error"
+													path="confirmPassword" /></span>
 										</div>
 										<input type="hidden" name="status" value="1"> <input
 											type="hidden" name="roleId" value="2">
@@ -66,39 +68,33 @@
 									<h3 class="mb-30">Thông tin nhà tuyển dụng</h3>
 									<div class="row">
 										<div class="col-sm-6">
-											<label>Họ</label> <input type="text" name="lastName"
-												placeholder="Nguuyễn Văn" onfocus="this.placeholder = ''"
-												onblur="this.placeholder = 'Nguyễn Văn'" required
-												class="single-input">
+											<label>Họ (*)</label>
+											<form:input type="text" class="single-input" path="lastName" />
+											<span><form:errors cssClass="error" path="lastName" /></span>
 										</div>
 										<div class="col-sm-6">
-											<label>Tên</label> <input type="text" name="firstName"
-												placeholder="A" onfocus="this.placeholder = ''"
-												onblur="this.placeholder = 'A'" required
-												class="single-input">
+											<label>Tên (*)</label>
+											<form:input type="text" class="single-input" path="firstName" />
+											<span><form:errors cssClass="error" path="firstName" /></span>
 										</div>
 									</div>
 									<div class="mt-10">
-										<label>Chức vụ</label> <input type="text" name="position"
-											placeholder="Quản lý nhân sự, Giám đốc,..."
-											onfocus="this.placeholder = ''"
-											onblur="this.placeholder = 'Quản lý nhân sự, Giám đốc,...'"
-											required class="single-input">
+										<label>Chức vụ</label>
+										<form:input type="text" class="single-input" path="position" />
+										<span><form:errors cssClass="error" path="position" /></span>
 									</div>
 									<div class="mt-10">
-										<label>Tên công ty</label> <input type="text"
-											name="companyName" placeholder="Axon"
-											onfocus="this.placeholder = ''"
-											onblur="this.placeholder = 'Axon'" required
-											class="single-input">
+										<label>Tên công ty</label>
+										<form:input type="text" class="single-input"
+											path="companyName" />
+										<span><form:errors cssClass="error" path="companyName" /></span>
 									</div>
 									<div class="mt-10">
-										<label>Địa chỉ công ty</label> <input type="text"
-											name="companyAddress"
-											placeholder="33 Xô Viết Nghệ Tĩnh - Đà Nẵng"
-											onfocus="this.placeholder = ''"
-											onblur="this.placeholder = '33 Xô Viết Nghệ Tĩnh - Đà Nẵng'"
-											required class="single-input">
+										<label>Địa chỉ công ty</label>
+										<form:input type="text" class="single-input"
+											path="companyAddress" />
+										<span><form:errors cssClass="error"
+												path="companyAddress" /></span>
 									</div>
 									<!-- <div class="input-group-icon mt-10">
 										<div class="icon">
@@ -114,57 +110,56 @@
 											</select>
 										</div>
 									</div> -->
-									<div class="mt-5">
-										<div class="switch-wrap d-flex justify-content-left">
-											<div class="primary-radio">
-												<input type="checkbox" id="default-radio"> <label
-													for="default-radio"></label>
+									<div class="single-element-widget mt-30">
+										<div class="switch-wrap d-flex">
+											<div class="primary-checkbox">
+												<input type="checkbox" id="default-checkbox"> <label for="default-checkbox"></label>
 											</div>
-											<p>Đồng ý với các chính sách bảo mật</p>
+											<p>
+												Tôi đã đọc và đồng ý với <a href="#" style="color: #fb246a">Điều
+													khoản dịch vụ</a> và <a href="#" style="color: #fb246a">Chính
+													sách bảo mật</a> của JobFinder
+											</p>
 										</div>
 									</div>
 									<div class="mt-10">
-										<input type="button" id="btnRegister"
+										<input id="submitButton" type="submit" style="color: #fff"
 											class="genric-btn primary-border circle single-input-primary"
 											value="Đăng ký" />
 									</div>
 								</div>
 							</div>
-						</form>
+							</form>
+						</form:form>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
 	<!-- slider Area End-->
-	<script type="text/javascript">
-		var btnRegister = document.getElementById("btnRegister");
-		btnRegister.onclick = function(e) {
-			e.preventDefault();
-			var data = {};
-			var formData = $('#formCreate').serializeArray();
-			$.each(formData, function(i, v) {
-				data["" + v.name + ""] = v.value;
-			});
-			resgister(data);
-		};
+	<script>
+		document.addEventListener("DOMContentLoaded", function() {
+			var checkbox = document.getElementById("default-checkbox");
+			var submitButton = document.getElementById("submitButton");
 
-		function resgister(data) {
-			$
-					.ajax({
-						url : '${employerURL}',
-						type : 'POST',
-						contentType : 'application/json',
-						data : JSON.stringify(data),
-						dataType : 'json',
-						success : function(result) {
-							window.location.href = "/dang-nhap?message=register-success";
-						},
-						error : function(error) {
-							window.location.href = "/dang-ky?type=nha-tuyen-dungc&message=error";
-						}
-					});
-		}
+			// Function to enable or disable the button and change its background color
+			function updateButtonState() {
+				if (checkbox.checked) {
+					submitButton.disabled = false;
+					submitButton.style.backgroundColor = "#1f2b7b"; // Reset background color
+				} else {
+					submitButton.disabled = true;
+					submitButton.style.backgroundColor = "#5363d2"; // Set a lighter background color
+				}
+			}
+
+			// Initial call to set the button state
+			updateButtonState();
+
+			checkbox.addEventListener("change", function() {
+				updateButtonState();
+			});
+		});
 	</script>
 </body>
 </html>

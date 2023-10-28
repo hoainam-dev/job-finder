@@ -14,4 +14,5 @@ public interface IRoleService {
 	List<RoleEntity> findByIds(List<Long> ids);
 	RoleDTO save(RoleDTO dto);
 	void delete(long[] ids);
+	void updateRole(Long userId, Long roleId);
 }
