@@ -13,10 +13,16 @@ public interface JobRepository extends JpaRepository<JobEntity, Long>{
 
 	List<JobEntity> findByCategoryId(Long categoryId);
 	
-	List<JobEntity> findByTitleContaining(String title);
+	List<JobEntity> findByTitleContaining(String keyword);
 	
-	List<JobEntity> findByCategoryContaining(CategoryEntity category);
+	List<JobEntity> findByLocationContaining(String location);
 	
-	List<JobEntity> findByTitleAndCategoryContaining (String keyword, CategoryEntity category);
+	List<JobEntity> findByPositionContaining(String position);
+	
+	List<JobEntity> findJobBySalaryContaining(int minSalary, int maxSalary);
+	
+	List<JobEntity> findByCategoryContaining(Long categoryId);
+	
+	List<JobEntity> findByTitleAndCategoryContaining(String keyword, Long categoryId);
 
 }

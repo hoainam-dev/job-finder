@@ -43,7 +43,7 @@ public class HomeController {
 		return mav;
 	}
 	
-	@RequestMapping(value = "/search", method = RequestMethod.GET)
+	@RequestMapping(value = "/tim-kiem", method = RequestMethod.GET)
 	public String searchByTitle(@RequestParam("keyword") String keyword, Model model) {
 		List<JobDTO> jobs = jobService.findByTitle(keyword);
 		List<CategoryDTO> categories = categoryService.findAll();

@@ -6,5 +6,5 @@ import com.jobfinder.dto.CategoryDTO;
 
 public interface ICategoryService {
 	List<CategoryDTO> findAll();
-	public CategoryDTO findById(Long id);
+	CategoryDTO findById(Long id);
 }

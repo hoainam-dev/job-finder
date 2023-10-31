@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -28,144 +29,59 @@
                     <!-- Left content -->
                     <div class="col-xl-3 col-lg-3 col-md-4">
                         <div class="row">
-                            <div class="col-7">
+                            <div class="col-12">
                                     <div class="small-section-tittle2 mb-45">
-	                                    <div class="ion"> <svg 
-	                                        xmlns="http://www.w3.org/2000/svg"
-	                                        xmlns:xlink="http://www.w3.org/1999/xlink"
-	                                        width="20px" height="12px">
-		                                    <path fill-rule="evenodd"  fill="rgb(27, 207, 107)"
-		                                        d="M7.778,12.000 L12.222,12.000 L12.222,10.000 L7.778,10.000 L7.778,12.000 ZM-0.000,-0.000 L-0.000,2.000 L20.000,2.000 L20.000,-0.000 L-0.000,-0.000 ZM3.333,7.000 L16.667,7.000 L16.667,5.000 L3.333,5.000 L3.333,7.000 Z"/>
-		                                    </svg>
-	                                    </div>
-	                                    <h4>Search Jobs</h4>
-                                	</div>
-                            </div>
-                            <div class="col-5">
-                              	<a href="/viec-lam/danh-sach"><button type="button" style="padding:5px, 10px; background-color: #FF2E7B; border: none;">Làm mới</button></a>
+                                    <div class="ion"> <svg 
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        xmlns:xlink="http://www.w3.org/1999/xlink"
+                                        width="20px" height="12px">
+                                    <path fill-rule="evenodd"  fill="rgb(27, 207, 107)"
+                                        d="M7.778,12.000 L12.222,12.000 L12.222,10.000 L7.778,10.000 L7.778,12.000 ZM-0.000,-0.000 L-0.000,2.000 L20.000,2.000 L20.000,-0.000 L-0.000,-0.000 ZM3.333,7.000 L16.667,7.000 L16.667,5.000 L3.333,5.000 L3.333,7.000 Z"/>
+                                    </svg>
+                                    </div>
+                                    <h4>Filter Jobs</h4>
+                                </div>
                             </div>
                         </div>
                         <!-- Job Category Listing start -->
-                        	<div class="job-category-listing mb-50">
-	                            <!-- single one -->
-	                            <div class="single-listing">
-	                               <form action="/viec-lam/tim-kiem/tu-khoa" method="GET">
-		                               <div class="small-section-tittle2">
-		                                     <h4>Title</h4>
-		                               </div>
-		                               <div class="row">
-		                               		<div class="col-sm-9">
-		                               			<input type="text" name="keyword" placeholder="Enter keyword" style="width:187px; height:35px; padding-left:7px; padding-right:6px; border: solid 1px #FF2E7B; " required>
-		                               			<% String errorMessage1 = (String) request.getAttribute("errorMessage"); %>
-												<% if (errorMessage1 != null) { %>
-												    <p class="error-message"><%= errorMessage1 %></p>
-												<% } %>
-		                               		</div>
-		                                	<div class="col-sm-2" style="border:none;">
-		                                		<button type="submit" style="background-color:#FF2E7B; border:none; border-radius:3px;padding:8px;"><i class="fas fa-solid fa-arrow-right" style="font-size:19px;"></i></i></button>
-		                                	</div>
-		                               </div>
-	                                </form>
-	                                <!--  Select job items End-->
+                        <div class="job-category-listing mb-50">
+                        	<form:form action="/viec-lam/tim-kiem" method="get">
+                            <!-- single one -->
+                            <div class="single-listing">
+                               <div class="small-section-tittle2">
+                                     <h4>Job Category</h4>
+                               </div>
+                                <!-- Select job items start -->
+                                <div class="select-job-items2">
+                                    <select name="category">
+                                    	<c:forEach var="category" items="${categories}">
+                                    		<option value="${category.id}">${category.name}</option>
+                                    	</c:forEach>
+                                    </select>
+                                </div>
+                                <!--  Select job items End-->
+                                <!-- select-Categories start -->
+                                <div class="select-Categories pt-80 pb-50">
+                                    <div class="small-section-tittle2">
+                                        <h4>Job Type</h4>
+                                    </div>
+					   				<select id="type" name="type">
+					   					<option value="FullTime" label="Full Time"/>
+					   					<option value="PartTime" label="Part Time"/>
+					   					<option value="Remote" label="Remote"/>
+					   					<option value="Freelance" label="Freelance"/>
+					   				</select>
+                                </div>
+                                <!-- select-Categories End -->
 	                            </div>
-	                            <hr/>
-	                             <!-- single one -->
-	                            <div class="single-listing">
-	                               <form action="/viec-lam/tim-kiem/categoryId" method="GET">
-		                               <div class="small-section-tittle2">
-		                                     <h4>Category</h4>
-		                               </div>
-										<div class="row">
-											<div class="col-sm-9">
-												<div class="form-group">
-											        <select id="categoryId" name="categoryId" style="padding:6px;margin-left:2px; border:solid 1px #FF2E7B" required>
-											        	<option value="">Select category</option>
-											            <c:forEach items="${categories}" var="category">
-											                <option value="${category.id}">${category.name}</option>
-											                <% String errorMessage = (String) request.getAttribute("errorMessage"); %>
-															<% if (errorMessage != null) { %>
-															    <p class="error-message"><%= errorMessage %></p>
-															<% } %>
-											            </c:forEach>
-											        </select><br>
-									    		</div>
-											</div>
-		                               		<div class="col-sm-2" style="border:none;">
-		                                		<button type="submit" style="background-color:#FF2E7B; border:none; border-radius:3px;padding:8px;"><i class="fas fa-solid fa-arrow-right" style="font-size:19px;"></i></i></button>
-		                                	</div>
-										</div>
-	                                </form>
-	                                <!--  Select job items End-->
-	                            </div>
-	                            <hr/>
-								 <!-- single one -->
-	                            <div class="single-listing">
-	                               <form action="/viec-lam/tim-kiem/dia-diem" method="GET">
-		                               <div class="small-section-tittle2">
-		                                     <h4>Location</h4>
-		                               </div>
-		                               <div class="row">
-		                               		<div class="col-sm-9">
-		                               			<input type="text" name="location" placeholder="Enter location" style="width:187px; height:35px; padding-left:7px; padding-right:6px; border: solid 1px #FF2E7B; " required>
-		                               			<% String errorMessage2 = (String) request.getAttribute("errorMessage"); %>
-												<% if (errorMessage2 != null) { %>
-												    <p class="error-message"><%= errorMessage2 %></p>
-												<% } %>
-		                               		</div>
-		                               		<div class="col-sm-2" style="border:none;">
-		                                		<button type="submit" style="background-color:#FF2E7B; border:none; border-radius:3px;padding:8px;"><i class="fas fa-solid fa-arrow-right" style="font-size:19px;"></i></i></button>
-		                                	</div>
-		                               </div>
-		                                
-	                                </form>
-	                                <!--  Select job items End-->
-	                            </div>
-	                             <hr/>
-								 <!-- single one -->
-	                            <div class="single-listing">
-	                               <form action="/viec-lam/tim-kiem/vi-tri" method="GET">
-		                               <div class="small-section-tittle2">
-		                                     <h4>Position</h4>
-		                               </div>
-		                               <div class="row">
-		                               		<div class="col-sm-9">
-		                               			<input type="text" name="position" placeholder="Enter position" style="width:187px; height:35px; padding-left:7px; padding-right:6px; border: solid 1px #FF2E7B; " required>
-		                               			<% String errorMessage3 = (String) request.getAttribute("errorMessage"); %>
-												<% if (errorMessage3 != null) { %>
-												    <p class="error-message"><%= errorMessage3 %></p>
-												<% } %>
-		                               		</div>
-		                               		<div class="col-sm-2" style="border:none;">
-		                                		<button type="submit" style="background-color:#FF2E7B; border:none; border-radius:3px;padding:8px;"><i class="fas fa-solid fa-arrow-right" style="font-size:19px;"></i></i></button>
-		                                	</div>
-		                               </div>
-		                                
-	                                </form>
-	                                <!--  Select job items End-->
-	                            </div>
-	                            <hr/>
-								 <!-- single one -->
-	                            <div class="single-listing">
-	                               <form action="/viec-lam/tim-kiem/luong" method="GET">
-		                               <div class="small-section-tittle2">
-		                                     <h4>Salary</h4>
-		                               </div>
-		                               <div class="row">
-			                               	<div class="col-sm-9">
-			                               			<input type="number" name="salary" placeholder="Enter salary" style="width:187px; height:35px; padding-left:7px; padding-right:6px; border: solid 1px #FF2E7B;" required>
-			                               			<% String errorMessage4 = (String) request.getAttribute("errorMessage"); %>
-													<% if (errorMessage4 != null) { %>
-													    <p class="error-message"><%= errorMessage4 %></p>
-													<% } %>
-			                               </div>
-									       <div class="col-sm-2" style="border:none;">
-			                                	<button type="submit" style="background-color:#FF2E7B; border:none; border-radius:3px;padding:8px;"><i class="fas fa-solid fa-arrow-right" style="font-size:19px;"></i></i></button>
-			                               </div>
-		                               </div>
-	                                </form>
-	                                <!--  Select job items End-->
-	                            </div>
-	                        </div>
+	                            <div class="row">
+                             		<div class="col-sm-9">
+                             			<input type="text" name="location" placeholder="Enter location" style="width:187px; height:35px; padding-left:7px; padding-right:6px; border: solid 1px #FF2E7B; ">
+                             		</div>
+                             	</div>
+                            <button type="submit" class="btn btn-2"></button>
+                            </form:form>
+                        </div>
                         <!-- Job Category Listing End -->
                     </div>
                     <!-- Right content -->

@@ -14,6 +14,8 @@ public class JobDTO extends AbstractDTO<JobDTO>{
 	
 	private String position;
 	
+	private String type;
+	
 	private Long category_id;
 	
 	private Long employer_id;
@@ -64,6 +66,14 @@ public class JobDTO extends AbstractDTO<JobDTO>{
 
 	public void setPosition(String position) {
 		this.position = position;
+	}
+
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
 	}
 
 	public Long getCategory_id() {

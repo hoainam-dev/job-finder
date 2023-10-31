@@ -2,13 +2,19 @@ package com.jobfinder.converter;
 
 import java.text.SimpleDateFormat;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.jobfinder.dto.CategoryDTO;
 import com.jobfinder.dto.JobDTO;
+import com.jobfinder.entity.CategoryEntity;
 import com.jobfinder.entity.JobEntity;
 
 @Component
 public class JobConverter {
+	
+    @Autowired
+    private CategoryConverter categoryConverter;
 	
 	public JobDTO toDto(JobEntity entity) {
 		SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy"); 
@@ -20,6 +26,7 @@ public class JobConverter {
 		result.setSalary(entity.getSalary());
 		result.setLocation(entity.getLocation());
 		result.setPosition(entity.getPosition());
+		result.setType(entity.getType());
 		if (entity.getCategory() != null) {
 			result.setCategory_id(entity.getCategory().getId());
 		}
@@ -39,6 +46,7 @@ public class JobConverter {
 		result.setSalary(dto.getSalary());
 		result.setLocation(dto.getLocation());
 		result.setPosition(dto.getPosition());
+		result.setType(dto.getType());
 		return result;
 	}
 	
@@ -49,6 +57,8 @@ public class JobConverter {
 		result.setSalary(dto.getSalary());
 		result.setLocation(dto.getLocation());
 		result.setPosition(dto.getPosition());
+		result.setType(dto.getType());
+		dto.getCategory_id();
 		return result;
 	}
 

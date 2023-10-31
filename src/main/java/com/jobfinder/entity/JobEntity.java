@@ -30,6 +30,8 @@ public class JobEntity extends BaseEntity{
 	@Column(name = "position")
 	private String position;
 	
+	@Column(name = "type")
+	private String type;
 	
 	@ManyToOne
 	@JoinColumn(name = "employer_id")
@@ -85,6 +87,14 @@ public class JobEntity extends BaseEntity{
 
 	public void setPosition(String position) {
 		this.position = position;
+	}
+
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
 	}
 
 	public EmployerEntity getEmployer() {

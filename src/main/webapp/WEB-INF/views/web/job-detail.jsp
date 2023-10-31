@@ -38,9 +38,10 @@
                                 <div class="job-tittle">
                                     <h4>${job.title}</h4>
                                     <ul>
-                                        <li><i class="fas fa-map-marker-alt"></i>${job.location }</li>
-                                        <li>$ ${job.salary }</li>
-                                        <li><i class="fa fa-regular fa-clock"></i>${job.createAt}</li>
+                                        <li><i class="fas fa-solid fa-user"></i>${job.position }</li>
+										<li><i class="fas fa-map-marker-alt"></i>${job.location }</li>
+										<li>$ ${job.salary}</li>
+										<li><i class="fa fa-regular fa-clock"></i>${job.createAt}</li>
                                     </ul>
                                 </div>
                             </div>
@@ -48,6 +49,13 @@
                           <!-- job single End -->
                        
                         <div class="job-post-details">
+                        	<div class="post-details1 mb-50">
+                                <!-- Small Section Tittle -->
+                                <div class="small-section-tittle">
+                                    <h4>Job Postion</h4>
+                                </div>
+                                <p>${job.position}</p>
+                            </div>
                             <div class="post-details1 mb-50">
                                 <!-- Small Section Tittle -->
                                 <div class="small-section-tittle">
@@ -76,7 +84,7 @@
                                <h4>Job Overview</h4>
                            </div>
                           <ul>
-                              <li>Posted date time : <span>${job.createAt }</span></li>
+                              <li>Posted date time : <span>${job.createAt}</span></li>
                               <li>Location : <span>${job.location }</span></li>
                               <li>Salary :  <span>$ ${job.salary }</span></li>
                               <li>Application date : <span></span></li>
