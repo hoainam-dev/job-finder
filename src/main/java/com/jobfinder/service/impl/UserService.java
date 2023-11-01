@@ -117,4 +117,25 @@ public class UserService implements IUserService {
         return null;
     }
 
+	@Override
+	public UserDTO findByUserName(String userName) {
+		UserEntity userEntity = userRepository.findByUserName(userName);
+		return userConverter.toDto(userEntity);
+	}
+	
+	@Override
+	public void updateUser(UserDTO userDTO) {
+		UserEntity userEntity = userRepository.findByUserName(userDTO.getUserName());
+//		if (userEntity != null) {
+//	        userEntity.setFirstName(userDTO.getFirstName());
+//	        userRepository.save(userEntity);
+//	    } 
+		userEntity.setFirstName(userDTO.getFirstName());
+		userEntity.setLastName(userDTO.getLastName());
+		userEntity.setPhone(userDTO.getPhone());
+		userEntity.setAddress(userDTO.getAddress());
+		userEntity.setEmail(userDTO.getEmail());
+		userRepository.save(userEntity);
+	}
+
 }

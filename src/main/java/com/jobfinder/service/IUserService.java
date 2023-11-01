@@ -14,6 +14,7 @@ public interface IUserService {
 	void delete(long[] ids);
 	UserEntity blockUser(Long userId);
 	UserEntity unblockUser(Long userId);
-	
+	UserDTO findByUserName(String userName);
+	void updateUser(UserDTO userDTO);
 
 }
