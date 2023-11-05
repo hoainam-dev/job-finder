@@ -40,19 +40,19 @@ public class EmployerValidation implements Validator{
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "email", "user.email.empty");
         
         //Business validation
-        if(!password.equals(confirmPassword)){//password không khớp
+        if(!password.equals(confirmPassword)){//password khong khop
             errors.rejectValue("confirmPassword","user.confirmPassword.missMatch");
         }
         
-        if(password.length()<8 || password.length()>15){//password quá ngắn dài hoặc quá dài
+        if(password.length()<8 || password.length()>15){//password qua ngan hoac qua dai
             errors.rejectValue("password","user.password.size");
         }
         
-        if(userService.findOneByUserNameAndStatus(userName, 1)!=null&&userName.length()>1){//username đã tồn tại
+        if(userService.findOneByUserNameAndStatus(userName, 1)!=null&&userName.length()>1){//username da ton tai
             errors.rejectValue("userName","user.userName.exist");
         }
         
-        if(userService.findOneByEmailAndStatus(email, 1)!=null&&email.length()>1){//email đã tồn tại
+        if(userService.findOneByEmailAndStatus(email, 1)!=null&&email.length()>1){//email da ton tai
             errors.rejectValue("email","user.email.exist");
         }
 	}

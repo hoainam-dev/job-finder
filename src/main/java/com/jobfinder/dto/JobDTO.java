@@ -1,6 +1,9 @@
 package com.jobfinder.dto;
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 69a7cef3d9ac3e01fe27affe2941c377df4dc554
 public class JobDTO extends AbstractDTO<JobDTO>{
 	
 	private String title;
@@ -13,7 +16,11 @@ public class JobDTO extends AbstractDTO<JobDTO>{
 	
 	private String location;
 	
-//	private Long company_id;
+	private String position;
+	
+	private Long category_id;
+	
+	private Long employer_id;
 
 	public String getTitle() {
 		return title;
@@ -55,12 +62,30 @@ public class JobDTO extends AbstractDTO<JobDTO>{
 		this.location = location;
 	}
 
-//	public Long getCompany_id() {
-//		return company_id;
-//	}
-//
-//	public void setCompany_id(Long company_id) {
-//		this.company_id = company_id;
-//	}
+	public String getPosition() {
+		return position;
+	}
+
+	public void setPosition(String position) {
+		this.position = position;
+	}
+
+	public Long getCategory_id() {
+		return category_id;
+	}
+
+	public void setCategory_id(Long category_id) {
+		this.category_id = category_id;
+	}
+
+	public Long getEmployer_id() {
+		return employer_id;
+	}
+
+	public void setEmployer_id(Long employer_id) {
+		this.employer_id = employer_id;
+	}
+	
+	
 
 }

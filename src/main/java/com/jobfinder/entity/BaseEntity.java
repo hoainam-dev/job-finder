@@ -58,16 +58,32 @@ public abstract class BaseEntity {
 		return create_at;
 	}
 
+	public void setCreate_at(Date create_at) {
+		this.create_at = create_at;
+	}
+
 	public String getCreate_by() {
 		return create_by;
+	}
+
+	public void setCreate_by(String create_by) {
+		this.create_by = create_by;
 	}
 
 	public Date getUpdate_at() {
 		return update_at;
 	}
 
+	public void setUpdate_at(Date update_at) {
+		this.update_at = update_at;
+	}
+
 	public String getUpdate_by() {
 		return update_by;
+	}
+
+	public void setUpdate_by(String update_by) {
+		this.update_by = update_by;
 	}
 
 	public Date getDelete_at() {

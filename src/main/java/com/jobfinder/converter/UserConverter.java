@@ -1,5 +1,7 @@
 package com.jobfinder.converter;
 
+import java.text.SimpleDateFormat;
+
 import org.springframework.stereotype.Component;
 
 import com.jobfinder.dto.UserDTO;
@@ -10,6 +12,7 @@ import com.jobfinder.security.BcryptPassword;
 public class UserConverter {
 	
 	public UserDTO toDto(UserEntity entity) {
+		SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy"); 
 		UserDTO result = new UserDTO();
 		result.setId(entity.getId());
 		result.setUserName(entity.getUserName());
@@ -19,6 +22,8 @@ public class UserConverter {
 		result.setEmail(entity.getEmail());
 		result.setAddress(entity.getAddress());
 		result.setPhone(entity.getPhone());
+		result.setCreateAt(formatter.format(entity.getCreate_at().getTime()));
+		result.setUpdateAt(formatter.format(entity.getUpdate_at().getTime()));
 		return result;
 	}
 	

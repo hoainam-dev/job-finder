@@ -7,8 +7,8 @@ import java.util.List;
 public class AbstractDTO<T> {
 	
 	private Long id;
-	private Timestamp createAt;
-	private Timestamp updateAt;
+	private String createAt;
+	private String updateAt;
 	private String deleteAt;
 	private String createBy;
 	private String updateBy;
@@ -31,16 +31,16 @@ public class AbstractDTO<T> {
 	public void setId(Long id) {
 		this.id = id;
 	}
-	public Timestamp getCreateAt() {
+	public String getCreateAt() {
 		return createAt;
 	}
-	public void setCreateAt(Timestamp createAt) {
+	public void setCreateAt(String createAt) {
 		this.createAt = createAt;
 	}
-	public Timestamp getUpdateAt() {
+	public String getUpdateAt() {
 		return updateAt;
 	}
-	public void setUpdateAt(Timestamp updateAt) {
+	public void setUpdateAt(String updateAt) {
 		this.updateAt = updateAt;
 	}
 

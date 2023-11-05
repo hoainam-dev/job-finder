@@ -1,14 +1,10 @@
 package com.jobfinder	.entity;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -30,14 +26,18 @@ public class JobEntity extends BaseEntity{
 	@Column(name = "location")
 	private String location;
 	
-//	@OneToOne(cascade = CascadeType.ALL)
-//	@JoinColumn(name = "company_id", referencedColumnName = "id")
-//	private CompanyEntity companyEntity;
 
-	@ManyToMany(fetch = FetchType.LAZY)
-	@JoinTable(name = "job_categories", joinColumns = @JoinColumn(name = "job_id"),
-			inverseJoinColumns = @JoinColumn(name = "category_id"))
-	private List<CategoryEntity> categories = new ArrayList<>();
+	@Column(name = "position")
+	private String position;
+	
+	
+	@ManyToOne
+	@JoinColumn(name = "employer_id")
+	private EmployerEntity employer;
+	
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "category_id")
+	private CategoryEntity category;
 
 	public String getTitle() {
 		return title;
@@ -78,21 +78,32 @@ public class JobEntity extends BaseEntity{
 	public void setLocation(String location) {
 		this.location = location;
 	}
-
-//	public CompanyEntity getCompanyEntity() {
-//		return companyEntity;
-//	}
-//
-//	public void setCompanyEntity(CompanyEntity companyEntity) {
-//		this.companyEntity = companyEntity;
-//	}
-
-	public List<CategoryEntity> getCategories() {
-		return categories;
+	
+	public String getPosition() {
+		return position;
 	}
 
-	public void setCategories(List<CategoryEntity> categories) {
-		this.categories = categories;
+	public void setPosition(String position) {
+		this.position = position;
 	}
+
+	public EmployerEntity getEmployer() {
+		return employer;
+	}
+
+	public void setEmployer(EmployerEntity employer) {
+		this.employer = employer;
+	}
+
+	public CategoryEntity getCategory() {
+		return category;
+	}
+
+	public void setCategory(CategoryEntity category) {
+		this.category = category;
+	}
+	
+	
+	
 	
 }
