@@ -94,4 +94,20 @@ public class EmployerService implements IEmployerService{
 			employerRepository.delete(id);
 		}
 	}
+
+	@Override
+	public void updatePackageService(Long emId, Long serId) {
+		// TODO Auto-generated method stub
+		EmployerEntity entity = employerRepository.findOne(emId);
+		if(entity != null ) {
+			entity.setServices(serId);
+			employerRepository.save(entity);
+			System.out.println("Update Succsses");
+			System.out.println(entity.getServices().getId());
+		}
+		
+		
+		
+	}
+	
 }

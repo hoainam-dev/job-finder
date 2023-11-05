@@ -9,4 +9,5 @@ public interface IEmployerService {
 	List<EmployerDTO> findAll();
 	EmployerDTO save(EmployerDTO dto);
 	void delete(long[] ids);
+	void updatePackageService(Long emId , Long serId );
 }

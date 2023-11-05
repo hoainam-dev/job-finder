@@ -1,2 +1,5 @@
 eclipse.preferences.version=1
 encoding//src/main/java/com/jobfinder/controller/admin/HomeController.java=UTF-8
+encoding//src/main/java/com/jobfinder/controller/admin/PaymentIntentController.java=UTF-8
+encoding//src/main/java/com/jobfinder/controller/admin/PermisionUser.java=UTF-8
+encoding//src/main/webapp/WEB-INF/views/admin/service_package.jsp=UTF-8

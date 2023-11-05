@@ -50,6 +50,10 @@ public abstract class BaseEntity {
 		return id;
 	}
 
+	public void setId(Long id) {
+		this.id = id;
+	}
+
 	public Date getCreate_at() {
 		return create_at;
 	}

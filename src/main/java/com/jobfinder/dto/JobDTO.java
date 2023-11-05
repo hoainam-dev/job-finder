@@ -1,6 +1,5 @@
 package com.jobfinder.dto;
 
-import javax.persistence.Entity;
 
 public class JobDTO extends AbstractDTO<JobDTO>{
 	
