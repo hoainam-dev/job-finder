@@ -1,8 +1,6 @@
 package com.jobfinder.controller.web;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -51,5 +49,4 @@ public class HomeController {
 		mav.addObject("employers", employerService.findAll());
 		return mav;
 	}
-	
 }

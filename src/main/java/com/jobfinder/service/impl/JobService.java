@@ -16,7 +16,6 @@ import org.springframework.stereotype.Service;
 
 import com.jobfinder.converter.JobConverter;
 import com.jobfinder.dto.JobDTO;
-import com.jobfinder.entity.CategoryEntity;
 import com.jobfinder.entity.JobEntity;
 import com.jobfinder.entity.SkillEntity;
 import com.jobfinder.repository.CategoryRepository;
@@ -49,33 +48,12 @@ public class JobService implements IJobService{
 	public JobService(JobRepository jobRepository) {
 		this.jobRepository = jobRepository;
 	}
-	
-	@Override
-	public List<JobDTO> findByCategoryId(Long categoryId) {
-		List<JobDTO> models = new ArrayList<>();
-		List<JobEntity> jobs = jobRepository.findByCategoryId(categoryId);
-		for (JobEntity item : jobs) {
-			JobDTO userModel = jobConverter.toDto(item);
-			models.add(userModel);
-		}
-		return models;
-	}
 
 	@Override
 	public JobDTO findById(Long id) {
 		return jobConverter.toDto(jobRepository.findOne(id));
 	}
-
-	@Override
-	public List<JobDTO> findByCategory(CategoryEntity category) {
-		List<JobDTO> models = new ArrayList<>();
-		List<JobEntity> jobs = jobRepository.findByCategoryContaining(category);
-		for (JobEntity item : jobs) {
-			JobDTO userModel = jobConverter.toDto(item);
-			models.add(userModel);
-		}
-		return models;
-	}
+	
 
 	@Override
 	public List<JobDTO> findAll() {

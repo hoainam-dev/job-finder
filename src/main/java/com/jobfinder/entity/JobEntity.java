@@ -46,7 +46,6 @@ public class JobEntity extends BaseEntity{
 	@Column(name = "position")
 	private String position;
 	
-	
 	@ManyToOne
 	@JoinColumn(name = "employer_id")
 	private EmployerEntity employer;

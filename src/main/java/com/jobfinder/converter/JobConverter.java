@@ -12,7 +12,7 @@ import com.jobfinder.entity.SkillEntity;
 
 @Component
 public class JobConverter {
-	
+
 	SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
 	
 	public JobDTO toDto(JobEntity entity) {
@@ -33,6 +33,7 @@ public class JobConverter {
 		result.setSalary(entity.getSalary());
 		result.setLocation(entity.getLocation());
 		result.setPosition(entity.getPosition());
+		result.setType(entity.getType());
 		result.setSkills(skills);
 		if (entity.getCategory() != null) {
 			result.setCategory_id(entity.getCategory().getId());
@@ -57,6 +58,7 @@ public class JobConverter {
 		result.setSalary(dto.getSalary());
 		result.setLocation(dto.getLocation());
 		result.setPosition(dto.getPosition());
+		result.setType(dto.getType());
 		return result;
 	}
 	
@@ -69,6 +71,8 @@ public class JobConverter {
 		result.setSalary(dto.getSalary());
 		result.setLocation(dto.getLocation());
 		result.setPosition(dto.getPosition());
+		result.setType(dto.getType());
+		dto.getCategory_id();
 		return result;
 	}
 

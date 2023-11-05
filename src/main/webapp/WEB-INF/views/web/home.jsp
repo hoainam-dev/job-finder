@@ -49,11 +49,11 @@
 						<div class="row">
 							<div class="col-xl-8">
 								<!-- form -->
-								<form action="/search" class="search-box" method="GET">
+								<form action="/tim-kiem" class="search-box" method="GET">
 									<div class="input-form">
 										<input type="text" name="keyword" placeholder="Job Tittle or keyword">
 									</div>
-									<button type="submit" class="search-form"> Tìm kiếm</button>
+									<button type="submit" class="btn btn-primary search-form"> Tìm kiếm</button>
 								</form>
 							</div>
 						</div>
@@ -110,6 +110,7 @@
 												</c:if>
 												<li>
 												<i class="fa fa-regular fa-clock"></i>${job.createAt}</li>
+>>>>>>> dev
 											</ul>
 										</div>
 									</div>
@@ -136,6 +137,7 @@
 						</div>
 					</div>
 				</div>
+				<a href="">
 					<div class="row d-flex justify-contnet-center">
 						<c:forEach var="category" items="${categories}">
 							<div class="col-xl-3 col-lg-3 col-md-4 col-sm-6">
@@ -145,23 +147,15 @@
 									</div>
 									<div class="services-cap">
 										<h5>
-												<p>${category.name}</p>
+											<a href="/viec-lam/${category.id}"><p>${category.name}</p></a>
 										</h5>
 									</div>
 								</div>
 							</div>
 						</c:forEach>
 					</div>
+				</a>
 				<!-- More Btn -->
-				<!-- Section Button -->
-				<div class="row">
-					<div class="col-lg-12">
-						<div class="browse-btn2 text-center mt-50">
-							<a href="job_listing.html" class="border-btn2">Browse All
-								Sectors</a>
-						</div>
-					</div>
-				</div>
 			</div>
 		</div>
 		<!-- Our Services End -->

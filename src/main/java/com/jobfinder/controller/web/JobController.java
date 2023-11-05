@@ -3,7 +3,6 @@ package com.jobfinder.controller.web;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -22,9 +21,6 @@ import com.jobfinder.service.IUserService;
 @RequestMapping("/viec-lam")
 public class JobController {
 
-	@Value("${upload.dir}")
-	private String uploadDir = System.getProperty("user.home") + "/Desktop/image";
-
 	@Autowired
 	private IJobService jobService;
 
@@ -33,8 +29,7 @@ public class JobController {
 
 	@Autowired
 	private IUserService userService;
-	
-	@Autowired
+
 	private IEmployerService employerService;
 	
 	@Autowired
@@ -51,10 +46,7 @@ public class JobController {
 			jobService.filter(categoryId, type, salary, location);
 		}
 		model.addAttribute("jobs", jobs);
-		model.addAttribute("users", userService.findAll());
-		model.addAttribute("categories", categoryService.findAll());
-		model.addAttribute("employers", employerService.findAll());
-		return "web/list-job";
+		return "web/list-test";
 	}
 
 	@RequestMapping(value = "/chi-tiet-viec-lam/{id}", method = RequestMethod.GET)
@@ -67,5 +59,4 @@ public class JobController {
 		model.addAttribute("employers", employerService.findAll());
 		return "web/job-detail";
 	}
-
 }
