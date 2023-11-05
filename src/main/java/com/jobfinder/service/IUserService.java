@@ -16,5 +16,4 @@ public interface IUserService {
 	UserEntity unblockUser(Long userId);
 	UserDTO findByUserName(String userName);
 	void updateUser(UserDTO userDTO);
-
 }

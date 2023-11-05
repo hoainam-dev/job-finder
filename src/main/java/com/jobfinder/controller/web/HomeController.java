@@ -1,19 +1,17 @@
 package com.jobfinder.controller.web;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.jobfinder.dto.CategoryDTO;
 import com.jobfinder.dto.JobDTO;
-import com.jobfinder.dto.UserDTO;
 import com.jobfinder.service.ICategoryService;
+import com.jobfinder.service.IEmployerService;
 import com.jobfinder.service.IJobService;
 import com.jobfinder.service.IUserService;
 
@@ -28,28 +26,27 @@ public class HomeController {
 	
 	@Autowired
 	private ICategoryService categoryService;
+	
+	@Autowired
+	private IEmployerService employerService;
 
 	@RequestMapping(value = "/trang-chu", method = RequestMethod.GET)
 	public ModelAndView homePage() {
-		List<JobDTO> jobs = jobService.findAll();
-		List<CategoryDTO> categories = categoryService.findAll();
-		List<UserDTO> users = userService.findAll();
+		List<JobDTO> listJob = jobService.findAll();
+		List<JobDTO> jobs = new ArrayList<>();
+		if(listJob.size()>4) {
+			for(int i=0 ; i<4 ; i++) {
+				jobs.add(listJob.get(i));
+			}
+		}else {			
+			jobs=listJob;
+		}
 		
 		ModelAndView mav = new ModelAndView("web/home");
 		mav.addObject("jobs", jobs);
-		mav.addObject("categories", categories);
-		mav.addObject("users", users);
-		
+		mav.addObject("categories", categoryService.findAll());
+		mav.addObject("users", userService.findAll());
+		mav.addObject("employers", employerService.findAll());
 		return mav;
 	}
-	
-	@RequestMapping(value = "/tim-kiem", method = RequestMethod.GET)
-	public String searchByTitle(@RequestParam("keyword") String keyword, Model model) {
-		List<JobDTO> jobs = jobService.findByTitle(keyword);
-		List<CategoryDTO> categories = categoryService.findAll();
-		model.addAttribute("jobs", jobs);
-		model.addAttribute("categories", categories);
-		return "web/home";
-	}
-	
 }

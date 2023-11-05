@@ -21,9 +21,12 @@ public class EmployerConverter {
 			result.setEmail(entity.getUser().getEmail());
 			result.setFirstName(entity.getUser().getFirstName());
 			result.setLastName(entity.getUser().getLastName());
+			result.setUserName(entity.getUser().getUserName());
 		}
 		result.setCreateAt(formatter.format(entity.getCreate_at().getTime()));
 		result.setUpdateAt(formatter.format(entity.getUpdate_at().getTime()));
+		result.setCreateBy(entity.getCreate_by());
+		result.setUpdateBy(entity.getUpdate_by());
 		return result;
 	}
 	

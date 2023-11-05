@@ -1,9 +1,16 @@
 package com.jobfinder.entity;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -23,7 +30,12 @@ public class EmployerEntity extends BaseEntity {
 	@OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "user_id", referencedColumnName = "id")
     private UserEntity user;
+	// many to one with service 
+	@ManyToOne
+    @JoinColumn(name = "dich_vu_id")
+	private ServiceEntity service;
 
+	
 	public String getCompanyName() {
 		return companyName;
 	}
@@ -56,6 +68,16 @@ public class EmployerEntity extends BaseEntity {
 	public void setUser(UserEntity user) {
 		this.user = user;
 	}
-	
+
+	public ServiceEntity getServices() {
+		return service;
+	}
+
+	public void setServices(Long id) {
+		this.service = new ServiceEntity();
+		this.service.setId(id);
+	}
+
+
 	
 }

@@ -14,6 +14,24 @@
 		<!-- Navbar -->
 		<%@ include file="/common/admin/navbar.jsp" %>
 		<div class="container-fluid py-4">
+		<%-- Kiểm tra nếu có tin nhắn --%>
+			<c:if test="${not empty message}">
+			  <%-- Tạo phần tử div với lớp và vai trò tương ứng --%>
+			  <div class="alert alert-success" role="alert">
+			    <%-- Hiển thị tin nhắn --%>
+			    <h6>${message}</h6>
+			  </div>
+			
+			  <%-- Đặt thời gian tự động xóa sau 5 giây --%>
+			  <script>
+			    setTimeout(function() {
+			      var alertDiv = document.querySelector(".alert");
+			      alertDiv.parentNode.removeChild(alertDiv);
+			    }, 3000);
+			  </script>
+			</c:if>
+
+
 	  <div class="row">
         <div class="col-12">
           <div class="card mb-4">

@@ -6,13 +6,9 @@
 <head>
 <meta charset="UTF-8">
 <title>Đăng ký Người Tìm Việc</title>
+
 </head>
 <body>
-	<style>
-.error {
-	color: red;
-}
-</style>
 	<!-- slider Area Start-->
 	<div class="slider-area ">
 		<!-- Mobile Menu -->
@@ -39,8 +35,7 @@
 									<div class="mt-10">
 										<div class="mt-10">
 											<label>Tên đăng nhập (*)</label>
-											<form:input type="text" class="single-input" path="userName"
-												placeholder="Tên đăng nhập" />
+											<form:input type="text" class="single-input" path="userName" value="đaada"/>
 											<span><form:errors cssClass="error" path="userName" /></span>
 										</div>
 										<div class="mt-10">
@@ -80,12 +75,6 @@
 										</div>
 									</div>
 									<div class="mt-10">
-										<label>Kĩ năng (*)</label>
-										<form:textarea path="skills" rows="7" class="single-textarea"
-											placeholder="Skills" />
-										<span><form:errors cssClass="error" path="skills" /></span>
-									</div>
-									<div class="mt-10">
 										<label>Kinh nghiệm (*)</label>
 										<form:textarea path="experience" rows="7"
 											class="single-textarea" placeholder="Experience" />
@@ -97,10 +86,30 @@
 											class="single-textarea" placeholder="Education" />
 										<span><form:errors cssClass="error" path="education" /></span>
 									</div>
+									<div class="mt-10">
+										<label>Kĩ năng (*)</label><br /> <select id="categorySelect"
+											style="padding: 5px;">
+											<c:forEach items="${categories}" var="category">
+												<option value="${category.id}">${category.name}</option>
+											</c:forEach>
+										</select><br />
+										<br /> <select id="skills" style="padding: 5px;">
+										</select> <select hidden="true" id="skillVal">
+											<c:forEach items="${skills}" var="skill">
+												<option value="${skill.id}" id="${skill.id}"
+													class="${skill.category_id}">${skill.name}</option>
+											</c:forEach>
+										</select><br />
+										<div id="container-skill">
+											<input type="hidden" id="default-skill" name="skills" />
+										</div>
+										<span><form:errors cssClass="error" path="skills" /></span>
+									</div>
 									<div class="single-element-widget mt-30">
 										<div class="switch-wrap d-flex">
 											<div class="primary-checkbox">
-												<input type="checkbox" id="default-checkbox"> <label for="default-checkbox"></label>
+												<input type="checkbox" id="default-checkbox"> <label
+													for="default-checkbox"></label>
 											</div>
 											<p>
 												Tôi đã đọc và đồng ý với <a href="#" style="color: #fb246a">Điều
@@ -122,29 +131,5 @@
 			</div>
 		</div>
 	</div>
-	<script>
-		document.addEventListener("DOMContentLoaded", function() {
-			var checkbox = document.getElementById("default-checkbox");
-			var submitButton = document.getElementById("submitButton");
-
-			// Function to enable or disable the button and change its background color
-			function updateButtonState() {
-				if (checkbox.checked) {
-					submitButton.disabled = false;
-					submitButton.style.backgroundColor = "#1f2b7b"; // Reset background color
-				} else {
-					submitButton.disabled = true;
-					submitButton.style.backgroundColor = "#5363d2"; // Set a lighter background color
-				}
-			}
-
-			// Initial call to set the button state
-			updateButtonState();
-
-			checkbox.addEventListener("change", function() {
-				updateButtonState();
-			});
-		});
-	</script>
 </body>
 </html>

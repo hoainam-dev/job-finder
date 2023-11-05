@@ -7,11 +7,12 @@
 	<meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="manifest" href="site.webmanifest">
-	<link rel="shortcut icon" type="image/x-icon" href="<c:url value='./template/web/img/favicon.ico' />">
+	<link rel="shortcut icon" type="image/x-icon" href="<c:url value='/template/web/img/favicon.ico' />">
 
 	<!-- CSS here -->
     <link rel="stylesheet" href="<c:url value='/template/admin/css/nucleo-icons.css' />">
     <link rel="stylesheet" href="<c:url value='/template/admin/css/nucleo-svg.css' />">
+    <link rel="stylesheet" href="<c:url value='/template/web/css/custom.css' />">
         
 
 	<!--     Fonts and icons     -->
@@ -19,6 +20,7 @@
 	  
 	<!-- Nucleo Icons -->
 	<link rel="stylesheet" href="<c:url value='/template/admin/css/soft-ui-dashboard.css?v=1.0.7' />">
+	
 	  
 	<!-- Nepcha is a easy-to-use web analytics. No cookies and fully compliant with GDPR, CCPA and PECR. -->
 	<script defer data-site="YOUR_DOMAIN_HERE" src="https://api.nepcha.com/js/nepcha-analytics.js"></script>
@@ -26,6 +28,9 @@
 <body>
 	
 	<dec:body/>
+	
+	
+	<script src="/template/admin/js/job.js"></script>
 	
 	<!-- All JS Custom Plugins Link Here here -->
 	<script src="./template/admin/js/core/popper.min.js"></script>

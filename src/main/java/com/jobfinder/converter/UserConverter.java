@@ -24,6 +24,9 @@ public class UserConverter {
 		result.setPhone(entity.getPhone());
 		result.setCreateAt(formatter.format(entity.getCreate_at().getTime()));
 		result.setUpdateAt(formatter.format(entity.getUpdate_at().getTime()));
+		result.setEmployer_id(entity.getId());
+		result.setCreateBy(entity.getCreate_by());
+		result.setUpdateBy(entity.getUpdate_by());
 		return result;
 	}
 	
@@ -37,6 +40,7 @@ public class UserConverter {
 		result.setEmail(dto.getEmail());
 		result.setAddress(dto.getAddress());
 		result.setPhone(dto.getPhone());
+		result.setId(dto.getEmployer_id());;
 		return result;
 	}
 	

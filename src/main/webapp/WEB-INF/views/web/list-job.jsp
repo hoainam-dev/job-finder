@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,374 +8,240 @@
 <title>Danh sách công việc</title>
 </head>
 <body>
-
-	<!-- Hero Area Start-->
-        <div class="row slider-area" style="background:#F2185D; padding:30px">
-			<div class="col-xl-1">
-			 	<a href="/trang-chu"><i class="fa fa-home" aria-hidden="true" style="font-size:30px; color:white"></i></a>
+<style>
+	.row {
+	    display: flex;
+	    align-items: left;
+	}
+	
+	.image-container {
+	    flex: 1;
+	    text-align: left; /* Đặt ảnh ở giữa dòng */
+	}
+	
+	.text-container {
+	    flex: 2;
+	    padding: 10px; /* Tạo khoảng cách giữa h5 và p */
+	    text-align: left; /* Đặt nội dung văn bản bên phải */
+	}
+</style>
+	<main> <!-- Navigation --> <%@ include
+		file="/common/element/header.jsp"%> <!-- Job List Area Start -->
+	<div class="job-listing-area pt-120 pb-120">
+		<div class="container">
+			<div class="row justify-content-center">
+				<h1>Danh sách tin tuyển dụng</h1>
 			</div>
-	         <div class="col-xl-10">
-	             <div class="hero-cap text-center">
-	                 <h2>LIST JOB</h2>
-	             </div>
-         	</div>
-       </div>
-    <!-- Hero Area End -->
-	<!-- Job List Area Start -->
-        <div class="job-listing-area pt-120 pb-120">
-            <div class="container">
-                <div class="row">
-                    <!-- Left content -->
-                    <div class="col-xl-3 col-lg-3 col-md-4">
-                        <div class="row">
-                            <div class="col-7">
-                                    <div class="small-section-tittle2 mb-45">
-	                                    <div class="ion"> <svg 
-	                                        xmlns="http://www.w3.org/2000/svg"
-	                                        xmlns:xlink="http://www.w3.org/1999/xlink"
-	                                        width="20px" height="12px">
-		                                    <path fill-rule="evenodd"  fill="rgb(27, 207, 107)"
-		                                        d="M7.778,12.000 L12.222,12.000 L12.222,10.000 L7.778,10.000 L7.778,12.000 ZM-0.000,-0.000 L-0.000,2.000 L20.000,2.000 L20.000,-0.000 L-0.000,-0.000 ZM3.333,7.000 L16.667,7.000 L16.667,5.000 L3.333,5.000 L3.333,7.000 Z"/>
-		                                    </svg>
-	                                    </div>
-	                                    <h4>Search Jobs</h4>
-                                	</div>
-                            </div>
-                            <div class="col-5">
-                              	<a href="/viec-lam/danh-sach"><button type="button" style="padding:5px, 10px; background-color: #FF2E7B; border: none;">Làm mới</button></a>
-                            </div>
-                        </div>
-                        <!-- Job Category Listing start -->
-                        	<div class="job-category-listing mb-50">
-	                            <!-- single one -->
-	                            <div class="single-listing">
-	                               <form action="/viec-lam/tim-kiem/tu-khoa" method="GET">
-		                               <div class="small-section-tittle2">
-		                                     <h4>Title</h4>
-		                               </div>
-		                               <div class="row">
-		                               		<div class="col-sm-9">
-		                               			<input type="text" name="keyword" placeholder="Enter keyword" style="width:187px; height:35px; padding-left:7px; padding-right:6px; border: solid 1px #FF2E7B; " required>
-		                               			<% String errorMessage1 = (String) request.getAttribute("errorMessage"); %>
-												<% if (errorMessage1 != null) { %>
-												    <p class="error-message"><%= errorMessage1 %></p>
-												<% } %>
-		                               		</div>
-		                                	<div class="col-sm-2" style="border:none;">
-		                                		<button type="submit" style="background-color:#FF2E7B; border:none; border-radius:3px;padding:8px;"><i class="fas fa-solid fa-arrow-right" style="font-size:19px;"></i></i></button>
-		                                	</div>
-		                               </div>
-	                                </form>
-	                                <!--  Select job items End-->
-	                            </div>
-	                            <hr/>
-	                             <!-- single one -->
-	                            <div class="single-listing">
-	                               <form action="/viec-lam/tim-kiem/categoryId" method="GET">
-		                               <div class="small-section-tittle2">
-		                                     <h4>Category</h4>
-		                               </div>
-										<div class="row">
-											<div class="col-sm-9">
-												<div class="form-group">
-											        <select id="categoryId" name="categoryId" style="padding:6px;margin-left:2px; border:solid 1px #FF2E7B" required>
-											        	<option value="">Select category</option>
-											            <c:forEach items="${categories}" var="category">
-											                <option value="${category.id}">${category.name}</option>
-											                <% String errorMessage = (String) request.getAttribute("errorMessage"); %>
-															<% if (errorMessage != null) { %>
-															    <p class="error-message"><%= errorMessage %></p>
-															<% } %>
-											            </c:forEach>
-											        </select><br>
-									    		</div>
-											</div>
-		                               		<div class="col-sm-2" style="border:none;">
-		                                		<button type="submit" style="background-color:#FF2E7B; border:none; border-radius:3px;padding:8px;"><i class="fas fa-solid fa-arrow-right" style="font-size:19px;"></i></i></button>
-		                                	</div>
+			<br />
+			<div class="row">
+				<!-- Left content -->
+				<div class="left-content col-xl-3 col-lg-3 col-md-4">
+					<div class="row">
+						<div class="col-12">
+							<div class="small-section-tittle2 mb-45">
+								<div class="ion">
+									<svg xmlns="http://www.w3.org/2000/svg"
+										xmlns:xlink="http://www.w3.org/1999/xlink" width="20px"
+										height="12px">
+                                    <path fill-rule="evenodd"
+											fill="rgb(27, 207, 107)"
+											d="M7.778,12.000 L12.222,12.000 L12.222,10.000 L7.778,10.000 L7.778,12.000 ZM-0.000,-0.000 L-0.000,2.000 L20.000,2.000 L20.000,-0.000 L-0.000,-0.000 ZM3.333,7.000 L16.667,7.000 L16.667,5.000 L3.333,5.000 L3.333,7.000 Z" />
+                                    </svg>
+								</div>
+								<h4>Lọc nhanh</h4>
+							</div>
+						</div>
+					</div>
+					<!-- Job Category Listing start -->
+					<div class="job-category-listing mb-50">
+						<form>
+							<!-- category -->
+							<div class="single-listing">
+								<div class="small-section-tittle2">
+									<h4>Lĩnh vực</h4>
+								</div>
+								<!-- Select job items start -->
+								<div class="select-job-items2">
+									<select style="padding: 5px" name="cat">
+										<option value="0">Tất cả lĩnh vực</option>
+										<c:forEach var="category" items="${categories}">
+											<option value="${category.id}">${category.name}</option>
+										</c:forEach>
+									</select>
+								</div>
+							</div>
+							<hr />
+							<!-- type -->
+							<div class="select-Categories">
+								<div class="small-section-tittle2">
+									<h4>Phương thức làm việc</h4>
+								</div>
+								<select style="padding: 5px" name="type">
+									<option value="">Tất cả phương thức</option>
+									<option value="Full Time">Full Time</option>
+									<option value="Part Time">Part Time</option>
+									<option value="Remote">Remote</option>
+									<option value="Freelance">Freelance</option>
+								</select>
+							</div>
+							<hr />
+							<!-- salary -->
+							<div class="select-Categories">
+								<div class="small-section-tittle2">
+									<h4>Mức lương</h4>
+								</div>
+								<select style="padding: 5px" name="salary">
+									<option value="1">Tất cả mức lương</option>
+									<option value="9">Dưới 10 triệu</option>
+									<% for (int i = 10; i <= 45; i += 5) { %>
+									<option value="<%=i%>"><%=i%> - <%=i + 5%> triệu</option>
+									<% } %>
+									<option value="51">Trên 50 triệu</option>
+									<option value="0">Thỏa thuận</option>
+								</select>
+							</div>
+							<hr />
+							<!-- location -->
+							<div class="select-Categories">
+								<div class="small-section-tittle2">
+									<h4>Địa điểm</h4>
+								</div>
+								<div>
+									<select style="padding: 5px" name="location" id="location">
+										<option value="" selected>Chọn tỉnh thành</option>
+									</select>
+								</div>
+							</div>
+							<hr />
+							<input type="submit"
+								class="genric-btn circle single-input-primary" value="Lọc">
+						</form>
+					</div>
+					<!-- Job Category Listing End -->
+				</div>
+				<!-- Right content -->
+				<div class="right-content col-xl-9 col-lg-9 col-md-8">
+					<!-- Featured_job_start -->
+					<section class="featured-job-area">
+						<div class="container">
+							<!-- Count of Job list Start -->
+							<div class="row">
+								<div class="col-lg-12">
+									<div class="count-job mb-35">
+										<span>${jobs.size()} tin tìm thấy</span>
+										<!-- Select job items start -->
+										<div class="select-job-items">
+											<span>Lọc theo</span> <select name="select">
+												<option value="">None</option>
+												<option value="">Alphabet</option>
+												<option value="">Time</option>
+											</select>
 										</div>
-	                                </form>
-	                                <!--  Select job items End-->
-	                            </div>
-	                            <hr/>
-								 <!-- single one -->
-	                            <div class="single-listing">
-	                               <form action="/viec-lam/tim-kiem/dia-diem" method="GET">
-		                               <div class="small-section-tittle2">
-		                                     <h4>Location</h4>
-		                               </div>
-		                               <div class="row">
-		                               		<div class="col-sm-9">
-		                               			<input type="text" name="location" placeholder="Enter location" style="width:187px; height:35px; padding-left:7px; padding-right:6px; border: solid 1px #FF2E7B; " required>
-		                               			<% String errorMessage2 = (String) request.getAttribute("errorMessage"); %>
-												<% if (errorMessage2 != null) { %>
-												    <p class="error-message"><%= errorMessage2 %></p>
-												<% } %>
-		                               		</div>
-		                               		<div class="col-sm-2" style="border:none;">
-		                                		<button type="submit" style="background-color:#FF2E7B; border:none; border-radius:3px;padding:8px;"><i class="fas fa-solid fa-arrow-right" style="font-size:19px;"></i></i></button>
-		                                	</div>
-		                               </div>
-		                                
-	                                </form>
-	                                <!--  Select job items End-->
-	                            </div>
-	                             <hr/>
-								 <!-- single one -->
-	                            <div class="single-listing">
-	                               <form action="/viec-lam/tim-kiem/vi-tri" method="GET">
-		                               <div class="small-section-tittle2">
-		                                     <h4>Position</h4>
-		                               </div>
-		                               <div class="row">
-		                               		<div class="col-sm-9">
-		                               			<input type="text" name="position" placeholder="Enter position" style="width:187px; height:35px; padding-left:7px; padding-right:6px; border: solid 1px #FF2E7B; " required>
-		                               			<% String errorMessage3 = (String) request.getAttribute("errorMessage"); %>
-												<% if (errorMessage3 != null) { %>
-												    <p class="error-message"><%= errorMessage3 %></p>
-												<% } %>
-		                               		</div>
-		                               		<div class="col-sm-2" style="border:none;">
-		                                		<button type="submit" style="background-color:#FF2E7B; border:none; border-radius:3px;padding:8px;"><i class="fas fa-solid fa-arrow-right" style="font-size:19px;"></i></i></button>
-		                                	</div>
-		                               </div>
-		                                
-	                                </form>
-	                                <!--  Select job items End-->
-	                            </div>
-	                            <hr/>
-								 <!-- single one -->
-	                            <div class="single-listing">
-	                               <form action="/viec-lam/tim-kiem/luong" method="GET">
-		                               <div class="small-section-tittle2">
-		                                     <h4>Salary</h4>
-		                               </div>
-		                               <div class="row">
-			                               	<div class="col-sm-9">
-			                               			<input type="number" name="salary" placeholder="Enter salary" style="width:187px; height:35px; padding-left:7px; padding-right:6px; border: solid 1px #FF2E7B;" required>
-			                               			<% String errorMessage4 = (String) request.getAttribute("errorMessage"); %>
-													<% if (errorMessage4 != null) { %>
-													    <p class="error-message"><%= errorMessage4 %></p>
-													<% } %>
-			                               </div>
-									       <div class="col-sm-2" style="border:none;">
-			                                	<button type="submit" style="background-color:#FF2E7B; border:none; border-radius:3px;padding:8px;"><i class="fas fa-solid fa-arrow-right" style="font-size:19px;"></i></i></button>
-			                               </div>
-		                               </div>
-	                                </form>
-	                                <!--  Select job items End-->
-	                            </div>
-	                        </div>
-                        <!-- Job Category Listing End -->
-                    </div>
-                    <!-- Right content -->
-                    <div class="col-xl-9 col-lg-9 col-md-8">
-                        <!-- Featured_job_start -->
-                        <section class="featured-job-area">
-                            <div class="container">
-                                <!-- Count of Job list Start -->
-                                <div class="row">
-                                    <div class="col-lg-12">
-                                        <div class="count-job mb-35">
-                                            <span>39, 782 Jobs found</span>
-                                            <!-- Select job items start -->
-                                            <div class="select-job-items">
-                                                <span>Sort by</span>
-                                                <select name="select">
-                                                    <option value="">None</option>
-                                                    <option value="">Alphabet</option>
-                                                    <option value="">Time</option>
-                                                </select>
-                                            </div>
-                                            <!--  Select job items End-->
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- Count of Job list End -->
-                                <c:forEach var="job" items="${jobs}">
+										<!--  Select job items End-->
+									</div>
+								</div>
+							</div>
+							<!-- Count of Job list End -->
+							<c:forEach var="job" items="${jobs}">
 								<div class="row justify-content-center">
-									<div class="col-xl-10">
+									<div class="col-xl-11">
 										<!-- single-job-content -->
-											<div class="single-job-items mb-30" style="border:1px solid #DDDDDD">
-												<div class="job-items">
-													<div class="company-img">
-														<a href="/viec-lam/chi-tiet-bai-viet/${job.id}"><img
-															src="./template/web/img/icon/job-list1.png" alt=""></a>
-													</div>
-													<div class="job-tittle">
-														<a href="/viec-lam/chi-tiet-bai-viet/${job.id}"><h4>${job.title}</h4></a>
-														${job.createBy }
-														<ul>
-															<li><i class="fas fa-solid fa-user"></i>${job.position }</li>
-															<li><i class="fas fa-map-marker-alt"></i>${job.location }</li>
-															<li>$ ${job.salary}</li>
-															<li><i class="fa fa-regular fa-clock"></i>${job.createAt}</li>
-														</ul>
-													</div>
+										<div class="single-job-items mb-30">
+											<div class="job-items">
+												<div class="company-img">
+													<a href="/viec-lam/chi-tiet-viec-lam/${job.id}">
+														<div class="row">
+															<div class="col-sm-4 image-container">
+																<img src="/template/web/img/icon/job-list1.png" alt="">
+															</div>
+															<div class="col-sm-8 text-container">
+																<h5>${job.title}</h5>
+																<c:forEach var="employer" items="${employers}">
+																	<c:if test="${job.employer_id==employer.id}">
+																		<p>${employer.companyName}</p>
+																	</c:if>
+																</c:forEach>
+															</div>
+														</div>
+													</a>
+												</div>
+												<div class="job-tittle">
+													<ul>
+														<li><i class="fas fa-map-marker-alt"></i>${job.type}</li>
+														<li><i class="fas fa-map-marker-alt"></i>${job.location}</li>
+														<c:if test="${job.salary==0}">
+															<li>Thỏa thuận</li>
+														</c:if>
+														<c:if test="${job.salary>0&&job.salary<10}">
+															<li>Dưới 10 triệu</li>
+														</c:if>
+														<c:if test="${job.salary>50}">
+															<li>Trên 50 triệu</li>
+														</c:if>
+														<c:if test="${job.salary>=10&&job.salary<=50}">
+															<li>${job.salary} - ${job.salary+5} triệu</li>
+														</c:if>
+														<li><i class="fa fa-regular fa-clock"></i>${job.createAt}</li>
+													</ul>
 												</div>
 											</div>
 										</div>
 									</div>
-								</c:forEach>
-                    		</div>
-                    	</section>
-                	</div>
-            	</div>
-        	</div>
-       	</div>
-        <!-- Job List Area End -->
-        <!--Pagination Start  -->
-        <div class="pagination-area pb-115 text-center">
-            <div class="container">
-                <div class="row">
-                    <div class="col-xl-12">
-                        <div class="single-wrap d-flex justify-content-center">
-                            <nav aria-label="Page navigation example">
-                                <ul class="pagination justify-content-start">
-                                    <li class="page-item active"><a class="page-link" href="#">01</a></li>
-                                    <li class="page-item"><a class="page-link" href="#">02</a></li>
-                                    <li class="page-item"><a class="page-link" href="#">03</a></li>
-                                <li class="page-item"><a class="page-link" href="#"><span class="ti-angle-right"></span></a></li>
-                                </ul>
-                            </nav>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!--Pagination End  -->
-        
-    </main>
-    <footer>
-        <!-- Footer Start-->
-        <div class="footer-area footer-bg footer-padding">
-            <div class="container">
-                <div class="row d-flex justify-content-between">
-                    <div class="col-xl-3 col-lg-3 col-md-4 col-sm-6">
-                       <div class="single-footer-caption mb-50">
-                         <div class="single-footer-caption mb-30">
-                             <div class="footer-tittle">
-                                 <h4>About Us</h4>
-                                 <div class="footer-pera">
-                                     <p>Heaven frucvitful doesn't cover lesser dvsays appear creeping seasons so behold.</p>
-                                </div>
-                             </div>
-                         </div>
+								</div>
+								<hr />
+							</c:forEach>
+						</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- Job List Area End --> <!--Pagination Start  -->
+	<div class="pagination-area pb-115 text-center">
+		<div class="container">
+			<div class="row">
+				<div class="col-xl-12">
+					<div class="single-wrap d-flex justify-content-center">
+						<nav aria-label="Page navigation example">
+							<ul class="pagination justify-content-start">
+								<li class="page-item active"><a class="page-link" href="#">01</a></li>
+								<li class="page-item"><a class="page-link" href="#">02</a></li>
+								<li class="page-item"><a class="page-link" href="#">03</a></li>
+								<li class="page-item"><a class="page-link" href="#"><span
+										class="ti-angle-right"></span></a></li>
+							</ul>
+						</nav>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!--Pagination End  --> </main>
+	<!-- Navigation -->
+	<%@ include file="/common/element/footer.jsp"%>
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
+		referrerpolicy="no-referrer"></script>
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"></script>
+	<script>
+    	const host = "https://provinces.open-api.vn/api/";
+    	// Sử dụng fetch API để lấy dữ liệu từ API
+    	fetch(host).then(response => response.json())
+    	    .then(data => {
+    	        // Xử lý dữ liệu JSON ở đây
+    	        fillSelect(data);
+    	    });
+    	function fillSelect(data) {
+    	    const selectElement = document.querySelector('#location');
+    	    selectElement.innerHTML = '<option value="">Chọn tỉnh/thành phố</option>';
 
-                       </div>
-                    </div>
-                    <div class="col-xl-3 col-lg-3 col-md-4 col-sm-5">
-                        <div class="single-footer-caption mb-50">
-                            <div class="footer-tittle">
-                                <h4>Contact Info</h4>
-                                <ul>
-                                    <li>
-                                    <p>Address :Your address goes
-                                        here, your demo address.</p>
-                                    </li>
-                                    <li><a href="#">Phone : +8880 44338899</a></li>
-                                    <li><a href="#">Email : info@colorlib.com</a></li>
-                                </ul>
-                            </div>
-
-                        </div>
-                    </div>
-                    <div class="col-xl-3 col-lg-3 col-md-4 col-sm-5">
-                        <div class="single-footer-caption mb-50">
-                            <div class="footer-tittle">
-                                <h4>Important Link</h4>
-                                <ul>
-                                    <li><a href="#"> View Project</a></li>
-                                    <li><a href="#">Contact Us</a></li>
-                                    <li><a href="#">Testimonial</a></li>
-                                    <li><a href="#">Proparties</a></li>
-                                    <li><a href="#">Support</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xl-3 col-lg-3 col-md-4 col-sm-5">
-                        <div class="single-footer-caption mb-50">
-                            <div class="footer-tittle">
-                                <h4>Newsletter</h4>
-                                <div class="footer-pera footer-pera2">
-                                 <p>Heaven fruitful doesn't over lesser in days. Appear creeping.</p>
-                             </div>
-                             <!-- Form -->
-                             <div class="footer-form" >
-                                 <div id="mc_embed_signup">
-                                     <form target="_blank" action="https://spondonit.us12.list-manage.com/subscribe/post?u=1462626880ade1ac87bd9c93a&amp;id=92a4423d01"
-                                     method="get" class="subscribe_form relative mail_part">
-                                         <input type="email" name="email" id="newsletter-form-email" placeholder="Email Address"
-                                         class="placeholder hide-on-focus" onfocus="this.placeholder = ''"
-                                         onblur="this.placeholder = ' Email Address '">
-                                         <div class="form-icon">
-                                             <button type="submit" name="submit" id="newsletter-submit"
-                                             class="email_icon newsletter-submit button-contactForm"><img src="assets/img/icon/form.png" alt=""></button>
-                                         </div>
-                                         <div class="mt-10 info"></div>
-                                     </form>
-                                 </div>
-                             </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-               <!--  -->
-               <div class="row footer-wejed justify-content-between">
-                       <div class="col-xl-3 col-lg-3 col-md-4 col-sm-6">
-                          <!-- logo -->
-                          <div class="footer-logo mb-20">
-                            <a href="index.html"><img src="assets/img/logo/logo2_footer.png" alt=""></a>
-                          </div>
-                       </div>
-                       <div class="col-xl-3 col-lg-3 col-md-4 col-sm-5">
-                        <div class="footer-tittle-bottom">
-                            <span>5000+</span>
-                            <p>Talented Hunter</p>
-                        </div>
-                       </div>
-                       <div class="col-xl-3 col-lg-3 col-md-4 col-sm-5">
-                            <div class="footer-tittle-bottom">
-                                <span>451</span>
-                                <p>Talented Hunter</p>
-                            </div>
-                       </div>
-                       <div class="col-xl-3 col-lg-3 col-md-4 col-sm-5">
-                            <!-- Footer Bottom Tittle -->
-                            <div class="footer-tittle-bottom">
-                                <span>568</span>
-                                <p>Talented Hunter</p>
-                            </div>
-                       </div>
-               </div>
-            </div>
-        </div>
-        <!-- footer-bottom area -->
-        <div class="footer-bottom-area footer-bg">
-            <div class="container">
-                <div class="footer-border">
-                     <div class="row d-flex justify-content-between align-items-center">
-                         <div class="col-xl-10 col-lg-10 ">
-                             <div class="footer-copy-right">
-                                 <p><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-  Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
-  <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></p>
-                             </div>
-                         </div>
-                         <div class="col-xl-2 col-lg-2">
-                             <div class="footer-social f-right">
-                                 <a href="#"><i class="fab fa-facebook-f"></i></a>
-                                 <a href="#"><i class="fab fa-twitter"></i></a>
-                                 <a href="#"><i class="fas fa-globe"></i></a>
-                                 <a href="#"><i class="fab fa-behance"></i></a>
-                             </div>
-                         </div>
-                     </div>
-                </div>
-            </div>
-        </div>
-        <!-- Footer End-->
-    </footer>
+    	    data.forEach(city => {
+    	        const option = document.createElement('option');
+    	        option.value = city.name;
+    	        option.text = city.name;
+    	        selectElement.appendChild(option);
+    	    });
+    	}
+	</script>
 </body>
 </html>
