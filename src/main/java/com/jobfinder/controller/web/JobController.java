@@ -30,6 +30,7 @@ public class JobController {
 	@Autowired
 	private IUserService userService;
 
+	@Autowired
 	private IEmployerService employerService;
 	
 	@Autowired
@@ -46,7 +47,7 @@ public class JobController {
 			jobService.filter(categoryId, type, salary, location);
 		}
 		model.addAttribute("jobs", jobs);
-		return "web/list-test";
+		return "web/list-job";
 	}
 
 	@RequestMapping(value = "/chi-tiet-viec-lam/{id}", method = RequestMethod.GET)

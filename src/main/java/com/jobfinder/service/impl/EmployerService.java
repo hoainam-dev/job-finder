@@ -31,8 +31,10 @@ public class EmployerService implements IEmployerService{
 	
 	@Autowired
 	private UserConverter userConverter;
+	
 	@Autowired
 	private IUserService useService;
+	
 	@Autowired
 	private UserRepository userRepository;
 	

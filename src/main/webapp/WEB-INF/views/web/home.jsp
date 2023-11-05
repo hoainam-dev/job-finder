@@ -110,7 +110,6 @@
 												</c:if>
 												<li>
 												<i class="fa fa-regular fa-clock"></i>${job.createAt}</li>
->>>>>>> dev
 											</ul>
 										</div>
 									</div>
