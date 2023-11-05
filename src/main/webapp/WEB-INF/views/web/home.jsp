@@ -8,6 +8,25 @@
 <title>Trang chủ</title>
 </head>
 <body>
+<style>
+	.row {
+	    display: flex;
+	    align-items: center;
+	}
+	
+	.image-container {
+	    flex: 1;
+	    width: 2rem;
+	    text-align: center; /* Đặt ảnh ở giữa dòng */
+	}
+	
+	.text-container {
+	    flex: 2;
+	    padding: 10px; /* Tạo khoảng cách giữa h5 và p */
+	    justify-content: left;
+	    text-align: left; /* Đặt ảnh ở giữa dòng */
+	}
+</style>
 	<main>
 		<!-- Navigation -->
 		<%@ include file="/common/web/home-header.jsp" %>
@@ -51,34 +70,51 @@
 				<div class="row">
 					<div class="col-lg-12">
 						<div class="section-tittle text-center">
-							<span>List Job</span>
-							<h2>Featured Jobs</h2>
+							<span>Tin tuyển dụng</span>
+							<h2>Tin nổi bật</h2>
 						</div>
 					</div>
 				</div>
 				<c:forEach var="job" items="${jobs}">
 					<div class="row justify-content-center">
-						<div class="col-xl-10">
+						<div class="col-xl-11">
 							<!-- single-job-content -->
 								<div class="single-job-items mb-30">
 									<div class="job-items">
 										<div class="company-img">
-											<a href="job_details.html"><img
-												src="./template/web/img/icon/job-list1.png" alt=""></a>
+											<a href="job_details.html"><img src="./template/web/img/icon/job-list1.png" alt=""></a>
 										</div>
 										<div class="job-tittle">
-											<a href="job_details.html">
-												<h4>${job.title}</h4>
-											</a> ${job.createBy }
+											<a href="/viec-lam/chi-tiet-viec-lam/${job.id}">
+												<h5>${job.title}</h5>
+											</a>
 											<ul>
-												<li><i class="fas fa-map-marker-alt"></i>${job.location }</li>
-												<li>$ ${job.salary}</li>
-												<li><i class="fa fa-regular fa-clock"></i>${job.createAt}</li>
+												<c:forEach var="employer" items="${employers}">
+													<c:if test="${job.employer_id==employer.id}">
+														<p>${employer.companyName}</p> 
+													</c:if>
+												</c:forEach>
+												<li><i class="fas fa-map-marker-alt"></i>${job.type}</li>
+												<li><i class="fas fa-map-marker-alt"></i>${job.location}</li>
+												<c:if test="${job.salary==0}">
+													<li>Thỏa thuận</li>
+												</c:if>
+												<c:if test="${job.salary>0&&job.salary<10}">
+													<li>Dưới 10 triệu</li>
+												</c:if>
+												<c:if test="${job.salary>50}">
+													<li>Trên 50 triệu</li>
+												</c:if>
+												<c:if test="${job.salary>=10&&job.salary<=50}">
+													<li>${job.salary} - ${job.salary+5} triệu</li>
+												</c:if>
+												<li>
+												<i class="fa fa-regular fa-clock"></i>${job.createAt}</li>
 											</ul>
 										</div>
 									</div>
 									<div class="items-link f-right">
-										<a href="/viec-lam/chi-tiet-bai-viet/${job.id}">Show Detail</a>
+										<a href="/viec-lam/chi-tiet-viec-lam/${job.id}">Xem chi tiết</a>
 									</div>
 								</div>
 						</div>

@@ -9,7 +9,7 @@
 		<div class="preloader-inner position-relative">
 			<div class="preloader-circle"></div>
 			<div class="preloader-img pere-text">
-				<img src="./template/web/img/logo/logo.png" alt="">
+				<img src="<c:url value='/template/web/img/logo/logo.png'/>">
 			</div>
 		</div>
 	</div>
@@ -24,7 +24,7 @@
 					<div class="col-lg-3 col-md-2">
 						<!-- Logo -->
 						<div class="logo">
-							<a href="/"><img src="./template/web/img/logo/logo.png"
+							<a href="/"><img src="/template/web/img/logo/logo.png"
 								alt=""></a>
 						</div>
 					</div>
@@ -51,8 +51,8 @@
 							<!-- Header-btn -->
 							<div class="header-btn d-none f-right d-lg-block">
 								<security:authorize access="isAnonymous()">
-									<a href="dang-ky" class="btn head-btn1">Register</a>
-									<a href="dang-nhap" class="btn head-btn2">Login</a>
+									<a href="/dang-ky" class="btn head-btn1">Register</a>
+									<a href="/dang-nhap" class="btn head-btn2">Login</a>
 								</security:authorize>
 								<security:authorize access="isAuthenticated()">
 									<c:forEach items="${users}" var="user">
@@ -60,7 +60,7 @@
 											test="${user.userName==SecurityUtils.getPrincipal().getUsername()}">
 											<a style="color: #000"
 												href="<c:url value='/thong-tin-ca-nhan?id=${user.id}'/>">
-												Wellcome <%=SecurityUtils.getPrincipal().getUsername()%>
+												<%=SecurityUtils.getPrincipal().getUsername()%>
 											</a>
 										</c:if>
 									</c:forEach>
