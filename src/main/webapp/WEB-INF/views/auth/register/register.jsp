@@ -8,6 +8,10 @@
 <title>Đăng ký</title>
 </head>
 <body>
+<style>
+body{
+ background: #eaedff;
+</style>
 	<main>
 		<!-- slider Area Start-->
 		<div class="slider-area ">

@@ -15,7 +15,7 @@ import com.jobfinder.service.IPositionService;
 @Service
 public class PositionService implements IPositionService{
 	@Autowired
-	private PositionRepository positionEntity;
+	private PositionRepository positionRepository;
 	
 	@Autowired
 	private PositionConverter positionConverter;
@@ -23,7 +23,7 @@ public class PositionService implements IPositionService{
 	@Override
 	public List<PositionDTO> findAll() {
 		List<PositionDTO> models = new ArrayList<>();
-		List<PositionEntity> entities = positionEntity.findAll();
+		List<PositionEntity> entities = positionRepository.findAll();
 		for (PositionEntity item : entities) {
 			PositionDTO userModel = positionConverter.toDto(item);
 			models.add(userModel);
@@ -34,7 +34,7 @@ public class PositionService implements IPositionService{
 	@Override
 	public List<PositionDTO> findByCategoryId(Long categoryId) {
 		List<PositionDTO> models = new ArrayList<>();
-		List<PositionEntity> entities = positionEntity.findByCategoryId(categoryId);
+		List<PositionEntity> entities = positionRepository.findByCategoryId(categoryId);
 		for (PositionEntity item : entities) {
 			PositionDTO userModel = positionConverter.toDto(item);
 			models.add(userModel);

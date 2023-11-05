@@ -13,9 +13,11 @@ import com.jobfinder.dto.ApplicantDTO;
 import com.jobfinder.dto.UserDTO;
 import com.jobfinder.entity.ApplicantEntity;
 import com.jobfinder.entity.RoleEntity;
+import com.jobfinder.entity.SkillEntity;
 import com.jobfinder.entity.UserEntity;
 import com.jobfinder.repository.ApplicantRepository;
 import com.jobfinder.repository.RoleRepository;
+import com.jobfinder.repository.SkillRepository;
 import com.jobfinder.repository.UserRepository;
 import com.jobfinder.service.IApplicantService;
 
@@ -36,6 +38,9 @@ public class ApplicantService implements IApplicantService{
 	
 	@Autowired
 	private RoleRepository roleRepository;
+	
+	@Autowired
+	private SkillRepository skillRepository;
 	
 	@Override
 	public List<ApplicantDTO> findAll() {
@@ -65,6 +70,11 @@ public class ApplicantService implements IApplicantService{
 		} else {
 			applicantEntity = applicantConverter.toEntity(dto);
 			
+			List<SkillEntity> skills = new ArrayList<>();
+			for(Long skillId: dto.getSkills()) {
+				skills.add(skillRepository.findOne(skillId));
+			}
+			applicantEntity.setSkills(skills);
 			UserDTO userDTO = new UserDTO();
 			userDTO.setUserName(dto.getUserName());
 			userDTO.setPassword(dto.getPassword());

@@ -24,8 +24,14 @@
             <link rel="stylesheet" href="<c:url value='/template/web/css/slick.css' />">
             <link rel="stylesheet" href="<c:url value='/template/web/css/nice-select.css' />">
             <link rel="stylesheet" href="<c:url value='/template/web/css/style.css' />">
+            <link rel="stylesheet" href="<c:url value='/template/web/css/custom.css' />">
    </head>
 <body>
+<style>
+.header-bg{
+	background: #fff;
+}
+</style>
 <!-- Preloader Start -->
 	<div id="preloader-active">
 		<div
@@ -41,7 +47,7 @@
 	<!-- Preloader Start -->
 	<header>
 		<!-- Header Start -->
-		<div class="header-area header-transparrent">
+		<div class="header-area header-bg header-transparrent">
 			<div class="headder-top header-sticky">
 				<div class="container">
 					<div class="row align-items-center">
@@ -59,7 +65,7 @@
 									<nav class="d-none d-lg-block">
 										<ul id="navigation">
 											<li><a href="/">Home</a></li>
-											<li><a href="job_listing.html">Find a Jobs </a></li>
+											<li><a href="/viec-lam/danh-sach">Find a Jobs </a></li>
 											<li><a href="about.html">About</a></li>
 											<li><a href="#">Page</a>
 												<ul class="submenu">
@@ -238,6 +244,7 @@
 		</div>
 		<!-- Footer End-->
 	</footer>
+		<script src="./template/web/js/applicant.js"></script>
 	
 	<!-- All JS Custom Plugins Link Here here -->
         <script src="./template/web/js/vendor/modernizr-3.5.0.min.js"></script>
@@ -245,8 +252,6 @@
 		<script src="./template/web/js/vendor/jquery-1.12.4.min.js"></script>
         <script src="./template/web/js/popper.min.js"></script>
         <script src="./template/web/js/bootstrap.min.js"></script>
-	    <!-- Jquery Mobile Menu -->
-        <script src="./template/web/js/jquery.slicknav.min.js"></script>
 
 		<!-- Jquery Slick , Owl-Carousel Plugins -->
         <script src="./template/web/js/owl.carousel.min.js"></script>

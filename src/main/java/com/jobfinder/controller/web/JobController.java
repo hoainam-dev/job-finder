@@ -11,48 +11,61 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.jobfinder.dto.CategoryDTO;
 import com.jobfinder.dto.JobDTO;
 import com.jobfinder.service.ICategoryService;
+import com.jobfinder.service.IEmployerService;
 import com.jobfinder.service.IJobService;
+import com.jobfinder.service.ISkillService;
+import com.jobfinder.service.IUserService;
 
 @Controller
 @RequestMapping("/viec-lam")
 public class JobController {
-	
+
 	@Value("${upload.dir}")
 	private String uploadDir = System.getProperty("user.home") + "/Desktop/image";
 
 	@Autowired
 	private IJobService jobService;
-	
+
 	@Autowired
 	private ICategoryService categoryService;
+
+	@Autowired
+	private IUserService userService;
 	
+	@Autowired
+	private IEmployerService employerService;
+	
+	@Autowired
+	private ISkillService skillService;
 
 	@RequestMapping(value = "/danh-sach", method = RequestMethod.GET)
-	public String jobsList(Model model) {
+	public String jobsList(Model model, @RequestParam(name = "cat", required = false) Long categoryId,
+			@RequestParam(name = "type", required = false) String type,
+			@RequestParam(name = "salary", required = false) Integer salary,
+			@RequestParam(name = "location", required = false) String location) {
 		List<JobDTO> jobs = jobService.findAll();
-		List<CategoryDTO> categories = categoryService.findAll();
+
+		if (categoryId != null || type != null || location!=null) {
+			jobService.filter(categoryId, type, salary, location);
+		}
 		model.addAttribute("jobs", jobs);
-		model.addAttribute("categories", categories);
+		model.addAttribute("users", userService.findAll());
+		model.addAttribute("categories", categoryService.findAll());
+		model.addAttribute("employers", employerService.findAll());
 		return "web/list-job";
 	}
-	
-	@RequestMapping(value = "/chi-tiet-bai-viet/{id}", method = RequestMethod.GET) 
+
+	@RequestMapping(value = "/chi-tiet-viec-lam/{id}", method = RequestMethod.GET)
 	public String showJobDetail(@PathVariable("id") Long jobId, Model model) {
 		JobDTO job = jobService.findById(jobId);
-	    model.addAttribute("job", job);
-	    return "web/job-detail";
+		model.addAttribute("categories", categoryService.findAll());
+		model.addAttribute("skills", skillService.findAll());
+		model.addAttribute("users", userService.findAll());
+		model.addAttribute("job", job);
+		model.addAttribute("employers", employerService.findAll());
+		return "web/job-detail";
 	}
-	
-	@RequestMapping(value = "/tim-kiem" ,method = RequestMethod.GET)
-    public String search(@RequestParam(name = "keyword", required = false) String keyword,
-	            @RequestParam(name = "category", required = false) Long categoryId,
-	            Model model) {
-	List<JobDTO> jobs = jobService.search(keyword, categoryId);
-	model.addAttribute("jobs", jobs);
-	return "web/list-job";
-	}
-		
+
 }
