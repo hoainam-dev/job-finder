@@ -136,7 +136,7 @@
 
                     <!-- Form thay đổi quyền -->
                     <div id="roleForm" style="display: none;">
-                <form action="<%=baseUrl%>/quan-tri/nguoi-tim-viec/role/${applicant.user_id}" method="post">
+                <form action="<%=baseUrl%>/quan-tri/nguoi-tim-viec/role/${applicant.user_id}/{roleId}" method="get">
 						    <div class="form-group">
 						        <label for="newRole">Chọn quyền mới</label>
 						        <select class="form-control" id="roleId" name="roleId">

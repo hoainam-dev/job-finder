@@ -18,6 +18,7 @@ import com.jobfinder.service.IEmployerService;
 import com.jobfinder.service.IJobService;
 import com.jobfinder.service.IUserService;
 
+
 @Controller(value = "homeControllerOfAdmin")
 public class HomeController {
 	

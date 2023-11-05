@@ -125,6 +125,4 @@ public class JobDTO extends AbstractDTO<JobDTO>{
 		this.employer_id = employer_id;
 	}
 	
-	
-
 }
