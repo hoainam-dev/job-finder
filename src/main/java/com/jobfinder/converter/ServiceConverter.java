@@ -15,7 +15,7 @@ public class ServiceConverter {
 		result.setName(entity.getName());
 		result.setPrice(entity.getPrice());
 		result.setJobPostNumber(entity.getJobPostNumber());
-		result.setCreateAt((Timestamp) entity.getCreate_at());
+//		result.setCreateAt((Timestamp) entity.getCreate_at());
 		return result;
 	}
 	

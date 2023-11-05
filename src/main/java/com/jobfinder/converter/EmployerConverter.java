@@ -21,6 +21,7 @@ public class EmployerConverter {
 			result.setEmail(entity.getUser().getEmail());
 			result.setFirstName(entity.getUser().getFirstName());
 			result.setLastName(entity.getUser().getLastName());
+			result.setUserName(entity.getUser().getUserName());
 		}
 		result.setCreateAt(formatter.format(entity.getCreate_at().getTime()));
 		result.setUpdateAt(formatter.format(entity.getUpdate_at().getTime()));

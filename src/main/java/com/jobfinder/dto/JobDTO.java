@@ -1,9 +1,6 @@
 package com.jobfinder.dto;
 
-<<<<<<< HEAD
 
-=======
->>>>>>> 69a7cef3d9ac3e01fe27affe2941c377df4dc554
 public class JobDTO extends AbstractDTO<JobDTO>{
 	
 	private String title;

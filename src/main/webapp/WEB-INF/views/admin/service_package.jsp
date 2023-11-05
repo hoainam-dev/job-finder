@@ -41,7 +41,7 @@
                         <li><b>${service.jobPostNumber}</b> tin / tháng</li>
                      
                     </ul>
-                   <a href="${pageContext.request.contextPath}/create-payment-intent?amount=${service.price}" class="pricingTable-signup">Thanh Toán</a>
+                   <a href="${pageContext.request.contextPath}/nha-tuyen-dung/dang-ky?amount=${service.price}&id=${service.id}" class="pricingTable-signup">Thanh Toán</a>
                 </div>
             </div>
            </c:forEach>

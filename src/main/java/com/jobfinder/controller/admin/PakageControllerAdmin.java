@@ -16,7 +16,7 @@ public class PakageControllerAdmin {
 	private IPackageService packageService;
 	
 	// get data on view 
-	@GetMapping("/service-package")
+	@GetMapping("/nha-tuyen-dung/goi-dang-ky")
 	public String getServicePakage(Model model){
 		List<ServiceDTO> services = packageService.finAll();
 		model.addAttribute("services", services);

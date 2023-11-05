@@ -14,35 +14,66 @@ import java.util.List;
 import java.util.Map;
 import java.util.TimeZone;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
 import com.jobfinder.config.PaymentConfig;
+import com.jobfinder.dto.ServiceDTO;
+import com.jobfinder.service.IEmployerService;
+import com.jobfinder.service.IPackageService;
+import com.jobfinder.service.impl.PackageService;
 
 
 
 @Controller
+
 public class PaymentIntentController{
+	@Autowired
+	private IPackageService packageService;
+	@Autowired
+	private IEmployerService employerSevice;
+	int moutValue = 0;
+	Long  packageId = null ;
 	
-	@GetMapping("/create-payment-intent")
-	public String createIntent(@RequestParam("amount") int amount , Model model) {
-	    System.out.println("Giá trị");
+	@GetMapping("/nha-tuyen-dung/dang-ky")
+	public String createIntent(@RequestParam("amount") int amount ,@RequestParam("id") Long id , Model model) {
+		packageId = id ;
+		moutValue = amount;
 	    int amountpay = amount;
 //	    System.out.println(amount);
 	    int amountpayment = amountpay * 100;
 	    model.addAttribute("amountpayment", amountpayment);
-	    return "redirect:/pay";
+	    return "redirect:/nha-tuyen-dung/pay";
 	}
-	
-	@GetMapping("/pay")
+	@GetMapping("/nha-tuyen-dung/thanh-cong")
+	public String PaymentSuccess (Model model,HttpServletRequest request) {
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		String username = authentication.getName();
+		Long userId = employerSevice.getUserIdByUsername(username);
+		String vnp_Amount = request.getParameter("vnp_Amount");
+		String vnp_BankCode = request.getParameter("vnp_BankCode");
+		String vnp_BankTranNo = request.getParameter("vnp_BankTranNo");
+		String vnp_PayDate = request.getParameter("vnp_PayDate");
+		ServiceDTO service = packageService.findById(packageId);
+		if(service== null) {
+			System.out.println("Khong co ");
+		}
+		employerSevice.updatePackageService(userId, packageId);
+		model.addAttribute("package", service);
+		model.addAttribute("vnp_BankTranNo" , vnp_BankTranNo);
+		model.addAttribute("vnp_PayDate" , vnp_PayDate);
+		return "admin/checkout";
+	}
+	@GetMapping("/nha-tuyen-dung/pay")
 	public String getPay( @ModelAttribute("amountpayment") int amountpay, RedirectAttributes attributes) throws UnsupportedEncodingException{
 	    String vnp_Version = "2.1.0";
         String vnp_Command = "pay";

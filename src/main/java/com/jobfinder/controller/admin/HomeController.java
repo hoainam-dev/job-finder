@@ -1,10 +1,6 @@
 package com.jobfinder.controller.admin;
 
 import java.util.List;
-<<<<<<< HEAD
-
-=======
->>>>>>> 69a7cef3d9ac3e01fe27affe2941c377df4dc554
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -12,21 +8,16 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-<<<<<<< HEAD
-=======
 
->>>>>>> 69a7cef3d9ac3e01fe27affe2941c377df4dc554
 import com.jobfinder.dto.ApplicantDTO;
 import com.jobfinder.dto.EmployerDTO;
+import com.jobfinder.dto.JobDTO;
 import com.jobfinder.dto.UserDTO;
 import com.jobfinder.service.IApplicantService;
 import com.jobfinder.service.IEmployerService;
 import com.jobfinder.service.IJobService;
 import com.jobfinder.service.IUserService;
-<<<<<<< HEAD
 
-=======
->>>>>>> 69a7cef3d9ac3e01fe27affe2941c377df4dc554
 
 @Controller(value = "homeControllerOfAdmin")
 public class HomeController {
