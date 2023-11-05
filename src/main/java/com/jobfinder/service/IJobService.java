@@ -9,10 +9,8 @@ public interface IJobService {
 	
 	List<JobDTO> findByCategoryId(Long categoryId);
 	JobDTO findById(Long Id);
-	List<JobDTO> findByTitle(String keyword);
 	List<JobDTO> findByCategory(CategoryEntity category);
-	List<JobDTO> findByTitleAndCategory(String keyword, CategoryEntity category);
-	List<JobDTO> search(String keyword, Long categoryId);
 	JobDTO save(JobDTO dto);
 	List<JobDTO> findAll();
+	List<JobDTO> filter(Long categoryId, String type, int salary, String location);
 }

@@ -21,100 +21,190 @@
 			<div class="col-12">
 				<div class="card mb-4">
 					<div class="card-header pb-0">
-						<h6>Tạo việc làm</h6>
+						<h4>Tạo việc làm</h4>
 					</div>
 					<div class="card-body px-0 pt-0 pb-2">
 						<div class="container" style="margin-top: 20px">
 							<section class="panel panel-default">
 								<div class="panel-body">
-									<form:form action="/nha-tuyen-dung/tao-viec-lam"
-										cssClass="form-horizontal" modelAttribute="jobDTO"
+									<form:form cssClass="form-horizontal"
+										action="/nha-tuyen-dung/tao-viec-lam" modelAttribute="jobDTO"
 										method="POST">
 										<input type="hidden" name="employer_id" value="${employer.id}" />
+
+										<!-- title // -->
 										<div class="form-group">
-											<label for="title" class="col-sm-3 control-label"
-												style="font-weight: bold">Title</label>
+											<label for=title class="col-sm-3 control-label"
+												style="font-weight: bold">Tiêu đề</label>
 											<div class="col-sm-9">
-												<form:input type="text" path="title" cssClass="form-control"
+												<form:textarea rows="2" path="title" cssClass="form-control"
 													placeholder="Please enter title..." />
 											</div>
+											<span><form:errors cssClass="error" path="title" /></span>
 										</div>
-										<!-- form-group // -->
 
+										<!-- description // -->
+										<div class="form-group">
+											<label for=description class="col-sm-3 control-label"
+												style="font-weight: bold">Mô tả tuyển dụng</label>
+											<div class="col-sm-9">
+												<form:textarea rows="6" path="description"
+													cssClass="form-control"
+													placeholder="Please enter description..." />
+											</div>
+											<span><form:errors cssClass="error" path="description" /></span>
+										</div>
+
+										<!-- requirements // -->
+										<div class="form-group">
+											<label for="requirements" class="col-sm-3 control-label"
+												style="font-weight: bold">Yêu cầu tuyển dụng</label>
+											<div class="col-sm-9">
+												<form:textarea rows="6" path="requirements"
+													cssClass="form-control"
+													placeholder="Please enter requirements..." />
+											</div>
+											<span><form:errors cssClass="error"
+													path="requirements" /></span>
+										</div>
+
+										<!-- benefit // -->
+										<div class="form-group">
+											<label for="benefit" class="col-sm-3 control-label"
+												style="font-weight: bold">Quyền lợi</label>
+											<div class="col-sm-9">
+												<form:textarea rows="6" path="benefit"
+													cssClass="form-control"
+													placeholder="Please enter benefit..." />
+											</div>
+											<span><form:errors cssClass="error" path="benefit" /></span>
+										</div>
+
+										<!-- deadline // -->
+										<div class="form-group">
+											<label for="deadline" class="col-sm-3 control-label"
+												style="font-weight: bold">Hạn ứng tuyển</label>
+											<div class="col-sm-9">
+												<input type="date" name="deadline"
+													pattern="\d{2}-\d{2}-\d{4}" placeholder="dd-mm-yyyy"
+													class="form-control" />
+											</div>
+											<span><form:errors cssClass="error" path="deadline" /></span>
+										</div>
+
+										<!-- location -->
 										<div class="form-group">
 											<label for="location" class="col-sm-3 control-label"
 												style="font-weight: bold">Location</label>
 											<div class="col-sm-9">
-												<form:input type="text" path="location"
-													cssClass="form-control"
-													placeholder="Please enter location..." />
+												<select style="padding: 5px" name="location" id="location">
+													<option selected>Chọn tỉnh thành</option>
+												</select>
 											</div>
+											<span><form:errors cssClass="error" path="location" /></span>
 										</div>
-										<!-- form-group // -->
 
+										<!-- salary & type -->
 										<div class="form-group">
-											<label for=requirements class="col-sm-3 control-label"
-												style="font-weight: bold">Description</label>
-											<div class="col-sm-9">
-												<form:textarea path="description" cssClass="form-control"
-													placeholder="Please enter description..." />
+											<div class="row">
+												<div class="col-sm-4">
+													<label for="salary" class="col-sm-2 control-label"
+														style="font-weight: bold">Salary</label>
+													<div class="col-sm-2">
+														<select style="padding: 5px" name="salary">
+															<option value="9">Dưới 10 triệu</option>
+															<%
+																for (int i = 10; i <= 45; i += 5) {
+															%>
+															<option value="<%=i%>"><%=i%> -
+																<%=i + 5%> triệu
+															</option>
+															<%
+																}
+															%>
+															<option value="500000001">Trên 50 triệu</option>
+															<option value="0">Thỏa thuận</option>
+														</select>
+													</div>
+												</div>
+												<div class="col-sm-5">
+													<label for="type" class="col-sm-3 control-label"
+														style="font-weight: bold">Type</label>
+													<div class="col-sm-9">
+														<select style="padding: 5px" name="type">
+															<c:forEach items="${types}" var="type">
+																<option value="${type}">${type}</option>
+															</c:forEach>
+														</select>
+													</div>
+													<span><form:errors cssClass="error" path="type" /></span>
+												</div>
 											</div>
 										</div>
-										<!-- form-group // -->
 
-										<div class="form-group">
-											<label for="requirements" class="col-sm-3 control-label"
-												style="font-weight: bold">Requirements</label>
-											<div class="col-sm-9">
-												<form:input type="text" path="requirements"
-													cssClass="form-control"
-													placeholder="Please enter requirements..." />
-											</div>
-										</div>
-										<!-- form-group // -->
-
-										<div class="form-group">
-											<label for="salary" class="col-sm-3 control-label"
-												style="font-weight: bold">Salary</label>
-											<div class="col-sm-9">
-												<form:input type="number" path="salary"
-													cssClass="form-control"
-													placeholder="Please enter salary..." />
-											</div>
-										</div>
-										<!-- form-group // -->
-
+										<!-- category -->
 										<div class="form-group">
 											<label for="category_id" class="col-sm-1 control-label"
-												style="font-weight: bold">Category:</label> <select
-												id="category_id" name="category_id" style="padding: 5px;">
-												<c:forEach items="${categories}" var="category">
-													<option value="${category.id}">${category.name}</option>
-												</c:forEach>
-											</select><br>
+												style="font-weight: bold">Category:</label>
+											<div class="col-sm-9">
+												<select id="category_id" name="category_id"
+													style="padding: 5px;">
+													<c:forEach items="${categories}" var="category">
+														<option value="${category.id}">${category.name}</option>
+													</c:forEach>
+												</select>
+											</div>
 										</div>
-
+										<!-- position & skill -->
 										<div class="form-group">
-											<label for="position" class="col-sm-1 control-label"
-												style="font-weight: bold">Position</label> <select
-												id="position" name="position" style="padding: 5px;">
-											</select><br> <select hidden="true" id="positionVal">
-												<c:forEach items="${positions}" var="position">
-													<option value="${position.category_id}"
-														class="${position.category_id}">${position.name}</option>
-												</c:forEach>
-											</select><br>
+											<div class="row">
+												<div class="col-sm-4">
+													<label for="position" class="col-sm-2 control-label"
+														style="font-weight: bold">Position</label>
+													<div class="col-sm-2">
+														<select id="position" name="position"
+															style="padding: 5px;"></select>
+													</div>
+													<span><form:errors cssClass="error" path="position" /></span>
+												</div>
+												<div class="col-sm-5">
+													<label for="skills" class="col-sm-1 control-label"
+														style="font-weight: bold">Skill</label>
+													<div class="col-sm-9">
+														<select id="skills" style="padding: 5px;"></select>
+													</div>
+													<span><form:errors cssClass="error" path="skills" /></span>
+												</div>
+											</div>
 										</div>
-										<!-- form-group // -->
 
+										<!-- skills selected // -->
+										<div class="form-group">
+											<div id="container-skill">
+												<input type="hidden" id="default-skill" name="skills" />
+											</div>
+										</div>
 										<hr>
 										<div class="form-group">
 											<div class="col-sm-offset-3 col-sm-9">
-												<button type="submit" class="btn btn-primary">Create
-													Job</button>
+												<button type="submit" class="btn btn-primary">Tạo
+													tin</button>
 											</div>
 										</div>
-										<!-- form-group // -->
+
+										<!-- value -->
+										<select hidden="true" id="positionVal">
+											<c:forEach items="${positions}" var="position">
+												<option value="${position.category_id}"
+													class="${position.category_id}">${position.name}</option>
+											</c:forEach>
+										</select>
+										<select hidden="true" id="skillVal">
+											<c:forEach items="${skills}" var="skill">
+												<option value="${skill.id}" id="${skill.id}"
+													class="${skill.category_id}">${skill.name}</option>
+											</c:forEach>
+										</select>
 									</form:form>
 								</div>
 							</section>
@@ -125,65 +215,30 @@
 		</div>
 	</div>
 	</main>
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
+		referrerpolicy="no-referrer"></script>
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"></script>
 	<script>
-		document.addEventListener("DOMContentLoaded", function() {
-			// Lay ra the select voi id "category"
-			var categorySelect = document.getElementById("category_id");
+    	const host = "https://provinces.open-api.vn/api/";
+    	// Sử dụng fetch API để lấy dữ liệu từ API
+    	fetch(host).then(response => response.json())
+    	    .then(data => {
+    	        // Xử lý dữ liệu JSON ở đây
+    	        fillSelect(data);
+    	    });
+    	function fillSelect(data) {
+    	    const selectElement = document.querySelector('#location');
+    	    selectElement.innerHTML = '<option value="">Chọn tỉnh/thành phố</option>';
 
-			// Lay ra the select voi id "position"
-			var positionSelect = document.getElementById("position");
-
-			// Lay ra the select voi id "positionVal"
-			var positionValue = document.getElementById("positionVal");
-
-			var selectedCategory = "1";
-
-			// Khai bao mot mang de luu gia tri cua cac tuy chon
-			var optionValues = [];
-
-			// Lay tat ca tuy chon co class "position" trong the select
-			var options = positionValue
-					.getElementsByClassName(selectedCategory);
-
-			// Lap qua tung tuy chon va lay gia tri cua no
-			for (var i = 0; i < options.length; i++) {
-				optionValues.push(options[i].text);
-			}
-
-			// Ham them cac tuy chon cho the option
-			function updatePositionState() {
-				// Xoa tat ca cac tuy chon hien tai trong "position"
-				positionSelect.innerHTML = "";
-
-				// Them cac tuy chon tuong ung voi "category" đa chon
-				optionValues.forEach(function(position) {
-					var option = document.createElement("option");
-					option.text = position;
-					option.value = position;
-					positionSelect.appendChild(option);
-				});
-			}
-
-			// Initial call to set the select tag state
-			updatePositionState();
-
-			// Ham thay doi gia tri position option tag khi category thay doi
-			categorySelect.addEventListener("change", function() {
-				selectedCategory = categorySelect.value;//gan lai gia tri category da chon
-
-				// Lay tat ca tuy chon co class "position" trong the select
-				options = positionValue
-						.getElementsByClassName(selectedCategory);
-
-				optionValues = [];//gan mang gia tri thanh rong
-				// Lap qua tung tuy chon va lay gia tri cua no
-				for (var i = 0; i < options.length; i++) {
-					optionValues.push(options[i].text);
-				}
-
-				updatePositionState();
-			});
-		});
+    	    data.forEach(city => {
+    	        const option = document.createElement('option');
+    	        option.value = city.name;
+    	        option.text = city.name;
+    	        selectElement.appendChild(option);
+    	    });
+    	}
 	</script>
 </body>
 </html>

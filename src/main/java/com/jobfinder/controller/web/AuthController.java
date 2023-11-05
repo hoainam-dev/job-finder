@@ -19,8 +19,11 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.jobfinder.dto.ApplicantDTO;
 import com.jobfinder.dto.EmployerDTO;
+import com.jobfinder.repository.SkillRepository;
 import com.jobfinder.service.IApplicantService;
+import com.jobfinder.service.ICategoryService;
 import com.jobfinder.service.IEmployerService;
+import com.jobfinder.service.ISkillService;
 import com.jobfinder.validation.ApplicantValidation;
 import com.jobfinder.validation.EmployerValidation;
 
@@ -38,6 +41,15 @@ public class AuthController {
 	
 	@Autowired
 	private IEmployerService employerService;
+	
+	@Autowired
+	private ISkillService skillService;
+	
+	@Autowired
+	private SkillRepository skillRepository;
+	
+	@Autowired
+	private ICategoryService categoryService;
 	
 	
 	/**
@@ -90,6 +102,9 @@ public class AuthController {
 
 	@RequestMapping(value = "/dang-ky-nguoi-tim-viec", method = RequestMethod.GET)
 	public String registerApplicant(Model model) {
+		System.out.println(skillRepository.findOne(1l));
+		model.addAttribute("categories", categoryService.findAll());
+		model.addAttribute("skills", skillService.findAll());
 		model.addAttribute("applicantDTO", new ApplicantDTO());
 		return "auth/register/applicant-register";
 	}
@@ -110,10 +125,12 @@ public class AuthController {
 	 */
 	@RequestMapping(value = "/dang-ky-nguoi-tim-viec", method = RequestMethod.POST)
 	public String registerApplicant(@Valid ApplicantDTO applicantDTO, BindingResult bindingResult,
-			RedirectAttributes redirectAttributes) {
+			RedirectAttributes redirectAttributes, Model model) {
 		applicantValidation.validate(applicantDTO, bindingResult);//validation cho form dang ky nguoi tim viec
 		if (bindingResult.hasErrors()) {
 			//neu co loi return ve lai form va hien thi loi
+			model.addAttribute("categories", categoryService.findAll());
+			model.addAttribute("skills", skillService.findAll());
 			return "auth/register/applicant-register";
 		}
 		applicantService.save(applicantDTO);//luu vao database

@@ -12,6 +12,8 @@
 .error {
 	color: red;
 }
+body{
+ background: #eaedff;
 </style>
 	<!-- slider Area Start-->
 	<div class="slider-area ">

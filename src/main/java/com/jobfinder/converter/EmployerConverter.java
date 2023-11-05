@@ -25,6 +25,8 @@ public class EmployerConverter {
 		}
 		result.setCreateAt(formatter.format(entity.getCreate_at().getTime()));
 		result.setUpdateAt(formatter.format(entity.getUpdate_at().getTime()));
+		result.setCreateBy(entity.getCreate_by());
+		result.setUpdateBy(entity.getUpdate_by());
 		return result;
 	}
 	
