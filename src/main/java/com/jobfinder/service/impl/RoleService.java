@@ -11,14 +11,17 @@ import org.springframework.transaction.annotation.Transactional;
 import com.jobfinder.converter.RoleConverter;
 import com.jobfinder.dto.RoleDTO;
 import com.jobfinder.entity.RoleEntity;
+import com.jobfinder.entity.UserEntity;
 import com.jobfinder.repository.RoleRepository;
+import com.jobfinder.repository.UserRepository;
 import com.jobfinder.service.IRoleService;
 
 @Service
 public class RoleService implements IRoleService {
 	@Autowired
 	private RoleRepository roleRepository;
-	
+	@Autowired
+	private UserRepository userRepository;
 	@Autowired
 	private RoleConverter roleConverter;
 	
@@ -74,5 +77,14 @@ public class RoleService implements IRoleService {
 		for (long id: ids) {
 			roleRepository.delete(id);
 		}
+	}
+	@Override
+	@Transactional
+	public  void updateRole (Long userId , Long roleId) {
+		UserEntity userEntity = userRepository.findOne(userId);
+		RoleEntity newRole = roleRepository.findOne(roleId);
+		userEntity.getRoles().clear();
+		userEntity.getRoles().add(newRole);
+		userRepository.save(userEntity);
 	}
 }

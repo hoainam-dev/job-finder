@@ -188,6 +188,20 @@
 			<artifactId>jbcrypt</artifactId>
 			<version>0.4</version>
 		</dependency>
+		
+		<!-- icu4j chuyen doi tu khoa khong dau -->
+		<dependency>
+		    <groupId>com.ibm.icu</groupId>
+		    <artifactId>icu4j</artifactId>
+		    <version>69.1</version>
+		</dependency>
+		
+		
+		<dependency>
+		    <groupId>org.apache.commons</groupId>
+		    <artifactId>commons-lang3</artifactId>
+		    <version>3.12.0</version>
+		</dependency>
 
 		<!-- https://mvnrepository.com/artifact/org.hibernate.validator/hibernate-validator -->
 		<dependency>
@@ -195,7 +209,18 @@
 			<artifactId>hibernate-validator</artifactId>
 			<version>7.0.5.Final</version>
 		</dependency>
+				<dependency>
+			    <groupId>org.modelmapper</groupId>
+			    <artifactId>modelmapper</artifactId>
+			    <version>2.4.4</version>
+			</dependency>
 
+		<!-- https://mvnrepository.com/artifact/org.webjars/bootstrap -->
+		<dependency>
+		    <groupId>org.webjars</groupId>
+		    <artifactId>bootstrap</artifactId>
+		    <version>5.3.2</version>
+		</dependency>
 
 
 		<dependency>
@@ -203,8 +228,7 @@
 			<artifactId>validation-api</artifactId>
 			<version>1.1.0.Final</version>
 		</dependency>
-
-
+		
 	</dependencies>
 
 	<build>

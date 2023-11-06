@@ -12,6 +12,8 @@
 .error {
 	color: red;
 }
+body{
+ background: #eaedff;
 </style>
 	<!-- slider Area Start-->
 	<div class="slider-area ">
@@ -110,17 +112,20 @@
 											</select>
 										</div>
 									</div> -->
-									<div class="mt-5">
-										<div class="switch-wrap d-flex justify-content-left">
-											<div class="primary-radio">
-												<input type="checkbox" id="default-radio"> <label
-													for="default-radio"></label>
+									<div class="single-element-widget mt-30">
+										<div class="switch-wrap d-flex">
+											<div class="primary-checkbox">
+												<input type="checkbox" id="default-checkbox"> <label for="default-checkbox"></label>
 											</div>
-											<p>Đồng ý với các chính sách bảo mật</p>
+											<p>
+												Tôi đã đọc và đồng ý với <a href="#" style="color: #fb246a">Điều
+													khoản dịch vụ</a> và <a href="#" style="color: #fb246a">Chính
+													sách bảo mật</a> của JobFinder
+											</p>
 										</div>
 									</div>
 									<div class="mt-10">
-										<input type="submit"
+										<input id="submitButton" type="submit" style="color: #fff"
 											class="genric-btn primary-border circle single-input-primary"
 											value="Đăng ký" />
 									</div>
@@ -134,5 +139,29 @@
 		</div>
 	</div>
 	<!-- slider Area End-->
+	<script>
+		document.addEventListener("DOMContentLoaded", function() {
+			var checkbox = document.getElementById("default-checkbox");
+			var submitButton = document.getElementById("submitButton");
+
+			// Function to enable or disable the button and change its background color
+			function updateButtonState() {
+				if (checkbox.checked) {
+					submitButton.disabled = false;
+					submitButton.style.backgroundColor = "#1f2b7b"; // Reset background color
+				} else {
+					submitButton.disabled = true;
+					submitButton.style.backgroundColor = "#5363d2"; // Set a lighter background color
+				}
+			}
+
+			// Initial call to set the button state
+			updateButtonState();
+
+			checkbox.addEventListener("change", function() {
+				updateButtonState();
+			});
+		});
+	</script>
 </body>
 </html>

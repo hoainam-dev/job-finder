@@ -18,6 +18,7 @@ import com.jobfinder.repository.EmployerRepository;
 import com.jobfinder.repository.RoleRepository;
 import com.jobfinder.repository.UserRepository;
 import com.jobfinder.service.IEmployerService;
+import com.jobfinder.service.IUserService;
 
 @Service
 public class EmployerService implements IEmployerService{
@@ -30,6 +31,9 @@ public class EmployerService implements IEmployerService{
 	
 	@Autowired
 	private UserConverter userConverter;
+	
+	@Autowired
+	private IUserService useService;
 	
 	@Autowired
 	private UserRepository userRepository;
@@ -94,4 +98,30 @@ public class EmployerService implements IEmployerService{
 			employerRepository.delete(id);
 		}
 	}
+
+	@Override
+	public void updatePackageService(Long emId, Long serId) {
+		// tim employerID
+		EmployerEntity entity = employerRepository.findOne(emId);
+		if(entity != null ) {
+			// cap nhat package id
+			entity.setServices(serId);
+			employerRepository.save(entity);
+			System.out.println("Update Succsses");
+			System.out.println(entity.getServices().getId());
+		}	
+	}
+
+	@Override
+	public Long getUserIdByUsername (String name) {
+		//truy van user
+		UserDTO userDto = useService.findOneByUserNameAndStatus(name, 1);
+		Long userId = userDto.getEmployer_id();
+		// tim employerId
+		EmployerEntity employer = employerRepository.findByUserId(userId); 
+		Long employerId = employer.getId();
+//		System.out.println(employerId);
+		return employerId;
+	}
+	
 }

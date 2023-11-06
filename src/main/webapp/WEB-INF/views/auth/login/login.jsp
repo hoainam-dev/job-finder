@@ -47,13 +47,7 @@
 											<div class="mt-3">
 												<div class="col-lg-4 col-md-4 mt-sm-30">
 													<div class="single-element-widget">
-														<div class="switch-wrap d-flex justify-content-between">
-															<p>Nhớ mật khẩu</p>
-															<div class="confirm-radio">
-																<input type="checkbox" id="confirm-radio" checked>
-																<label for="confirm-radio"></label>
-															</div>
-														</div>
+														<span><a style="color: #000" href="#">Quên mật khẩu</a></span>
 													</div>
 												</div>
 											</div>

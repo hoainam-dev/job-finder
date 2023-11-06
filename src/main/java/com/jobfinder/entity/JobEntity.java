@@ -1,14 +1,17 @@
 package com.jobfinder	.entity;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -18,11 +21,20 @@ public class JobEntity extends BaseEntity{
 	@Column(name = "title")
 	private String title;
 	
-	@Column(name = "description")
+	@Column(name = "type")
+	private String type;
+	
+	@Column(name = "description", columnDefinition = "TEXT")
 	private String description;
 	
-	@Column(name = "requirements")
+	@Column(name = "requirements", columnDefinition = "TEXT")
 	private String requirements;
+	
+	@Column(name = "benefit", columnDefinition = "TEXT")
+	private String benefit;
+	
+	@Column(name = "application_deadline")
+	private Date applicationDeadline;
 	
 	@Column(name = "salary")
 	private int salary;
@@ -30,14 +42,22 @@ public class JobEntity extends BaseEntity{
 	@Column(name = "location")
 	private String location;
 	
-//	@OneToOne(cascade = CascadeType.ALL)
-//	@JoinColumn(name = "company_id", referencedColumnName = "id")
-//	private CompanyEntity companyEntity;
 
-	@ManyToMany(fetch = FetchType.LAZY)
-	@JoinTable(name = "job_categories", joinColumns = @JoinColumn(name = "job_id"),
-			inverseJoinColumns = @JoinColumn(name = "category_id"))
-	private List<CategoryEntity> categories = new ArrayList<>();
+	@Column(name = "position")
+	private String position;
+	
+	@ManyToOne
+	@JoinColumn(name = "employer_id")
+	private EmployerEntity employer;
+	
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "category_id")
+	private CategoryEntity category;
+	
+	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@JoinTable(name = "job_skill", joinColumns = @JoinColumn(name = "job_id"), 
+								  inverseJoinColumns = @JoinColumn(name = "skill_id"))
+	private List<SkillEntity> jobSkills = new ArrayList<>();
 
 	public String getTitle() {
 		return title;
@@ -45,6 +65,14 @@ public class JobEntity extends BaseEntity{
 
 	public void setTitle(String title) {
 		this.title = title;
+	}
+
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
 	}
 
 	public String getDescription() {
@@ -62,6 +90,22 @@ public class JobEntity extends BaseEntity{
 	public void setRequirements(String requirements) {
 		this.requirements = requirements;
 	}
+	
+	public String getBenefit() {
+		return benefit;
+	}
+
+	public void setBenefit(String benefit) {
+		this.benefit = benefit;
+	}
+
+	public Date getApplicationDeadline() {
+		return applicationDeadline;
+	}
+
+	public void setApplicationDeadline(Date applicationDeadline) {
+		this.applicationDeadline = applicationDeadline;
+	}
 
 	public int getSalary() {
 		return salary;
@@ -78,21 +122,37 @@ public class JobEntity extends BaseEntity{
 	public void setLocation(String location) {
 		this.location = location;
 	}
-
-//	public CompanyEntity getCompanyEntity() {
-//		return companyEntity;
-//	}
-//
-//	public void setCompanyEntity(CompanyEntity companyEntity) {
-//		this.companyEntity = companyEntity;
-//	}
-
-	public List<CategoryEntity> getCategories() {
-		return categories;
+	
+	public String getPosition() {
+		return position;
 	}
 
-	public void setCategories(List<CategoryEntity> categories) {
-		this.categories = categories;
+	public void setPosition(String position) {
+		this.position = position;
+	}
+
+	public EmployerEntity getEmployer() {
+		return employer;
+	}
+
+	public void setEmployer(EmployerEntity employer) {
+		this.employer = employer;
+	}
+
+	public CategoryEntity getCategory() {
+		return category;
+	}
+
+	public void setCategory(CategoryEntity category) {
+		this.category = category;
+	}
+
+	public List<SkillEntity> getSkills() {
+		return jobSkills;
+	}
+
+	public void setSkills(List<SkillEntity> jobSkills) {
+		this.jobSkills = jobSkills;
 	}
 	
 }

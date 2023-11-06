@@ -1,18 +1,21 @@
 package com.jobfinder.entity;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "applicant")
 public class ApplicantEntity extends BaseEntity{
-	
-	@Column(name = "skills", columnDefinition = "TEXT")
-	private String skills;
 	
 	@Column(name = "experience", columnDefinition = "TEXT")
 	private String experience;
@@ -24,13 +27,18 @@ public class ApplicantEntity extends BaseEntity{
     @JoinColumn(name = "user_id", referencedColumnName = "id")
     private UserEntity user;
 	
+	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@JoinTable(name = "applicant_skill", joinColumns = @JoinColumn(name = "applicant_id"), 
+								  inverseJoinColumns = @JoinColumn(name = "skill_id"))
+	private List<SkillEntity> applicantSkills = new ArrayList<>();
 	
-	public String getSkills() {
-		return skills;
+
+	public List<SkillEntity> getSkills() {
+		return applicantSkills;
 	}
 
-	public void setSkills(String skills) {
-		this.skills = skills;
+	public void setSkills(List<SkillEntity> applicantSkills) {
+		this.applicantSkills = applicantSkills;
 	}
 
 	public String getExperience() {

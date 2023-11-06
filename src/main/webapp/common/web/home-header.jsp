@@ -17,7 +17,7 @@
 <!-- Preloader Start -->
 <header>
 	<!-- Header Start -->
-	<div class="header-area header-transparrent">
+	<div class="header-area header-bg header-transparrent">
 		<div class="headder-top header-sticky">
 			<div class="container">
 				<div class="row align-items-center">

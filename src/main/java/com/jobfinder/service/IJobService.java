@@ -2,9 +2,15 @@ package com.jobfinder.service;
 
 import java.util.List;
 
-import com.jobfinder.entity.JobEntity;
+import com.jobfinder.dto.JobDTO;
 
 public interface IJobService {
-	List<JobEntity> getAllJobs();
-	public void createPost(JobEntity jobEntity);
+	
+	JobDTO findById(Long Id);
+
+	JobDTO save(JobDTO dto);
+	
+	List<JobDTO> findAll();
+	
+	List<JobDTO> filter(Long categoryId, String type, int salary, String location);
 }

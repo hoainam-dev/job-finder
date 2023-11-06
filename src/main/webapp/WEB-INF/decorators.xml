@@ -4,6 +4,9 @@
 	<decorator name="web" page="web.jsp">
 		<pattern>/*</pattern>
 	</decorator>
+	<decorator name="element" page="element.jsp">
+		<pattern>/viec-lam*</pattern>
+	</decorator>
 
 	<decorator name="employer" page="employer.jsp">
 		<pattern>/nha-tuyen-dung*</pattern>

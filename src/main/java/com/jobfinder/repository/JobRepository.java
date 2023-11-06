@@ -8,4 +8,5 @@ import com.jobfinder.entity.JobEntity;
 
 @Repository
 public interface JobRepository extends JpaRepository<JobEntity, Long>{
+
 }

@@ -6,13 +6,9 @@
 <head>
 <meta charset="UTF-8">
 <title>Đăng ký Người Tìm Việc</title>
+
 </head>
 <body>
-<style>
-	.error {
-		color: red;
-	}
-</style>
 	<!-- slider Area Start-->
 	<div class="slider-area ">
 		<!-- Mobile Menu -->
@@ -23,7 +19,8 @@
 					<div class="section-top-border">
 						<div class="row">
 							<div class="col-lg-8 col-md-8">
-								<form:form action="dang-ky-nguoi-tim-viec" method="POST" modelAttribute="applicantDTO">
+								<form:form action="dang-ky-nguoi-tim-viec" method="POST"
+									modelAttribute="applicantDTO">
 									<h3 class="mb-30">Tài khoản</h3>
 									<c:if test="${param.incorrectAccount != null}">
 										<div class="alert alert-danger">Username or password
@@ -38,8 +35,7 @@
 									<div class="mt-10">
 										<div class="mt-10">
 											<label>Tên đăng nhập (*)</label>
-											<form:input type="text" class="single-input" path="userName"
-												placeholder="Tên đăng nhập" />
+											<form:input type="text" class="single-input" path="userName" value="đaada"/>
 											<span><form:errors cssClass="error" path="userName" /></span>
 										</div>
 										<div class="mt-10">
@@ -58,7 +54,8 @@
 											<label>Xác nhận mật khẩu (*)</label>
 											<form:input type="password" class="single-input"
 												path="confirmPassword" />
-											<span><form:errors cssClass="error" path="confirmPassword" /></span>
+											<span><form:errors cssClass="error"
+													path="confirmPassword" /></span>
 										</div>
 										<input type="hidden" name="status" value="1"> <input
 											type="hidden" name="roleId" value="3">
@@ -78,12 +75,6 @@
 										</div>
 									</div>
 									<div class="mt-10">
-										<label>Kĩ năng (*)</label>
-										<form:textarea path="skills" rows="7" class="single-textarea"
-											placeholder="Skills" />
-										<span><form:errors cssClass="error" path="skills" /></span>
-									</div>
-									<div class="mt-10">
 										<label>Kinh nghiệm (*)</label>
 										<form:textarea path="experience" rows="7"
 											class="single-textarea" placeholder="Experience" />
@@ -95,19 +86,42 @@
 											class="single-textarea" placeholder="Education" />
 										<span><form:errors cssClass="error" path="education" /></span>
 									</div>
-									<div class="mt-5">
-										<div class="switch-wrap d-flex justify-content-left">
-											<div class="primary-radio">
-												<input type="checkbox" id="default-radio"> <label
-													for="default-radio"></label>
+									<div class="mt-10">
+										<label>Kĩ năng (*)</label><br /> <select id="categorySelect"
+											style="padding: 5px;">
+											<c:forEach items="${categories}" var="category">
+												<option value="${category.id}">${category.name}</option>
+											</c:forEach>
+										</select><br />
+										<br /> <select id="skills" style="padding: 5px;">
+										</select> <select hidden="true" id="skillVal">
+											<c:forEach items="${skills}" var="skill">
+												<option value="${skill.id}" id="${skill.id}"
+													class="${skill.category_id}">${skill.name}</option>
+											</c:forEach>
+										</select><br />
+										<div id="container-skill">
+											<input type="hidden" id="default-skill" name="skills" />
+										</div>
+										<span><form:errors cssClass="error" path="skills" /></span>
+									</div>
+									<div class="single-element-widget mt-30">
+										<div class="switch-wrap d-flex">
+											<div class="primary-checkbox">
+												<input type="checkbox" id="default-checkbox"> <label
+													for="default-checkbox"></label>
 											</div>
-											<p>Đồng ý với các chính sách bảo mật</p>
+											<p>
+												Tôi đã đọc và đồng ý với <a href="#" style="color: #fb246a">Điều
+													khoản dịch vụ</a> và <a href="#" style="color: #fb246a">Chính
+													sách bảo mật</a> của JobFinder
+											</p>
 										</div>
 									</div>
 									<div class="mt-10">
-										<input type="submit"
-											class="genric-btn primary-border circle single-input-primary"
-											value="Đăng ký" />
+										<input style="color: #fff" id="submitButton" type="submit"
+											class="genric-btn circle single-input-primary"
+											value="Đăng ký">
 									</div>
 								</form:form>
 							</div>
