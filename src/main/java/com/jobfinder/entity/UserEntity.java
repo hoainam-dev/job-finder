@@ -10,9 +10,8 @@ import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
-
-
 
 @Entity
 @Table(name = "user")
@@ -41,6 +40,9 @@ public class UserEntity extends BaseEntity {
 
 	@Column
 	private Integer status;
+	
+	@OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
+	private EmployerEntity employer;
 	
 	
 	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
@@ -120,5 +122,14 @@ public class UserEntity extends BaseEntity {
 	public void setRoles(List<RoleEntity> roles) {
 		this.roles = roles;
 	}
+
+	public EmployerEntity getEmployer() {
+		return employer;
+	}
+
+	public void setEmployer(EmployerEntity employer) {
+		this.employer = employer;
+	}
+	
 	
 }

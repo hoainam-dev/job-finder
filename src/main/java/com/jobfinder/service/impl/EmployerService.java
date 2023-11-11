@@ -2,11 +2,9 @@ package com.jobfinder.service.impl;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
 import com.jobfinder.converter.EmployerConverter;
 import com.jobfinder.converter.UserConverter;
 import com.jobfinder.dto.EmployerDTO;
@@ -123,5 +121,75 @@ public class EmployerService implements IEmployerService{
 //		System.out.println(employerId);
 		return employerId;
 	}
+	
+	@Override 
+	public EmployerDTO getEmployerProfile(Long id) {
+		
+		EmployerEntity employer = employerRepository.findByUserId(id);
+		
+		UserEntity user = employer.getUser();
+		
+		EmployerDTO employerDTO = new EmployerDTO();
+		employerDTO.setId(employer.getId());
+		employerDTO.setCompanyName(employer.getCompanyName());
+		employerDTO.setCompanyAddress(employer.getCompanyAddress());
+		employerDTO.setPosition(employer.getPosition());
+		
+		employerDTO.setUser_id(user.getId());
+        employerDTO.setUserName(user.getUserName());
+        employerDTO.setEmail(user.getEmail());
+        employerDTO.setFirstName(user.getFirstName());
+        employerDTO.setLastName(user.getLastName());
+        employerDTO.setPhone(user.getPhone());
+        
+        return employerDTO;
+	}
+
+//	@Override
+//	@Transactional
+//	public void updateEmployerProfile(Long id, EmployerDTO employerDTO) {
+//		
+//		EmployerEntity employer = employerRepository.findByUserId(id);
+//		
+//		UserEntity user = employer.getUser();
+//	
+//		employerDTO.setCompanyName(employer.getCompanyName());
+//		employerDTO.setCompanyAddress(employer.getCompanyAddress());
+//		employerDTO.setPosition(employer.getPosition());
+//		
+//		employerDTO.setEmail(user.getEmail());
+//        employerDTO.setFirstName(user.getFirstName());
+//        employerDTO.setLastName(user.getLastName());
+//        employerDTO.setPhone(user.getPhone());
+//        
+//        userRepository.save(user);
+//        employerRepository.save(employer);
+//		
+//	}
+	
+	@Override
+    @Transactional
+    public void updateEmployerInfo(Long id, Long employerId, EmployerDTO employerDTO) {
+        EmployerEntity employer = employerRepository.findByUserId(id);
+        UserEntity user = userRepository.findOne(id);
+        
+        if (employer != null && user != null && employer.getUser().getId().equals(id)) {
+            // Cập nhật thông tin của employer
+            employer.setCompanyName(employerDTO.getCompanyName());
+            employer.setCompanyAddress(employerDTO.getCompanyAddress());
+            employer.setPosition(employerDTO.getPosition());
+            // ...
+            
+            // Cập nhật thông tin của user
+            user.setEmail(employerDTO.getEmail());
+            user.setFirstName(employerDTO.getFirstName());
+            user.setLastName(employerDTO.getLastName());
+            user.setPhone(employerDTO.getPhone());
+            // ...
+            
+            employerRepository.save(employer);
+            userRepository.save(user);
+        }
+    }
 	
 }

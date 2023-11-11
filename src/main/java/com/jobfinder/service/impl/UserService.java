@@ -8,7 +8,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.jobfinder.converter.UserConverter;
+import com.jobfinder.dto.EmployerDTO;
 import com.jobfinder.dto.UserDTO;
+import com.jobfinder.entity.EmployerEntity;
 import com.jobfinder.entity.RoleEntity;
 import com.jobfinder.entity.UserEntity;
 import com.jobfinder.repository.RoleRepository;

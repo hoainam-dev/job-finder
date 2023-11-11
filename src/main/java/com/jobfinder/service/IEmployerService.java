@@ -11,4 +11,7 @@ public interface IEmployerService {
 	EmployerDTO save(EmployerDTO dto);
 	void delete(long[] ids);
 	void updatePackageService(Long emId , Long serId );
+//	void updateEmployer(EmployerDTO dto);
+	EmployerDTO getEmployerProfile(Long id);
+	void updateEmployerInfo(Long id, Long employerId, EmployerDTO employerDTO);
 }
