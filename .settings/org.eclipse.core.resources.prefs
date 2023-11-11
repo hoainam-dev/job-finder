@@ -1,13 +1,9 @@
 =\=\=\=\=\=\=
 <<<<<<<=HEAD
->>>>>>>=69a7cef3d9ac3e01fe27affe2941c377df4dc554
+>>>>>>>=0c792f5d455197ee062f12e2f0993d085a3d1bcd
 eclipse.preferences.version=1
+encoding//src/main/java/com/jobfinder/controller/admin/EmailController.java=UTF-8
 encoding//src/main/java/com/jobfinder/controller/admin/HomeController.java=UTF-8
-<<<<<<< HEAD
-encoding//src/main/webapp/WEB-INF/views/admin/service_package.jsp=UTF-8
-encoding//src/main/webapp/WEB-INF/views/employer/create-job.jsp=UTF-8
-encoding//src/main/webapp/WEB-INF/views/web/job-detail.jsp=UTF-8
-=======
 encoding//src/main/java/com/jobfinder/controller/admin/PaymentIntentController.java=UTF-8
 encoding//src/main/java/com/jobfinder/controller/admin/PermisionUser.java=UTF-8
 encoding//src/main/webapp/WEB-INF/views/admin/checkout.jsp=UTF-8
@@ -15,4 +11,3 @@ encoding//src/main/webapp/WEB-INF/views/admin/service_package.jsp=UTF-8
 encoding//src/main/webapp/WEB-INF/views/employer/create-job.jsp=UTF-8
 encoding//src/main/webapp/WEB-INF/views/web/job-detail.jsp=UTF-8
 encoding//src/main/webapp/template/web/css/custom.css=UTF-8
->>>>>>> 0c792f5d455197ee062f12e2f0993d085a3d1bcd
