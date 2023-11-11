@@ -3,5 +3,6 @@
 >>>>>>>=dev
 eclipse.preferences.version=1
 encoding//src/main/java/com/jobfinder/controller/admin/HomeController.java=UTF-8
+encoding//src/main/java/com/jobfinder/controller/web/HomeController.java=UTF-8
 encoding//src/main/webapp/WEB-INF/views/employer/create-job.jsp=UTF-8
 encoding//src/main/webapp/WEB-INF/views/web/job-detail.jsp=UTF-8

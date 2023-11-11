@@ -29,6 +29,9 @@ public class UserService implements IUserService {
 	
 	
 
+
+	
+
 	@Override
 	public List<UserDTO> findAll() {
 		List<UserDTO> models = new ArrayList<>();
@@ -116,5 +119,16 @@ public class UserService implements IUserService {
         }
         return null;
     }
+
+
+
+	@Override
+	public UserDTO findByUserName(String userName) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
+
+
 
 }

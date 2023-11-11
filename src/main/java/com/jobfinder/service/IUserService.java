@@ -8,12 +8,16 @@ import com.jobfinder.entity.UserEntity;
 public interface IUserService {
 	UserDTO findById(long id);
 	List<UserDTO> findAll();
+	UserDTO findByUserName(String userName);
 	UserDTO findOneByUserNameAndStatus(String userName, int status);
 	UserDTO findOneByEmailAndStatus(String email, int status);
 	UserDTO save(UserDTO dto);
 	void delete(long[] ids);
 	UserEntity blockUser(Long userId);
 	UserEntity unblockUser(Long userId);
+	
+	
+	
 	
 
 }

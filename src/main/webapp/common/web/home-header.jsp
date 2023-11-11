@@ -59,7 +59,7 @@
 										<c:if
 											test="${user.userName==SecurityUtils.getPrincipal().getUsername()}">
 											<a style="color: #000"
-												href="<c:url value='/thong-tin-ca-nhan?id=${user.id}'/>">
+												href="<c:url value='/trang-chu/thong-tin-ca-nhan?id=${user.id}'/>">
 												Wellcome <%=SecurityUtils.getPrincipal().getId()%>
 											</a>
 										</c:if>
