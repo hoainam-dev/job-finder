@@ -23,6 +23,7 @@ public class JobConverter {
 			}
 		}
 		JobDTO result = new JobDTO();
+		result.setLocation(entity.getLocation());
 		result.setId(entity.getId());
 		result.setTitle(entity.getTitle());
 		result.setType(entity.getType());
@@ -31,7 +32,6 @@ public class JobConverter {
 		result.setBenefit(entity.getBenefit());
 		result.setDeadline(formatter.format(entity.getApplicationDeadline().getTime()));
 		result.setSalary(entity.getSalary());
-		result.setLocation(entity.getLocation());
 		result.setPosition(entity.getPosition());
 		result.setType(entity.getType());
 		result.setSkills(skills);
@@ -75,5 +75,4 @@ public class JobConverter {
 		dto.getCategory_id();
 		return result;
 	}
-
 }

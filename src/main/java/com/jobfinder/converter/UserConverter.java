@@ -45,12 +45,8 @@ public class UserConverter {
 	}
 	
 	public UserEntity toEntity(UserEntity result, UserDTO dto) {
-		BcryptPassword bcryptPassword = new BcryptPassword();
-		result.setUserName(dto.getUserName());
-		result.setPassword(bcryptPassword.BcryptPass(dto.getPassword()));
 		result.setFirstName(dto.getFirstName());
 		result.setLastName(dto.getLastName());
-		result.setEmail(dto.getEmail());
 		result.setAddress(dto.getAddress());
 		result.setPhone(dto.getPhone());
 		return result;

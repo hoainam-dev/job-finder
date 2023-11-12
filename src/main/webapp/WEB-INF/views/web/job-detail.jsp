@@ -21,14 +21,27 @@ p{
 	<main> 
 		<!-- Navigation --> 
 		<%@ include file="/common/element/header.jsp"%>
-		 
+		
+		<!-- Hero Area Start-->
+	    <div class="slider-area ">
+	        <div class="single-slider section-overly slider-height2 d-flex align-items-center" 
+	        data-background="./template/web/img/hero/h1_hero.png">
+	            <div class="container">
+	                <div class="row">
+	                    <div class="col-xl-12">
+	                        <div class="hero-cap text-center">
+	                            <h2>${job.title}</h2>
+	                        </div>
+	                    </div>
+	                </div>
+	            </div>
+	        </div>
+	    </div>
+	    <!-- Hero Area End -->
 		<!-- job post company Start -->
 		<div class="job-post-company pt-130 pb-130">
 			<div class="container">
-				<div class="row justify-content-center">
-					<h2>${job.title}</h2>
-				</div><br/>
-				<div class="row justify-content-between">
+				<div class="row">
 					<!-- Left Content -->
 					<div class="left-content col-xl-8 col-lg-9">
 						<!-- job single -->
@@ -137,16 +150,16 @@ p{
 							</div>
 							<ul>
 								<c:forEach var="employer" items="${employers}">
-									<c:forEach var="user" items="${users}">
-										<c:if test="${job.employer_id==employer.id}">
-											<c:if test="${employer.id==user.id}">
+									<c:if test="${job.employer_id==employer.id}">
+										<c:forEach var="user" items="${users}">
+											<c:if test="${employer.user_id==user.id}">
 												<li>Tên           : <span>${user.lastName} ${user.firstName}</span></li>
 												<li>Chức vụ       : <span>${employer.position}</span></li>
 												<li>Số điện thoại : <span>${user.phone}</span></li>
 												<li>Email         : <span>${user.email}</span></li>
 											</c:if>
-										</c:if>
-									</c:forEach>
+										</c:forEach>
+									</c:if>
 								</c:forEach>
 							</ul>
 						</div>

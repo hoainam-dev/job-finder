@@ -31,14 +31,13 @@
 										action="/nha-tuyen-dung/tao-viec-lam" modelAttribute="jobDTO"
 										method="POST">
 										<input type="hidden" name="employer_id" value="${employer.id}" />
-
 										<!-- title // -->
 										<div class="form-group">
 											<label for=title class="col-sm-3 control-label"
 												style="font-weight: bold">Tiêu đề</label>
 											<div class="col-sm-9">
 												<form:textarea rows="2" path="title" cssClass="form-control"
-													placeholder="Please enter title..." />
+													placeholder="Nhập tiêu đề tin tuyển dụng" />
 											</div>
 											<span><form:errors cssClass="error" path="title" /></span>
 										</div>
@@ -50,7 +49,7 @@
 											<div class="col-sm-9">
 												<form:textarea rows="6" path="description"
 													cssClass="form-control"
-													placeholder="Please enter description..." />
+													placeholder="Nhập mô tả cho tin tuyển dụng" />
 											</div>
 											<span><form:errors cssClass="error" path="description" /></span>
 										</div>
@@ -62,7 +61,7 @@
 											<div class="col-sm-9">
 												<form:textarea rows="6" path="requirements"
 													cssClass="form-control"
-													placeholder="Please enter requirements..." />
+													placeholder="Nhập yêu cầu tuyển dụng" />
 											</div>
 											<span><form:errors cssClass="error"
 													path="requirements" /></span>
@@ -75,7 +74,7 @@
 											<div class="col-sm-9">
 												<form:textarea rows="6" path="benefit"
 													cssClass="form-control"
-													placeholder="Please enter benefit..." />
+													placeholder="Nhập quyền lợi cho ứng viên" />
 											</div>
 											<span><form:errors cssClass="error" path="benefit" /></span>
 										</div>
@@ -95,7 +94,7 @@
 										<!-- location -->
 										<div class="form-group">
 											<label for="location" class="col-sm-3 control-label"
-												style="font-weight: bold">Location</label>
+												style="font-weight: bold">Địa điểm làm việc</label>
 											<div class="col-sm-9">
 												<select style="padding: 5px" name="location" id="location">
 													<option selected>Chọn tỉnh thành</option>
@@ -107,30 +106,24 @@
 										<!-- salary & type -->
 										<div class="form-group">
 											<div class="row">
-												<div class="col-sm-4">
+												<div class="col-sm-5">
 													<label for="salary" class="col-sm-2 control-label"
-														style="font-weight: bold">Salary</label>
+														style="font-weight: bold">Mức lương</label>
 													<div class="col-sm-2">
-														<select style="padding: 5px" name="salary">
+														<select onclick="handleSelectClick()" id="options" style="padding: 5px" name="salary">
 															<option value="9">Dưới 10 triệu</option>
-															<%
-																for (int i = 10; i <= 45; i += 5) {
-															%>
-															<option value="<%=i%>"><%=i%> -
-																<%=i + 5%> triệu
-															</option>
-															<%
-																}
-															%>
-															<option value="500000001">Trên 50 triệu</option>
+															<% for (int i = 10; i <= 45; i += 5) { %>
+																<option value="<%=i%>"><%=i%> - <%=i + 5%> triệu</option>
+															<% } %>
+															<option value="50">Trên 50 triệu</option>
 															<option value="0">Thỏa thuận</option>
 														</select>
 													</div>
 												</div>
-												<div class="col-sm-5">
+												<div class="col-sm-6">
 													<label for="type" class="col-sm-3 control-label"
-														style="font-weight: bold">Type</label>
-													<div class="col-sm-9">
+														style="font-weight: bold">Phương thức làm việc</label>
+													<div class="col-sm-8">
 														<select style="padding: 5px" name="type">
 															<c:forEach items="${types}" var="type">
 																<option value="${type}">${type}</option>
@@ -145,7 +138,7 @@
 										<!-- category -->
 										<div class="form-group">
 											<label for="category_id" class="col-sm-1 control-label"
-												style="font-weight: bold">Category:</label>
+												style="font-weight: bold">Danh mục:</label>
 											<div class="col-sm-9">
 												<select id="category_id" name="category_id"
 													style="padding: 5px;">
@@ -158,19 +151,19 @@
 										<!-- position & skill -->
 										<div class="form-group">
 											<div class="row">
-												<div class="col-sm-4">
+												<div class="col-sm-5">
 													<label for="position" class="col-sm-2 control-label"
-														style="font-weight: bold">Position</label>
+														style="font-weight: bold">Vị trí</label>
 													<div class="col-sm-2">
 														<select id="position" name="position"
 															style="padding: 5px;"></select>
 													</div>
 													<span><form:errors cssClass="error" path="position" /></span>
 												</div>
-												<div class="col-sm-5">
-													<label for="skills" class="col-sm-1 control-label"
-														style="font-weight: bold">Skill</label>
-													<div class="col-sm-9">
+												<div class="col-sm-6">
+													<label for="skills" class="col-sm-2 control-label"
+														style="font-weight: bold">Kỹ năng</label>
+													<div class="col-sm-8">
 														<select id="skills" style="padding: 5px;"></select>
 													</div>
 													<span><form:errors cssClass="error" path="skills" /></span>
@@ -187,8 +180,7 @@
 										<hr>
 										<div class="form-group">
 											<div class="col-sm-offset-3 col-sm-9">
-												<button type="submit" class="btn btn-primary">Tạo
-													tin</button>
+												<button type="submit" class="btn btn-primary">Tạo tin</button>
 											</div>
 										</div>
 
@@ -234,7 +226,7 @@
 
     	    data.forEach(city => {
     	        const option = document.createElement('option');
-    	        option.value = city.name;
+    	        option.value = city.codename;
     	        option.text = city.name;
     	        selectElement.appendChild(option);
     	    });
