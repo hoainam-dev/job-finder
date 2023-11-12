@@ -1,8 +1,8 @@
 package com.jobfinder.controller.web;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -16,7 +16,6 @@ import com.jobfinder.service.IEmployerService;
 import com.jobfinder.service.IJobService;
 import com.jobfinder.service.ISkillService;
 import com.jobfinder.service.IUserService;
-import com.jobfinder.util.LocationUtil;
 
 @Controller
 @RequestMapping("/viec-lam")
@@ -37,7 +36,6 @@ public class JobController {
 	@Autowired
 	private ISkillService skillService;
 	
-	LocationUtil locationUtil = new LocationUtil();
 
 	/**
 	 * method get mapping to return list job
@@ -51,24 +49,28 @@ public class JobController {
 	 * @return view jsp
 	 */
 	@RequestMapping(value = "/danh-sach", method = RequestMethod.GET)
-	public String jobsList(Model model, @RequestParam(name = "category", required=false) Long categoryId,
+	public String jobsList(Model model, @RequestParam(name = "page") int page,
+			@RequestParam(name = "limit") int limit,
+			@RequestParam(name = "category", required=false) Long categoryId,
 			@RequestParam(name = "type", required=false) String type,
 			@RequestParam(name = "salary", required=false) Integer salary,
 			@RequestParam(name = "location", required=false) String location) {
-		List<JobDTO> jobs = jobService.findAll();//get all job
+		JobDTO jobDTO = new JobDTO();
+		jobDTO.setPage(page);
+		jobDTO.setLimit(limit);
+		Pageable pageable = new PageRequest(page - 1, limit);
+		jobDTO.setListResult(jobService.findAll(pageable));//get all job
+		jobDTO.setTotalItem(jobService.getTotalItem());
+		jobDTO.setTotalPage((int) Math.ceil((double) jobDTO.getTotalItem()/jobDTO.getLimit()));
 		
 		if(categoryId!= null || type!=null || salary!=null || location!=null) {
 			//filter job by categoryId, type, salary, location
-			jobs = jobService.filter(categoryId, type, salary, location);
+			jobDTO.setListResult(jobService.filter(pageable, categoryId, type, salary, location));
 		}
-		
-		for(JobDTO job : jobs) {//set location
-			job.setLocation(locationUtil.getLocation().get(job.getLocation()));
-		}
-		model.addAttribute("jobs", jobs);//push jobs to view
+		model.addAttribute("jobs", jobDTO);//push jobs to view
 		model.addAttribute("categories", categoryService.findAll());//push categories to view
 		model.addAttribute("employers", employerService.findAll());//push employers to view
-		
+		model.addAttribute("users", userService.findAll());// push users to view
 		return "web/list-job";
 	}
 
@@ -83,8 +85,6 @@ public class JobController {
 	@RequestMapping(value = "/chi-tiet-viec-lam/{id}", method = RequestMethod.GET)
 	public String showJobDetail(@PathVariable("id") Long jobId, Model model) {
 		JobDTO job = jobService.findById(jobId);//get job by id
-		
-		job.setLocation(locationUtil.getLocation().get(job.getLocation()));//set location
 		
 		model.addAttribute("categories", categoryService.findAll());//push categories to view
 		model.addAttribute("skills", skillService.findAll());//push skills to view

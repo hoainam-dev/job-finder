@@ -5,9 +5,11 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.jobfinder.converter.JobConverter;
@@ -59,6 +61,18 @@ public class JobService implements IJobService {
 		}
 		return models;
 	}
+	
+	@Override
+	public List<JobDTO> findAll(Pageable pageable) {
+		List<JobDTO> models = new ArrayList<>();
+		List<JobEntity> entities = jobRepository.findAll(pageable).getContent();
+		for (JobEntity item : entities) {
+			JobDTO userModel = jobConverter.toDto(item);
+			models.add(userModel);
+		}
+		return models;
+	}
+	
 
 	@Override
 	@Transactional
@@ -94,19 +108,19 @@ public class JobService implements IJobService {
 	}
 
 	@Override
-	public List<JobDTO> filter(Long categoryId, String type, int salary, String location) {
+	public List<JobDTO> filter(Pageable pageable, Long categoryId, String type, int salary, String location) {
 		List<JobDTO> result = new ArrayList<>();
 		if (categoryId != 0) {
-			result = removeDuplicateJob(result, jobRepository.findByCategoryId(categoryId));
+			result = removeDuplicateJob(result, jobRepository.findByCategoryId(pageable, categoryId).getContent());
 		}
 		if (!type.equals("")) {
-			result = removeDuplicateJob(result, jobRepository.findByType(type));
+			result = removeDuplicateJob(result, jobRepository.findByType(pageable,type).getContent());
 		}
 		if (salary != 1) {
-			result = removeDuplicateJob(result, jobRepository.findBySalary(salary));
+			result = removeDuplicateJob(result, jobRepository.findBySalary(pageable,salary).getContent());
 		}
 		if (!location.equals("")) {
-			result = removeDuplicateJob(result, jobRepository.findByLocation(location));
+			result = removeDuplicateJob(result, jobRepository.findByLocation(pageable,location).getContent());
 		}
 		return result;
 	}
@@ -141,5 +155,19 @@ public class JobService implements IJobService {
 			}
 		}
 		return jobfiltered;
+	}
+
+	@Override
+	public List<JobDTO> findByEmployerId(Long employer_id) {
+		List<JobDTO> result = new ArrayList<>();
+		for(JobEntity job: jobRepository.findByEmployerId(employer_id)) {
+			result.add(jobConverter.toDto(job));
+		}
+		return result;
+	}
+
+	@Override
+	public int getTotalItem() {
+		return (int) jobRepository.count();
 	}
 }

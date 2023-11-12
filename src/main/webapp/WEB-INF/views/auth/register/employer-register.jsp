@@ -98,20 +98,12 @@ body{
 										<span><form:errors cssClass="error"
 												path="companyAddress" /></span>
 									</div>
-									<!-- <div class="input-group-icon mt-10">
-										<div class="icon">
-											<i class="fa fa-plane" aria-hidden="true"></i>
-										</div>
-										<div class="form-select" id="default-select"">
-											<select>
-												<option value=" 1">City</option>
-												<option value="1">Dhaka</option>
-												<option value="1">Dilli</option>
-												<option value="1">Newyork</option>
-												<option value="1">Islamabad</option>
-											</select>
-										</div>
-									</div> -->
+									<div class="mt-10">
+										<label>Giới thiệu về công ty (*)</label>
+										<form:textarea path="companyIntroduce" rows="7"
+											class="single-textarea" placeholder="Introduce" />
+										<span><form:errors cssClass="error" path="companyIntroduce" /></span>
+									</div>
 									<div class="single-element-widget mt-30">
 										<div class="switch-wrap d-flex">
 											<div class="primary-checkbox">

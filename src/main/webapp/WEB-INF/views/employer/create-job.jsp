@@ -226,7 +226,7 @@
 
     	    data.forEach(city => {
     	        const option = document.createElement('option');
-    	        option.value = city.codename;
+    	        option.value = city.name;
     	        option.text = city.name;
     	        selectElement.appendChild(option);
     	    });

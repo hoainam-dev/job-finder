@@ -15,13 +15,10 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.jobfinder.dto.CategoryDTO;
 import com.jobfinder.dto.JobDTO;
 import com.jobfinder.dto.UserDTO;
-import com.jobfinder.entity.CategoryEntity;
-import com.jobfinder.entity.JobEntity;
 import com.jobfinder.service.ICategoryService;
 import com.jobfinder.service.IEmployerService;
 import com.jobfinder.service.IJobService;
 import com.jobfinder.service.IUserService;
-import com.jobfinder.util.LocationUtil;
 
 @Controller(value = "homeControllerOfWeb")
 public class HomeController {
@@ -38,7 +35,6 @@ public class HomeController {
 	@Autowired
 	private IEmployerService employerService;
 	
-	LocationUtil locationUtil = new LocationUtil();
 
 	/**
 	 * method get mapping return home page
@@ -70,10 +66,6 @@ public class HomeController {
 			categories=ListCategory;
 		}
 		
-		for(JobDTO job : jobs) {
-			// set location from codename to name(thanh_pho_ha_noi -> Thanh Pho Ha Noi)
-			job.setLocation(locationUtil.getLocation().get(job.getLocation()));
-		}
 		ModelAndView mav = new ModelAndView("web/home");//create model view jsp
 		mav.addObject("jobs", jobs);// push jobs to view
 		mav.addObject("categories", categories);// push categories to view
@@ -101,7 +93,10 @@ public class HomeController {
 	@RequestMapping(value = "/tim-kiem", method = RequestMethod.GET)
 	public String searchByTitle(@RequestParam("keyword") String keyword, Model model) {
 		List<JobDTO> jobs = jobService.findByTitle(keyword);
-		model.addAttribute("jobs", jobs);
-		return "web/home";
+		
+		model.addAttribute("jobs", jobs);//push jobs to view
+		model.addAttribute("categories", categoryService.findAll());//push categories to view
+		model.addAttribute("employers", employerService.findAll());//push employers to view
+		return "web/list-job";
 	}
 }

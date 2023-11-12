@@ -17,11 +17,12 @@
 			<a class="btn btn-infor" href="#">Cài đặt tài khoản</a>
 			<div class="row">
 				<div class="col-md-12 text-center">
+					<h3>Thông tin cá nhân</h3>
 					<c:if test="${not empty message}">
 						<div class="alert alert-${alert}">${message}</div>
 					</c:if>
-					<h3>Thông tin cá nhân</h3>
 				</div>
+				
 			</div>
 			<hr/>
 			<form id="contact-form" role="form" action="/thong-tin-ca-nhan?id=${user.id}" method="post">

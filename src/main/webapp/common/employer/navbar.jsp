@@ -44,7 +44,7 @@
 					<c:forEach items="${users}" var="user">
 						<c:if test="${user.userName==SecurityUtils.getPrincipal().getUsername()}">
 							<li class="nav-item d-flex align-items-center">
-								<a href="/nha-tuyen-dung/${user.id}" class="nav-link text-body font-weight-bold px-0"> 
+								<a href="/nha-tuyen-dung/thong-tin-ca-nhan?id=${user.id}" class="nav-link text-body font-weight-bold px-0"> 
 									<i class="fa fa-user me-sm-1"></i> 
 									<span class="d-sm-inline d-none"><%=SecurityUtils.getPrincipal().getUsername()%></span>
 								</a>
