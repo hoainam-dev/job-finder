@@ -64,10 +64,10 @@ public class ApplicantService implements IApplicantService{
 	public ApplicantDTO save(ApplicantDTO dto) {
 		ApplicantEntity applicantEntity = new ApplicantEntity();
 		UserEntity userEntity = new UserEntity();
-		if (dto.getId() != null) {
+		if (dto.getId() != null) {//update applicant
 			ApplicantEntity oldApplicant = applicantRepository.findOne(dto.getId());
 			applicantEntity = applicantConverter.toEntity(oldApplicant, dto);
-		} else {
+		} else {//create applicant
 			applicantEntity = applicantConverter.toEntity(dto);
 			
 			List<SkillEntity> skills = new ArrayList<>();
