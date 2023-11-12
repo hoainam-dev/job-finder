@@ -13,4 +13,7 @@ public interface IJobService {
 	List<JobDTO> findAll();
 	
 	List<JobDTO> filter(Long categoryId, String type, int salary, String location);
+
+	List<JobDTO> findByTitle(String keyword);
+	
 }

@@ -15,6 +15,8 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.jobfinder.dto.CategoryDTO;
 import com.jobfinder.dto.JobDTO;
 import com.jobfinder.dto.UserDTO;
+import com.jobfinder.entity.CategoryEntity;
+import com.jobfinder.entity.JobEntity;
 import com.jobfinder.service.ICategoryService;
 import com.jobfinder.service.IEmployerService;
 import com.jobfinder.service.IJobService;
@@ -94,5 +96,12 @@ public class HomeController {
 		redirectAttributes.addFlashAttribute("message", "Đổi thông tin thành công");//truyen message thanh cong toi trang dang nhap
 		redirectAttributes.addFlashAttribute("alert", "success");//truyen type message toi trang dang nhap
 		return "redirect:/thong-tin-ca-nhan?id=" + userId;
+	}
+	
+	@RequestMapping(value = "/tim-kiem", method = RequestMethod.GET)
+	public String searchByTitle(@RequestParam("keyword") String keyword, Model model) {
+		List<JobDTO> jobs = jobService.findByTitle(keyword);
+		model.addAttribute("jobs", jobs);
+		return "web/home";
 	}
 }

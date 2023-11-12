@@ -19,6 +19,7 @@ import com.jobfinder.repository.EmployerRepository;
 import com.jobfinder.repository.JobRepository;
 import com.jobfinder.repository.SkillRepository;
 import com.jobfinder.service.IJobService;
+import com.jobfinder.util.SearchUtils;
 
 @Service
 public class JobService implements IJobService {
@@ -110,6 +111,18 @@ public class JobService implements IJobService {
 		return result;
 	}
 	
+	@Override
+	public List<JobDTO> findByTitle(String keyword) {
+	    String keywordWithoutAccents = SearchUtils.removeAccents(keyword);
+	    List<JobDTO> models = new ArrayList<>();
+		List<JobEntity> jobs = jobRepository.findByTitleContaining(keywordWithoutAccents);
+		for (JobEntity item : jobs) {
+			JobDTO userModel = jobConverter.toDto(item);
+			models.add(userModel);
+		}
+		return models;
+		
+	}
 	
 	//Ham filter theo tung truong hop
 	public List<JobDTO> removeDuplicateJob(List<JobDTO> jobDTO, List<JobEntity> jobEntity) {
