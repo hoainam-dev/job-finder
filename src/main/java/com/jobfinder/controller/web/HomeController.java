@@ -5,11 +5,15 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.jobfinder.dto.JobDTO;
+import com.jobfinder.entity.CategoryEntity;
+import com.jobfinder.entity.JobEntity;
 import com.jobfinder.service.ICategoryService;
 import com.jobfinder.service.IEmployerService;
 import com.jobfinder.service.IJobService;
@@ -48,5 +52,12 @@ public class HomeController {
 		mav.addObject("users", userService.findAll());
 		mav.addObject("employers", employerService.findAll());
 		return mav;
+	}
+	
+	@RequestMapping(value = "/tim-kiem", method = RequestMethod.GET)
+	public String searchByTitle(@RequestParam("keyword") String keyword, Model model) {
+		List<JobDTO> jobs = jobService.findByTitle(keyword);
+		model.addAttribute("jobs", jobs);
+		return "web/home";
 	}
 }

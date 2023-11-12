@@ -78,6 +78,6 @@ public class UserDTO extends AbstractDTO<UserDTO>{
 	}
 	public void setEmployer_id(Long employer_id) {
 		this.employer_id = employer_id;
-	}
+	}	
 	
 }
