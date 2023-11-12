@@ -7,7 +7,7 @@ body {
 }
 
 #container-skill {
-	background: #a3caeb;
+	background: #f0f0f0;
 	display: flex;
 	flex-wrap: wrap;
 	/* Cho phép các .skill xuống dòng nếu không đủ chiều rộng */

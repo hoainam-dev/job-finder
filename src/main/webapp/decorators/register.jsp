@@ -65,7 +65,7 @@
 									<nav class="d-none d-lg-block">
 										<ul id="navigation">
 											<li><a href="/">Trang chủ</a></li>
-										<li><a href="/viec-lam/danh-sach">Tìm việc</a></li>
+										<li><a href="/viec-lam/danh-sach?page=1&limit=10">Tìm việc</a></li>
 										<li><a href="#">Công ty</a>
 											<ul class="submenu">
 												<li><a href="#">Danh sách công ty</a></li>

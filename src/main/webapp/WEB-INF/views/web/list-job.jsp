@@ -2,7 +2,6 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
-<html>
 <head>
 <meta charset="UTF-8">
 <title>Danh sách công việc</title>
@@ -57,12 +56,14 @@
 							</div>
 						</div>
 						<div class="col-5">
-							<a class="btn btn-info" style="padding:15px" href="/viec-lam/danh-sach">bỏ lọc</a>
+							<a class="btn btn-info" id="clearFilter" style="padding:15px" href="/viec-lam/danh-sach?page=1&limit=10">bỏ lọc</a>
 						</div>
 					</div>
 					<!-- Job Category Listing start -->
 					<div class="job-category-listing mb-50">
-						<form>
+						<form action="<c:url value='/viec-lam/danh-sach'/>" id="formFilterSubmit" Method="GET">
+							<input type="hidden" value="1" class="page" name="page"/>
+							<input type="hidden" value="10" class="limit" name="limit"/>
 							<!-- category -->
 							<div class="single-listing">
 								<div class="small-section-tittle2">
@@ -70,7 +71,7 @@
 								</div>
 								<!-- Select job items start -->
 								<div class="select-job-items2">
-									<select style="padding: 5px" name="category">
+									<select id="catgory" style="padding: 5px" name="category">
 										<option value="0">Tất cả lĩnh vực</option>
 										<c:forEach var="category" items="${categories}">
 											<option value="${category.id}">${category.name}</option>
@@ -84,7 +85,7 @@
 								<div class="small-section-tittle2">
 									<h4>Phương thức làm việc</h4>
 								</div>
-								<select style="padding: 5px" name="type">
+								<select id="type" style="padding: 5px" name="type">
 									<option value="">Tất cả phương thức</option>
 									<option value="Full Time">Full Time</option>
 									<option value="Part Time">Part Time</option>
@@ -98,7 +99,7 @@
 								<div class="small-section-tittle2">
 									<h4>Mức lương</h4>
 								</div>
-								<select style="padding: 5px" name="salary">
+								<select id="salary" style="padding: 5px" name="salary">
 									<option value="1">Tất cả mức lương</option>
 									<option value="9">Dưới 10 triệu</option>
 									<% for (int i = 10; i <= 45; i += 5) { %>
@@ -115,8 +116,7 @@
 									<h4>Địa điểm</h4>
 								</div>
 								<div>
-									<select style="padding: 5px" name="location" id="location">
-										<option value="" selected>Chọn tỉnh thành</option>
+									<select id="location" style="padding: 5px" name="location" id="location">
 									</select>
 								</div>
 							</div>
@@ -136,11 +136,11 @@
                             <div class="row">
                                 <div class="col-lg-12">
                                     <div class="count-job mb-35">
-                                        <c:if test="${jobs.size()==0}">
+                                        <c:if test="${jobs.listResult.size()==0}">
                                         	<p>Không có tin nào trùng khớp để hiển thị</p>
                                         </c:if>
-                                        <c:if test="${jobs.size()>0}">
-                                        	<span>${jobs.size()} tin tìm thấy</span>
+                                        <c:if test="${jobs.listResult.size()>0}">
+                                        	<span>${jobs.listResult.size()} tin tìm thấy</span>
                                         <!-- Select job items start -->
                                         <div class="select-job-items">
                                             <span>Lọc theo</span>
@@ -151,7 +151,7 @@
                                             </select>
                                         </div>
                                         <!--  Select job items End-->
-                                        <c:forEach var="job" items="${jobs}">
+                                        <c:forEach var="job" items="${jobs.listResult}">
                                         	<!-- single-job-content -->
 			                                <div class="single-job-items mb-30">
 			                                    <div class="job-items">
@@ -196,59 +196,100 @@
                             </div>
                             <!-- Count of Job list End -->
 		                </div>
+		                <!--Pagination Start  -->
+		                <form action="<c:url value='/viec-lam/danh-sach'/>" id="formSubmit" method="GET">
+							<div class="pagination-area pb-115 text-center">
+								<div class="container">
+								     <ul class="pagination" id="pagination"></ul>
+								     <input type="hidden" value="" class="page" name="page"/>
+								     <input type="hidden" value="" class="limit" name="limit"/>
+								</div>
+							</div>
+						</form>
+						<!--Pagination End  -->
 	                </section>
                 </div>
 			</div>
 		</div>
 	</div>
-	<!-- Job List Area End --> 
-	<!--Pagination Start  -->
-	<div class="pagination-area pb-115 text-center">
-		<div class="container">
-			<div class="row">
-				<div class="col-xl-12">
-					<div class="single-wrap d-flex justify-content-center">
-						<nav aria-label="Page navigation example">
-							<ul class="pagination justify-content-start">
-								<li class="page-item active"><a class="page-link" href="#">01</a></li>
-								<li class="page-item"><a class="page-link" href="#">02</a></li>
-								<li class="page-item"><a class="page-link" href="#">03</a></li>
-								<li class="page-item"><a class="page-link" href="#"><span
-										class="ti-angle-right"></span></a></li>
-							</ul>
-						</nav>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-	<!--Pagination End  --> </main>
+	<!-- Job List Area End -->  
+	</main>
 	<!-- Navigation -->
 	<%@ include file="/common/element/footer.jsp"%>
-	<script
-		src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
-		referrerpolicy="no-referrer"></script>
-	<script
-		src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" referrerpolicy="no-referrer"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"></script>
 	<script>
+		var totalPages = ${jobs.totalPage}
+		var currentPage = ${jobs.page}
+		$(function () {
+	        window.pagObj = $('#pagination').twbsPagination({
+	            totalPages: totalPages,
+	            visiblePages: 10,
+	            startPage: currentPage,
+	            onPageClick: function (event, page) {
+	                if(currentPage != page){
+	                	$(".limit").val(10);
+	                	$(".page").val(page);
+	                	$("#formSubmit").submit();
+	                	const selectedCategory = '<%= request.getParameter("category") %>';
+	                	const selectedType = '<%= request.getParameter("type") %>';
+	                	const selectedSalary = '<%= request.getParameter("salary") %>';
+	                	const selectedLocation = '<%= request.getParameter("location") %>';
+	                    if (!selectedCategory||!selectedType||!selectedSalary||!selectedLocation) {
+	                    	$("#formFilterSubmit").submit();
+	                    }
+	                }
+	            }
+	        })
+	    });
+		  
     	const host = "https://provinces.open-api.vn/api/";
     	// Sử dụng fetch API để lấy dữ liệu từ API
     	fetch(host).then(response => response.json())
     	    .then(data => {
     	        // Xử lý dữ liệu JSON ở đây
     	        fillSelect(data);
-    	    });
+    	});
     	function fillSelect(data) {
     	    const selectElement = document.querySelector('#location');
     	    selectElement.innerHTML = '<option value="">Chọn tỉnh/thành phố</option>';
 
     	    data.forEach(city => {
     	        const option = document.createElement('option');
-    	        option.value = city.codename;
+    	        option.value = city.name;
     	        option.text = city.name;
     	        selectElement.appendChild(option);
     	    });
     	}
+    	
+    	// Lưu giá trị của các select khi form được submit
+		  document.getElementById('formFilterSubmit').addEventListener('submit', function(e) {
+		    var selects = document.querySelectorAll('select');
+		    selects.forEach(function(select) {
+		      var selectedValue = select.value;
+		      localStorage.setItem(select.name, selectedValue);
+		    });
+		  });
+
+		  // Khôi phục giá trị đã chọn khi trang được tải lại
+		  window.addEventListener('load', function() {
+		    var selects = document.querySelectorAll('select');
+		    selects.forEach(function(select) {
+		      var selectedValue = localStorage.getItem(select.name);
+		      if (selectedValue) {
+		        select.value = selectedValue;
+		      }
+		    });
+		  });
+    	
+    	// Xử lý nút "Khôi phục mặc định"
+    	  document.getElementById('clearFilter').addEventListener('click', function() {
+    	    var selects = document.querySelectorAll('select');
+    	    selects.forEach(function(select) {
+    	      select.value = select.options[0].value; // Chọn giá trị mặc định
+    	      localStorage.removeItem(select.name); // Xóa giá trị đã lưu
+    	    });
+    	  });
 	</script>
 </body>
 </html>

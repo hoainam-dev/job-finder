@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@include file="/common/taglib.jsp" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -44,11 +45,13 @@
 		}
 	</style>
 	<dec:body/>
-	
-	<!-- All JS Custom Plugins Link Here here -->
+		<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+	    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/js/bootstrap.min.js"></script>
+	    <script src="<c:url value='/template/web/paging/jquery.twbsPagination.js'/>"></script>
+		<!-- All JS Custom Plugins Link Here here -->
+		
         <script src="/template/web/js/vendor/modernizr-3.5.0.min.js"></script>
 		<!-- Jquery, Popper, Bootstrap -->
-		<script src="/template/web/js/vendor/jquery-1.12.4.min.js"></script>
         <script src="/template/web/js/popper.min.js"></script>
         <script src="/template/web/js/bootstrap.min.js"></script>
 	    <!-- Jquery Mobile Menu -->

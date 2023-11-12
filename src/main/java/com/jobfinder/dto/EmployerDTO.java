@@ -7,6 +7,7 @@ public class EmployerDTO extends AbstractDTO<UserDTO>{
 	private Long id;
 	private String companyName;
 	private String companyAddress;
+	private String companyIntroduce;
 	private String position;
 	private String firstName;
 	private String lastName;
@@ -37,6 +38,12 @@ public class EmployerDTO extends AbstractDTO<UserDTO>{
 	}
 	public void setCompanyAddress(String companyAddress) {
 		this.companyAddress = companyAddress;
+	}
+	public String getCompanyIntroduce() {
+		return companyIntroduce;
+	}
+	public void setCompanyIntroduce(String companyIntroduce) {
+		this.companyIntroduce = companyIntroduce;
 	}
 	public String getPosition() {
 		return position;
