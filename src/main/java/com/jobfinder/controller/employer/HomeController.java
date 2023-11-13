@@ -25,24 +25,24 @@ import com.jobfinder.util.SecurityUtils;
 @Controller(value = "homeControllerOfEmployer")
 @RequestMapping("/nha-tuyen-dung")
 public class HomeController {
-	
+
 	@Autowired
 	private IUserService userService;
-	
+
 	@Autowired
 	private IJobService jobService;
-	
+
 	@Autowired
 	private IEmployerService employerService;
-	
+
 	@Autowired
 	private ICategoryService categoryService;
-	
+
 	@Autowired
 	private IPositionService positionService;
 
 	SecurityUtils user = new SecurityUtils();
-	
+
 	@RequestMapping(value = "/trang-chu", method = RequestMethod.GET)
 	public ModelAndView homePage() {
 		List<UserDTO> users = userService.findAll();
@@ -52,7 +52,7 @@ public class HomeController {
 		mav.addObject("totalJob", jobs.size());
 		return mav;
 	}
-	
+
 	@RequestMapping(value = "/viec-lam", method = RequestMethod.GET)
 	public ModelAndView jobPage() {
 		List<UserDTO> users = userService.findAll();
@@ -60,8 +60,8 @@ public class HomeController {
 		List<JobDTO> jobs = jobService.findAll();
 		ModelAndView mav = new ModelAndView("employer/jobs");
 		EmployerDTO employer = null;
-		for(EmployerDTO empl: employerService.findAll()) {
-			if(Long.parseLong(user.getPrincipal().getId()) == empl.getUser_id()) {
+		for (EmployerDTO empl : employerService.findAll()) {
+			if (Long.parseLong(user.getPrincipal().getId()) == empl.getUser_id()) {
 				employer = empl;
 			}
 		}
@@ -71,7 +71,7 @@ public class HomeController {
 		mav.addObject("jobs", jobs);
 		return mav;
 	}
-	
+
 	@RequestMapping(value = "/tao-viec-lam", method = RequestMethod.GET)
 	public String createJob(Model model) {
 		List<CategoryDTO> categories = categoryService.findAll();
@@ -79,8 +79,8 @@ public class HomeController {
 		model.addAttribute("categories", categories);
 		model.addAttribute("positions", positions);
 		EmployerDTO employer = null;
-		for(EmployerDTO empl: employerService.findAll()) {
-			if(Long.parseLong(user.getPrincipal().getId()) == empl.getUser_id()) {
+		for (EmployerDTO empl : employerService.findAll()) {
+			if (Long.parseLong(user.getPrincipal().getId()) == empl.getUser_id()) {
 				employer = empl;
 			}
 		}
@@ -88,10 +88,13 @@ public class HomeController {
 		model.addAttribute("jobDTO", new JobDTO());
 		return "employer/create-job";
 	}
-	
+
 	@RequestMapping(value = "/tao-viec-lam", method = RequestMethod.POST)
 	public String createJob(@ModelAttribute("jobs") JobDTO jobDTO) {
 		jobService.save(jobDTO);
 		return "redirect:/nha-tuyen-dung/viec-lam";
 	}
+	
+	
+	
 }
