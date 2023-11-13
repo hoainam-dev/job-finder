@@ -19,8 +19,6 @@ public interface IJobService {
 	int getTotalItem();
 	
 	List<JobDTO> filter(Pageable pageable, Long categoryId, String type, int salary, String location);
-
-	List<JobDTO> findByTitle(String keyword);
 	
 	void deleteJobs(List<Long> jobIds);
 	
