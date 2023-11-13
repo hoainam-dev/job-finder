@@ -12,24 +12,37 @@ import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.mail.javamail.MimeMessagePreparator;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import com.jobfinder.dto.EmployerDTO;
+import com.jobfinder.service.IEmployerService;
 
 @Controller
-@RequestMapping("/sendEmail")
+@RequestMapping("/quan-tri")
 public class EmailController {
 	@Autowired
 	private JavaMailSender mailSender;
+	@Autowired
+	private IEmployerService employerService ;
 
-	@RequestMapping(method = RequestMethod.GET)
-	public String getForm() {
+	@RequestMapping(method = RequestMethod.GET ,value="/sendEmail/{userId}")
+	public String getForm(@PathVariable Long userId, Model model) {
+		EmployerDTO employer = employerService.findById(userId);
+		final String name = employer.getFirstName() +" "+ employer.getLastName();
+		final String emailTo = employer.getEmail();
+		model.addAttribute("emailTo" , emailTo);
+		model.addAttribute("name" , name);
 		return "email/emailForm";
 	}
 
-	@RequestMapping(method = RequestMethod.POST)
-	public String sendEmail(HttpServletRequest request, @RequestParam("attachFile") CommonsMultipartFile attachFile) {
+	@RequestMapping(method = RequestMethod.POST, value="/sendEmail")
+	public String sendEmail(HttpServletRequest request, @RequestParam("attachFile") CommonsMultipartFile attachFile, RedirectAttributes redirectAttributes) {
 
 		// reads form input
 		final String emailTo = request.getParameter("mailTo");
@@ -67,7 +80,7 @@ public class EmailController {
 			}
 
 		});
-
-		return "email/success";
+        redirectAttributes.addFlashAttribute("message", "Thực hiện thành công!");
+		return "redirect:/quan-tri/cong-ty";
 	}
 }

@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.jobfinder.dto.JobDTO;
+import com.jobfinder.service.IApplicantService;
 import com.jobfinder.service.ICategoryService;
 import com.jobfinder.service.IEmployerService;
 import com.jobfinder.service.IJobService;
@@ -32,6 +33,9 @@ public class JobController {
 
 	@Autowired
 	private IEmployerService employerService;
+	
+	@Autowired
+	private IApplicantService applicantService;
 	
 	@Autowired
 	private ISkillService skillService;
@@ -70,6 +74,7 @@ public class JobController {
 		model.addAttribute("jobs", jobDTO);//push jobs to view
 		model.addAttribute("categories", categoryService.findAll());//push categories to view
 		model.addAttribute("employers", employerService.findAll());//push employers to view
+		model.addAttribute("applicants", applicantService.findAll());// push employers to view
 		model.addAttribute("users", userService.findAll());// push users to view
 		return "web/list-job";
 	}
@@ -91,6 +96,7 @@ public class JobController {
 		model.addAttribute("users", userService.findAll());//push users to view
 		model.addAttribute("job", job);//push job to view
 		model.addAttribute("employers", employerService.findAll());//push employers to view
+		model.addAttribute("applicants", applicantService.findAll());// push employers to view
 		return "web/job-detail";
 	}
 }

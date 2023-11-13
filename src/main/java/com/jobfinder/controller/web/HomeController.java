@@ -4,6 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -12,13 +16,17 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.jobfinder.dto.ApplicantDTO;
 import com.jobfinder.dto.CategoryDTO;
+import com.jobfinder.dto.EmployerDTO;
 import com.jobfinder.dto.JobDTO;
 import com.jobfinder.dto.UserDTO;
+import com.jobfinder.service.IApplicantService;
 import com.jobfinder.service.ICategoryService;
 import com.jobfinder.service.IEmployerService;
 import com.jobfinder.service.IJobService;
 import com.jobfinder.service.IUserService;
+import com.jobfinder.util.SecurityUtils;
 
 @Controller(value = "homeControllerOfWeb")
 public class HomeController {
@@ -35,7 +43,48 @@ public class HomeController {
 	@Autowired
 	private IEmployerService employerService;
 	
-
+	@Autowired
+	private IApplicantService applicantService;
+	
+	/**
+	 * function check user logging in is applicant
+	 * 
+	 * 11102023 NamHH
+	 * 
+	 * @author NamHH
+	 */
+	public boolean isApplicant() {
+		boolean result = false;
+		for(ApplicantDTO applicant: applicantService.findAll()) {// find user employer logging in
+			if(Long.parseLong(SecurityUtils.getPrincipal().getId()) == applicant.getUser_id()) {
+				result = true;
+			}
+		}
+		return result;
+	}
+	
+	/**
+	 * function check role user logging in
+	 * 
+	 * 11102023 NamHH
+	 * 
+	 * @author NamHH
+	 */
+	public int roleUserLogginIn() {
+		int result = 1;
+		for(ApplicantDTO applicant: applicantService.findAll()) {//check user logging in is applicant
+			if(Long.parseLong(SecurityUtils.getPrincipal().getId()) == applicant.getUser_id()) {
+				result = 3;
+			}
+		}
+		for(EmployerDTO employer: employerService.findAll()) {//check user logging in is employer
+			if(Long.parseLong(SecurityUtils.getPrincipal().getId()) == employer.getUser_id()) {
+				result = 2;
+			}
+		}
+		return result;
+	}
+	
 	/**
 	 * method get mapping return home page
 	 * @author namHH
@@ -65,20 +114,44 @@ public class HomeController {
 		}else {			
 			categories=ListCategory;
 		}
-		
 		ModelAndView mav = new ModelAndView("web/home");//create model view jsp
+		
+		//kiem tra nguoi dung da dang nhap
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		if(!authentication.getName().equals("anonymousUser")) {
+			if(roleUserLogginIn()==2){//nguoi dung la employer
+				mav.addObject("role", 2);
+			}else if(roleUserLogginIn()==3){//nguoi dung la applicant
+				mav.addObject("role", 3);
+			}else {//nguoi dung la admin
+				mav.addObject("role", 1);
+			}
+		}
 		mav.addObject("jobs", jobs);// push jobs to view
 		mav.addObject("categories", categories);// push categories to view
 		mav.addObject("users", userService.findAll());// push users to view
 		mav.addObject("employers", employerService.findAll());// push employers to view
+		mav.addObject("applicants", applicantService.findAll());// push employers to view
 		return mav;
 	}
 	
 	@RequestMapping(value = "/thong-tin-ca-nhan", method = RequestMethod.GET)
 	public String showEditForm(@RequestParam(value = "id") Long id, Model model) {
-		UserDTO user = userService.findById(id);
-		model.addAttribute("user", user);
-		return "web/user-profile";
+		// Kiểm tra xem người dùng đã đăng nhập hay chưa
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		if(!authentication.getName().equals("anonymousUser")) {
+			if(isApplicant()){//kiem tra nguoi dung
+				model.addAttribute("user", userService.findById(id));
+				model.addAttribute("applicant", applicantService.findByUserId(id));
+				return "web/user-profile";
+			}
+			model.addAttribute("message", "Tài khoản của bạn không có quyền truy cập!");
+			model.addAttribute("alert", "danger");
+			return "auth/login/login";
+		}
+		model.addAttribute("message", "Bạn phải đăng nhập trước!");
+		model.addAttribute("alert", "danger");
+		return "auth/login/login";
 	}
 
 	@RequestMapping(value = "/thong-tin-ca-nhan", method = RequestMethod.POST)
@@ -91,12 +164,22 @@ public class HomeController {
 	}
 	
 	@RequestMapping(value = "/tim-kiem", method = RequestMethod.GET)
-	public String searchByTitle(@RequestParam("keyword") String keyword, Model model) {
-		List<JobDTO> jobs = jobService.findByTitle(keyword);
+	public String searchByTitle(@RequestParam("keyword") String keyword, 
+			@RequestParam(name = "page") int page,
+			@RequestParam(name = "limit") int limit,
+			Model model) {
+		JobDTO jobDTO = new JobDTO();
+		jobDTO.setPage(page);
+		jobDTO.setLimit(limit);
+		Pageable pageable = new PageRequest(page - 1, limit);
+		jobDTO.setListResult(jobService.findByTitle(pageable, keyword));//get all job
+		jobDTO.setTotalItem(jobService.getTotalItem());
+		jobDTO.setTotalPage((int) Math.ceil((double) jobDTO.getTotalItem()/jobDTO.getLimit()));
 		
-		model.addAttribute("jobs", jobs);//push jobs to view
+		model.addAttribute("jobs", jobDTO);//push jobs to view
 		model.addAttribute("categories", categoryService.findAll());//push categories to view
 		model.addAttribute("employers", employerService.findAll());//push employers to view
+		model.addAttribute("users", userService.findAll());// push users to view
 		return "web/list-job";
 	}
 }

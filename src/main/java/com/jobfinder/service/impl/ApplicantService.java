@@ -54,9 +54,13 @@ public class ApplicantService implements IApplicantService{
 	}
 	
 	@Override
-	public ApplicantDTO findById(long id) {
-		ApplicantEntity entity = applicantRepository.findOne(id);
-		return applicantConverter.toDto(entity);
+	public ApplicantDTO findById(Long id) {
+		return applicantConverter.toDto(applicantRepository.findOne(id));
+	}
+	
+	@Override
+	public ApplicantDTO findByUserId(Long id) {
+		return applicantConverter.toDto(applicantRepository.findByUserId(id));
 	}
 	
 	@Override

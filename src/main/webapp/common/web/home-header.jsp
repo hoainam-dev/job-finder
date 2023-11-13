@@ -54,12 +54,22 @@
 								</security:authorize>
 								<security:authorize access="isAuthenticated()">
 									<c:forEach items="${users}" var="user">
-										<c:if
-											test="${user.userName==SecurityUtils.getPrincipal().getUsername()}">
-											<a style="color: #000"
-												href="<c:url value='/thong-tin-ca-nhan?id=${user.id}'/>">
-												<span><img alt="" src="./template/web/img/user.png"></span> <%=SecurityUtils.getPrincipal().getUsername()%>
-											</a>
+										<c:if test="${user.userName==SecurityUtils.getPrincipal().getUsername()}">
+											<c:if test="${role==3}">
+												<a style="color: #000" href="<c:url value='/thong-tin-ca-nhan?id=${user.id}'/>">
+													<span><img alt="" src="./template/web/img/user.png"></span> <%=SecurityUtils.getPrincipal().getUsername()%>
+												</a>
+											</c:if>
+											<c:if test="${role==2}">
+												<a style="color: #000" href="<c:url value='nha-tuyen-dung/thong-tin-ca-nhan?id=${user.id}'/>">
+													<span><img alt="" src="./template/web/img/user.png"></span> <%=SecurityUtils.getPrincipal().getUsername()%>
+												</a>
+											</c:if>
+											<c:if test="${role==1}">
+												<a style="color: #000" href="<c:url value='quan-tri/edit/${user.userName}'/>">
+													<span><img alt="" src="./template/web/img/user.png"></span> <%=SecurityUtils.getPrincipal().getUsername()%>
+												</a>
+											</c:if>
 										</c:if>
 									</c:forEach>
 									<a href="thoat" class="btn head-btn2">Thoát</a>

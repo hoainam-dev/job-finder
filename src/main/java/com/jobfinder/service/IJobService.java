@@ -22,6 +22,10 @@ public interface IJobService {
 
 	List<JobDTO> findByTitle(String keyword);
 	
+	void deleteJobs(List<Long> jobIds);
+	
+	List<JobDTO> findByTitle(Pageable pageable, String keyword);
+	
 	List<JobDTO> findByEmployerId(Long employer_id);
 	
 }

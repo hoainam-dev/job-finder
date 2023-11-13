@@ -1,5 +1,7 @@
 package com.jobfinder.dto;
 
+import java.util.List;
+
 public class UserDTO extends AbstractDTO<UserDTO>{
 	private String userName;
 	private String password;
@@ -9,7 +11,7 @@ public class UserDTO extends AbstractDTO<UserDTO>{
 	private String address;
 	private String phone;
 	private Integer status;
-	private Long roleId;
+	private List<Long> roleId;
 	private	Long applicant_id;
 	private	Long employer_id;
 	
@@ -61,10 +63,10 @@ public class UserDTO extends AbstractDTO<UserDTO>{
 	public void setStatus(Integer status) {
 		this.status = status;
 	}
-	public Long getRoleId() {
+	public List<Long> getRoleId() {
 		return roleId;
 	}
-	public void setRoleId(Long roleId) {
+	public void setRoleId(List<Long> roleId) {
 		this.roleId = roleId;
 	}
 	public Long getApplicant_id() {

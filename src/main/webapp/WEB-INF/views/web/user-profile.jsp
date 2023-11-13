@@ -12,7 +12,7 @@
 	<!-- Navigation --> 
 	<%@ include file="/common/element/header.jsp"%> 
 	
-	<div class="job-post-company pt-130 pb-130">
+	<div class="job-post-company pt-50 pb-50">
 		<div class="container">
 			<a class="btn btn-infor" href="#">Cài đặt tài khoản</a>
 			<div class="row">
@@ -74,7 +74,6 @@
 									data-error="phone is required.">
 							</div>
 						</div>
-						
 						<div class="col-md-6">
 							<div class="form-group">
 								<label for="form_address">Địa chỉ *</label> <input

@@ -126,10 +126,10 @@ public class JobService implements IJobService {
 	}
 	
 	@Override
-	public List<JobDTO> findByTitle(String keyword) {
+	public List<JobDTO> findByTitle(Pageable pageable, String keyword) {
 	    String keywordWithoutAccents = SearchUtils.removeAccents(keyword);
 	    List<JobDTO> models = new ArrayList<>();
-		List<JobEntity> jobs = jobRepository.findByTitleContaining(keywordWithoutAccents);
+		List<JobEntity> jobs = jobRepository.findByTitleContaining(pageable, keywordWithoutAccents);
 		for (JobEntity item : jobs) {
 			JobDTO userModel = jobConverter.toDto(item);
 			models.add(userModel);
@@ -158,6 +158,12 @@ public class JobService implements IJobService {
 	}
 
 	@Override
+	public void deleteJobs(List<Long> jobIds) {
+		for(Long jobId   : jobIds ) {
+			jobRepository.delete(jobId);
+		}
+	}
+		
 	public List<JobDTO> findByEmployerId(Long employer_id) {
 		List<JobDTO> result = new ArrayList<>();
 		for(JobEntity job: jobRepository.findByEmployerId(employer_id)) {

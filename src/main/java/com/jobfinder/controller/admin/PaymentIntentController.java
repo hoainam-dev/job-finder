@@ -1,6 +1,8 @@
 package com.jobfinder.controller.admin;
 
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
@@ -14,23 +16,38 @@ import java.util.List;
 import java.util.Map;
 import java.util.TimeZone;
 
+import javax.mail.MessagingException;
+import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.core.io.InputStreamSource;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
+import org.springframework.mail.javamail.MimeMessagePreparator;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.freemarker.FreeMarkerTemplateUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.springframework.web.servlet.support.RequestContext;
 
 import com.jobfinder.config.PaymentConfig;
+import com.jobfinder.dto.EmployerDTO;
 import com.jobfinder.dto.ServiceDTO;
+import com.jobfinder.dto.UserDTO;
+import com.jobfinder.entity.PaymentMessage;
 import com.jobfinder.service.IEmployerService;
 import com.jobfinder.service.IPackageService;
 
+import freemarker.template.Configuration;
+import freemarker.template.Template;
+import freemarker.template.TemplateException;
 
 
 @Controller
@@ -41,9 +58,13 @@ public class PaymentIntentController{
 	
 	@Autowired
 	private IEmployerService employerSevice;
-	
+	@Autowired
+	private JavaMailSender mailSender;
+	 @Autowired
+	 private Configuration viewResolver;
 	int moutValue = 0;
 	Long  packageId = null ;
+	
 	
 	@GetMapping("/nha-tuyen-dung/dang-ky")
 	public String createIntent(@RequestParam("amount") int amount ,@RequestParam("id") Long id , Model model) {
@@ -56,22 +77,35 @@ public class PaymentIntentController{
 	    return "redirect:/nha-tuyen-dung/pay";
 	}
 	@GetMapping("/nha-tuyen-dung/thanh-cong")
-	public String PaymentSuccess (Model model,HttpServletRequest request) {
+	public String PaymentSuccess (Model model,HttpServletRequest request) throws MessagingException, IOException, TemplateException {
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		String username = authentication.getName();
 		Long userId = employerSevice.getUserIdByUsername(username);
+		EmployerDTO user = employerSevice.findById(userId);
 		String vnp_Amount = request.getParameter("vnp_Amount");
 		String vnp_BankCode = request.getParameter("vnp_BankCode");
 		String vnp_BankTranNo = request.getParameter("vnp_BankTranNo");
 		String vnp_PayDate = request.getParameter("vnp_PayDate");
 		ServiceDTO service = packageService.findById(packageId);
-		if(service== null) {
-			System.out.println("Khong co ");
+		if(service != null) {
+			System.out.println(user.getEmail());
 		}
+
+		PaymentMessage message = new PaymentMessage(
+		        user.getFirstName() + " " + user.getLastName(),
+		        service.getName(),
+		        service.getPrice(),
+		        vnp_PayDate,
+		        service.getJobPostNumber()
+		    );
+
+		String subject = "Sending Email for Employer";
 		employerSevice.updatePackageService(userId, packageId);
 		model.addAttribute("package", service);
 		model.addAttribute("vnp_BankTranNo" , vnp_BankTranNo);
 		model.addAttribute("vnp_PayDate" , vnp_PayDate);
+		
+		sendPaymentEmail(user.getEmail(), subject , message);
 		return "admin/checkout";
 	}
 	@GetMapping("/nha-tuyen-dung/pay")
@@ -145,5 +179,32 @@ public class PaymentIntentController{
         // Redirect to the paymentUrl
         return "redirect:" + paymentUrl;
 	}
+	
+	public void sendPaymentEmail(String emailTo, String subject, PaymentMessage paymentMessage) throws MessagingException, IOException, TemplateException {
+	    mailSender.send(new MimeMessagePreparator() {
+	        @Override
+	        public void prepare(MimeMessage mimeMessage) throws Exception {
+	            MimeMessageHelper messageHelper = new MimeMessageHelper(mimeMessage, true, "UTF-8");
+	            messageHelper.setTo(emailTo);
+	            messageHelper.setSubject(subject);
 
+	            // Use a method to generate email content from JSP template
+	            String emailContent = generateEmailContent(paymentMessage);
+
+	            messageHelper.setText(emailContent, true);
+	         
+	        }
+	    });
+	}
+	private String generateEmailContent(PaymentMessage paymentMessage) throws TemplateException, IOException {
+	    Template template = viewResolver.getTemplate("sendPaymentEmail.jsp");
+	    Map<String, Object> model = new HashMap<>();
+	    model.put("name", paymentMessage.getName());
+	    model.put("packageName", paymentMessage.getPackageName());
+	    model.put("paymentDate", paymentMessage.getPaymentDate());
+	    model.put("amount", paymentMessage.getAmount());
+	    model.put("postNumber", paymentMessage.getPostNumber());
+
+	    return FreeMarkerTemplateUtils.processTemplateIntoString(template, model);
+	}
 }

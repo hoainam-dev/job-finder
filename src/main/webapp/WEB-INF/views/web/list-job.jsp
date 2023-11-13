@@ -19,9 +19,9 @@
 	<!-- Navigation --> 
 	<%@ include file="/common/element/header.jsp"%>
 	<!-- Hero Area Start-->
-    <div class="slider-area ">
+    <div class="slider-area">
         <div class="single-slider section-overly slider-height2 d-flex align-items-center" 
-        data-background="/template/web/img/hero/h1_hero.png">
+        data-background='<c:url value="/template/web/img/hero/about.jpg"/>'>
             <div class="container">
                 <div class="row">
                     <div class="col-xl-12">
@@ -35,7 +35,7 @@
     </div>
     <!-- Hero Area End -->
 	<!-- Job List Area Start -->
-	<div class="job-listing-area pt-120 pb-120">
+	<div class="job-listing-area pt-50 pb-50">
 		<div class="container">
 			<div class="row">
 				<!-- Left content -->
