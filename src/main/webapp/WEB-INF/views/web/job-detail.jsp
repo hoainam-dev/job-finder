@@ -25,7 +25,7 @@ p{
 		<!-- Hero Area Start-->
 	    <div class="slider-area ">
 	        <div class="single-slider section-overly slider-height2 d-flex align-items-center" 
-	        data-background="./template/web/img/hero/h1_hero.png">
+	        data-background='<c:url value="/template/web/img/hero/h1_hero.png"/>'>
 	            <div class="container">
 	                <div class="row">
 	                    <div class="col-xl-12">
@@ -39,7 +39,7 @@ p{
 	    </div>
 	    <!-- Hero Area End -->
 		<!-- job post company Start -->
-		<div class="job-post-company pt-130 pb-130">
+		<div class="job-post-company pt-50 pb-50">
 			<div class="container">
 				<div class="row">
 					<!-- Left Content -->

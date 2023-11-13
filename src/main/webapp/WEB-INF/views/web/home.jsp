@@ -57,6 +57,8 @@
 								<form action="/tim-kiem" class="search-box" method="GET">
 									<div class="input-form">
 										<input type="text" name="keyword" placeholder="Nhập từ khóa">
+										<input type="hidden" value="1" class="page" name="page"/>
+										<input type="hidden" value="10" class="limit" name="limit"/>
 									</div>
 									<button type="submit" class="btn btn-primary search-form"> Tìm kiếm</button>
 								</form>
@@ -164,14 +166,14 @@
 		<hr/>
 		<!-- Online CV Area Start -->
 		<div class="online-cv cv-bg section-overly pt-90 pb-120"
-			data-background="./template/web/img/gallery/cv_bg.jpg">
+			data-background="/template/web/img/gallery/cv_bg.jpg">
 			<div class="container">
 				<div class="row justify-content-center">
 					<div class="col-xl-10">
 						<div class="cv-caption text-center">
-							<p class="pera1">FEATURED TOURS Packages</p>
-							<p class="pera2">Make a Difference with Your Online Resume!</p>
-							<a href="#" class="border-btn2 border-btn4">Upload your cv</a>
+							<p class="pera1">CÁC DU LỊCH NỔI BẬT Các gói</p>
+							<p class="pera2">Tạo sự khác biệt với sơ yếu lý lịch của bạn!</p>
+							<a href="#" class="border-btn2 border-btn4">Tải CV ngay</a>
 						</div>
 					</div>
 				</div>
@@ -181,14 +183,14 @@
 		
 		<!-- How  Apply Process Start-->
 		<div class="apply-process-area apply-bg pt-150 pb-150"
-			data-background="./template/web/img/gallery/how-applybg.png">
+			data-background="/template/web/img/gallery/how-applybg.png">
 			<div class="container">
 				<!-- Section Tittle -->
 				<div class="row">
 					<div class="col-lg-12">
 						<div class="section-tittle white-text text-center">
-							<span>Apply process</span>
-							<h2>How it works</h2>
+							<span>QUY TRÌNH ỨNG TUYỂN</span>
+							<h2>Cách tìm công việc ưng ý</h2>
 						</div>
 					</div>
 				</div>
@@ -200,9 +202,8 @@
 								<span class="flaticon-search"></span>
 							</div>
 							<div class="process-cap">
-								<h5>1. Search a job</h5>
-								<p>Sorem spsum dolor sit amsectetur adipisclit, seddo
-									eiusmod tempor incididunt ut laborea.</p>
+								<h5>1. Tìm kiếm tin tuyển dụng</h5>
+								<p>Tìm kiếm cơ hội việc làm phù hợp với mục tiêu và kỹ năng của bạn là bước đầu tiên trong việc tìm công việc ưng ý.</p>
 							</div>
 						</div>
 					</div>
@@ -212,9 +213,8 @@
 								<span class="flaticon-curriculum-vitae"></span>
 							</div>
 							<div class="process-cap">
-								<h5>2. Apply for job</h5>
-								<p>Sorem spsum dolor sit amsectetur adipisclit, seddo
-									eiusmod tempor incididunt ut laborea.</p>
+								<h5>2. Ứng tuyển vào vị trí</h5>
+								<p>Sau khi tìm thấy vị trí phù hợp, hãy ứng tuyển và chuẩn bị hồ sơ xin việc một cách cẩn thận để nổi bật trước nhà tuyển dụng.</p>
 							</div>
 						</div>
 					</div>
@@ -224,9 +224,8 @@
 								<span class="flaticon-tour"></span>
 							</div>
 							<div class="process-cap">
-								<h5>3. Get your job</h5>
-								<p>Sorem spsum dolor sit amsectetur adipisclit, seddo
-									eiusmod tempor incididunt ut laborea.</p>
+								<h5>3. Nhận việc</h5>
+								<p>Khi nhận cơ hội làm việc, hãy tận dụng nó và bắt đầu hành trình sự nghiệp của bạn với nhiệm vụ và đam mê.</p>
 							</div>
 						</div>
 					</div>

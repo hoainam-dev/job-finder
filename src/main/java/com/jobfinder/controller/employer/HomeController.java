@@ -54,7 +54,6 @@ public class HomeController {
 	@Autowired
 	private JobValidation jobValidation;
 
-	
 	/**
 	 * function Get current employer logging in
 	 * 
@@ -63,10 +62,9 @@ public class HomeController {
 	 * @author NamHH
 	 */
 	public EmployerDTO getCurrentEmployer() {
-		SecurityUtils user = new SecurityUtils();
 		EmployerDTO result = null;
 		for(EmployerDTO empl: employerService.findAll()) {// find user employer logging in
-			if(Long.parseLong(user.getPrincipal().getId()) == empl.getUser_id()) {
+			if(Long.parseLong(SecurityUtils.getPrincipal().getId()) == empl.getUser_id()) {
 				result = empl;
 			}
 		}

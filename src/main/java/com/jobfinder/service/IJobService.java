@@ -20,7 +20,7 @@ public interface IJobService {
 	
 	List<JobDTO> filter(Pageable pageable, Long categoryId, String type, int salary, String location);
 
-	List<JobDTO> findByTitle(String keyword);
+	List<JobDTO> findByTitle(Pageable pageable, String keyword);
 	
 	List<JobDTO> findByEmployerId(Long employer_id);
 	
