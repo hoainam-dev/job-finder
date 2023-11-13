@@ -8,7 +8,11 @@ encoding//src/main/java/com/jobfinder/controller/admin/PaymentIntentController.j
 encoding//src/main/java/com/jobfinder/controller/admin/PermisionUser.java=UTF-8
 encoding//src/main/java/com/jobfinder/controller/employer/HomeController.java=UTF-8
 encoding//src/main/java/com/jobfinder/controller/web/HomeController.java=UTF-8
+<<<<<<< HEAD
 encoding//src/main/java/com/jobfinder/converter/EmployerConverter.java=UTF-8
+=======
+encoding//src/main/java/com/jobfinder/controller/web/JobController.java=UTF-8
+>>>>>>> dev
 encoding//src/main/webapp/WEB-INF/views/admin/checkout.jsp=UTF-8
 encoding//src/main/webapp/WEB-INF/views/admin/service_package.jsp=UTF-8
 encoding//src/main/webapp/WEB-INF/views/employer/create-job.jsp=UTF-8

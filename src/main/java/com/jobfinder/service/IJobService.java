@@ -2,6 +2,8 @@ package com.jobfinder.service;
 
 import java.util.List;
 
+import org.springframework.data.domain.Pageable;
+
 import com.jobfinder.dto.JobDTO;
 
 public interface IJobService {
@@ -12,8 +14,18 @@ public interface IJobService {
 	
 	List<JobDTO> findAll();
 	
-	List<JobDTO> filter(Long categoryId, String type, int salary, String location);
+	List<JobDTO> findAll(Pageable pageable);
+	
+	int getTotalItem();
+	
+	List<JobDTO> filter(Pageable pageable, Long categoryId, String type, int salary, String location);
 
 	List<JobDTO> findByTitle(String keyword);
+	
 	void deleteJobs(List<Long> jobIds);
+	
+	List<JobDTO> findByTitle(Pageable pageable, String keyword);
+	
+	List<JobDTO> findByEmployerId(Long employer_id);
+	
 }

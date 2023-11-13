@@ -15,6 +15,7 @@ public class EmployerConverter {
 		result.setId(entity.getId());
 		result.setCompanyName(entity.getCompanyName());
 		result.setCompanyAddress(entity.getCompanyAddress());
+		result.setCompanyIntroduce(entity.getCompanyIntroduce());
 		result.setPosition(entity.getPosition());
 		if(entity.getServices() != null) {
 			result.setService(entity.getServices().getName());
@@ -42,6 +43,7 @@ public class EmployerConverter {
 		EmployerEntity result = new EmployerEntity();
 		result.setCompanyName(dto.getCompanyName());
 		result.setCompanyAddress(dto.getCompanyAddress());
+		result.setCompanyIntroduce(dto.getCompanyIntroduce());
 		result.setPosition(dto.getPosition());
 		return result;
 	}
@@ -49,6 +51,7 @@ public class EmployerConverter {
 	public EmployerEntity toEntity(EmployerEntity result, EmployerDTO dto) {
 		result.setCompanyName(dto.getCompanyName());
 		result.setCompanyAddress(dto.getCompanyAddress());
+		result.setCompanyIntroduce(dto.getCompanyIntroduce());
 		result.setPosition(dto.getPosition());
 		return result;
 	}

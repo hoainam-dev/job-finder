@@ -16,10 +16,8 @@ public class ApplicantConverter {
 	public ApplicantDTO toDto(ApplicantEntity entity) {
 		SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy"); 
 		List<Long> skills = new ArrayList<>();
-		if (entity.getSkills() != null) {
-			for(SkillEntity skill: entity.getSkills()) {
-				skills.add(skill.getId());
-			}
+		for(SkillEntity skill: entity.getSkills()) {
+			skills.add(skill.getId());
 		}
 		ApplicantDTO result = new ApplicantDTO();
 		result.setId(entity.getId());

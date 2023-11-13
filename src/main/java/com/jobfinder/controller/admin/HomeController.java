@@ -30,7 +30,6 @@ import com.jobfinder.service.ICategoryService;
 import com.jobfinder.service.IEmployerService;
 import com.jobfinder.service.IJobService;
 import com.jobfinder.service.IUserService;
-import com.jobfinder.util.LocationUtil;
 
 
 @Controller(value = "homeControllerOfAdmin")
@@ -48,8 +47,6 @@ public class HomeController {
 	
 	@Autowired
 	private IApplicantService applicantService;
-	
-	LocationUtil locationUtil = new LocationUtil();
 
 	// get data  for dashboard 
 	@RequestMapping(value = "/quan-tri/trang-chu", method = RequestMethod.GET)
@@ -60,9 +57,7 @@ public class HomeController {
 		int countJob = jobs.size();
 		List<EmployerDTO> employer = employerService.findAll();
 		int countEmployer = employer.size();
-		for(JobDTO job : jobs) {
-			job.setLocation(locationUtil.getLocation().get(job.getLocation()));
-		}
+
 		// model view 
 		model.addAttribute("users", users);
 		model.addAttribute("countUser", countUser);

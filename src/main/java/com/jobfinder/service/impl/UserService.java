@@ -81,7 +81,9 @@ public class UserService implements IUserService {
 			userEntity = userConverter.toEntity(dto);
 			
 			List<RoleEntity> roles = new ArrayList<>();
-			roles.add(roleRepository.findOne(dto.getRoleId()));
+			for(Long id: dto.getRoleId()) {
+				roles.add(roleRepository.findOne(id));
+			}
 			userEntity.setRoles(roles);
 			
 			userEntity.setStatus(1);

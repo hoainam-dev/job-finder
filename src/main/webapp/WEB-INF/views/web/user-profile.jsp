@@ -12,16 +12,17 @@
 	<!-- Navigation --> 
 	<%@ include file="/common/element/header.jsp"%> 
 	
-	<div class="job-post-company pt-130 pb-130">
+	<div class="job-post-company pt-50 pb-50">
 		<div class="container">
 			<a class="btn btn-infor" href="#">Cài đặt tài khoản</a>
 			<div class="row">
 				<div class="col-md-12 text-center">
+					<h3>Thông tin cá nhân</h3>
 					<c:if test="${not empty message}">
 						<div class="alert alert-${alert}">${message}</div>
 					</c:if>
-					<h3>Thông tin cá nhân</h3>
 				</div>
+				
 			</div>
 			<hr/>
 			<form id="contact-form" role="form" action="/thong-tin-ca-nhan?id=${user.id}" method="post">
@@ -73,7 +74,6 @@
 									data-error="phone is required.">
 							</div>
 						</div>
-						
 						<div class="col-md-6">
 							<div class="form-group">
 								<label for="form_address">Địa chỉ *</label> <input

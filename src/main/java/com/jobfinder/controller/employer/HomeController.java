@@ -10,9 +10,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -20,14 +20,12 @@ import com.jobfinder.dto.CategoryDTO;
 import com.jobfinder.dto.EmployerDTO;
 import com.jobfinder.dto.JobDTO;
 import com.jobfinder.dto.UserDTO;
-import com.jobfinder.entity.EmployerEntity;
 import com.jobfinder.service.ICategoryService;
 import com.jobfinder.service.IEmployerService;
 import com.jobfinder.service.IJobService;
 import com.jobfinder.service.IPositionService;
 import com.jobfinder.service.ISkillService;
 import com.jobfinder.service.IUserService;
-import com.jobfinder.util.LocationUtil;
 import com.jobfinder.util.SecurityUtils;
 import com.jobfinder.validation.JobValidation;
 
@@ -55,10 +53,23 @@ public class HomeController {
 	
 	@Autowired
 	private JobValidation jobValidation;
-	
-	LocationUtil locationUtil = new LocationUtil();
 
-	SecurityUtils user = new SecurityUtils();
+	/**
+	 * function Get current employer logging in
+	 * 
+	 * 11102023 NamHH
+	 * 
+	 * @author NamHH
+	 */
+	public EmployerDTO getCurrentEmployer() {
+		EmployerDTO result = null;
+		for(EmployerDTO empl: employerService.findAll()) {// find user employer logging in
+			if(Long.parseLong(SecurityUtils.getPrincipal().getId()) == empl.getUser_id()) {
+				result = empl;
+			}
+		}
+		return result;
+	}
 	
 	/**
 	 * function Get mapping return home page
@@ -71,8 +82,11 @@ public class HomeController {
 	public ModelAndView homePage() {
 		
 		List<UserDTO> users = userService.findAll();//get all user
-		List<JobDTO> jobs = jobService.findAll();//get all user
-				
+		
+		EmployerDTO employer = getCurrentEmployer();//get current employer
+
+		List<JobDTO> jobs = jobService.findByEmployerId(employer.getId());//get job by employer id
+		
 		ModelAndView mav = new ModelAndView("employer/home");
 		mav.addObject("title", "Trang chủ");//push title to view
 		mav.addObject("users", users);//push users to view
@@ -96,16 +110,7 @@ public class HomeController {
 		
 		ModelAndView mav = new ModelAndView("employer/jobs");//create a Model view return jsp
 		
-		for(JobDTO job : jobs) {
-			// set location from codename to name(thanh_pho_ha_noi -> Thanh Pho Ha Noi)
-			job.setLocation(locationUtil.getLocation().get(job.getLocation()));
-		}
-		EmployerDTO employer = null;
-		for(EmployerDTO empl: employerService.findAll()) {// find user employer logging in
-			if(Long.parseLong(user.getPrincipal().getId()) == empl.getUser_id()) {
-				employer = empl;
-			}
-		}
+		EmployerDTO employer = getCurrentEmployer();//get current employer
 		mav.addObject("categories", categories);//push categories to view
 		mav.addObject("employer", employer);//push employer to view
 		mav.addObject("users", users);//push users to view
@@ -130,12 +135,7 @@ public class HomeController {
 		types.add("Remote");
 		types.add("Freelance");
 		
-		EmployerDTO employer = null;
-		for(EmployerDTO empl: employerService.findAll()) {// find user employer logging in
-			if(Long.parseLong(user.getPrincipal().getId()) == empl.getUser_id()) {
-				employer = empl;
-			}
-		}
+		EmployerDTO employer = getCurrentEmployer();//get current employer
 		
 		model.addAttribute("categories", categoryService.findAll());//push categories to view
 		model.addAttribute("positions", positionService.findAll());//push positions to view
@@ -143,6 +143,7 @@ public class HomeController {
 		model.addAttribute("skills", skillService.findAll());//push skills to view
 		model.addAttribute("employer", employer);//push employer to view
 		model.addAttribute("jobDTO", new JobDTO());//push modelAtribute to form
+		model.addAttribute("users", userService.findAll());//push users to view
 		model.addAttribute("title", "Tạo việc làm");//push title to view
 		return "employer/create-job";
 	}
@@ -161,12 +162,7 @@ public class HomeController {
 		//validation cho form dang ky nguoi tim viec
 		jobValidation.validate(jobDTO, bindingResult);
 		
-		EmployerDTO employer = null;
-		for(EmployerDTO empl: employerService.findAll()) {// find user employer logging in to get employer id
-			if(Long.parseLong(user.getPrincipal().getId()) == empl.getUser_id()) {
-				employer = empl;
-			}
-		}
+		EmployerDTO employer = getCurrentEmployer();//get current employer
 		
 		//create list Type
 		List<String> types = new ArrayList<String>();
@@ -191,17 +187,32 @@ public class HomeController {
 		return "redirect:/nha-tuyen-dung/viec-lam";
 	}
 	
-	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
-	public String getEmployerProfile(@PathVariable("id") Long id, Model model) {
+	/**
+	 * function GET mapping to show profile page
+	 * 
+	 *  11102023 NhanNN
+	 * 
+	 * @author NhanNN
+	 */
+	@RequestMapping(value = "/thong-tin-ca-nhan", method = RequestMethod.GET)
+	public String getEmployerProfile(@RequestParam(value = "id") Long id, Model model) {
 		EmployerDTO employerDTO = employerService.getEmployerProfile(id);
 		model.addAttribute("employer", employerDTO);
 		UserDTO userDTO = userService.findById(id);
 		model.addAttribute("user", userDTO);
+		model.addAttribute("title", "Thông tin cá nhân");//push title to view
 		return "employer/profile";
 	}
 	
-	@RequestMapping(value = "/cap-nhat-thong-tin/{id}", method = RequestMethod.GET)	
-	public String showFormUpdateProfile(@PathVariable("id") Long id, Model model) {
+	/**
+	 * function GET mapping to show update profile page
+	 * 
+	 *  11102023 NhanNN
+	 * 
+	 * @author NhanNN
+	 */
+	@RequestMapping(value = "/cap-nhat-thong-tin", method = RequestMethod.GET)	
+	public String showFormUpdateProfile(@RequestParam(value = "id") Long id, Model model) {
 		 EmployerDTO employer = employerService.getEmployerProfile(id);
 		 UserDTO user = userService.findById(id);
 		if (user != null) {
@@ -217,18 +228,30 @@ public class HomeController {
             employerDTO.setPosition(employer.getPosition());
             
             
-            
+            model.addAttribute("title", "Cập nhật thông tin");//push title to view
             model.addAttribute("employer", employerDTO);
+            model.addAttribute("user", user);
             
-            return "employer/form-update-profile";
+            return "employer/update-profile";
         } else {
             return null;
         }
 	}
 	
-	@RequestMapping(value = "/cap-nhat-thong-tin/{id}", method = RequestMethod.POST)
-	public String  updateEmployerProfile(@PathVariable("id") Long id, @ModelAttribute("employer") EmployerDTO employerDTO) {
+	/**
+	 * function POST mapping to update profile
+	 * 
+	 *  11102023 NhanNN
+	 * 
+	 * @author NhanNN
+	 */
+	@RequestMapping(value = "/cap-nhat-thong-tin", method = RequestMethod.POST)
+	public String  updateEmployerProfile(@RequestParam(value = "id") Long id, 
+			@ModelAttribute("employer") EmployerDTO employerDTO
+			, RedirectAttributes redirectAttributes) {
 		employerService.updateEmployerInfo(id, employerDTO.getId(), employerDTO);
-		return "redirect:/nha-tuyen-dung/" + id;
+		redirectAttributes.addFlashAttribute("message", "Đổi thông tin thành công");//truyen message thanh cong toi trang dang nhap
+		redirectAttributes.addFlashAttribute("alert", "success");//truyen type message toi trang dang nhap
+		return "redirect:/nha-tuyen-dung/thong-tin-ca-nhan?id=" + id;
 	}
 }
