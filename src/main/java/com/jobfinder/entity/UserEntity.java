@@ -44,6 +44,9 @@ public class UserEntity extends BaseEntity {
 	@OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
 	private EmployerEntity employer;
 	
+	@OneToOne(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	private ApplicantEntity applicant;
+	
 	
 	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"), 
@@ -131,5 +134,12 @@ public class UserEntity extends BaseEntity {
 		this.employer = employer;
 	}
 	
+	public ApplicantEntity getApplicant() {
+		return applicant;
+	}
+
+	public void setApplicant(ApplicantEntity applicant) {
+		this.applicant = applicant;
+	}
 	
 }

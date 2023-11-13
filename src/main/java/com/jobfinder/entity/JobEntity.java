@@ -58,6 +58,18 @@ public class JobEntity extends BaseEntity{
 	@JoinTable(name = "job_skill", joinColumns = @JoinColumn(name = "job_id"), 
 								  inverseJoinColumns = @JoinColumn(name = "skill_id"))
 	private List<SkillEntity> jobSkills = new ArrayList<>();
+	
+	@ManyToMany(mappedBy = "appliedJobs")
+	
+	private List<ApplicantEntity> applicants = new ArrayList<>();
+	
+	public List<ApplicantEntity> getApplicants() {
+	    return applicants;
+	}
+
+	public void setApplicants(List<ApplicantEntity> applicants) {
+	    this.applicants = applicants;
+	}
 
 	public String getTitle() {
 		return title;

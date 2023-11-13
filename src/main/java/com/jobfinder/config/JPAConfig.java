@@ -49,7 +49,7 @@ public class JPAConfig{
 		dataSource.setDriverClassName("com.mysql.jdbc.Driver");
 		dataSource.setUrl("jdbc:mysql://127.0.0.1:3306/jobfinder");
 		dataSource.setUsername("root");
-		dataSource.setPassword("trochoiketthuc0");
+		dataSource.setPassword("namT@123");
 		return dataSource;
 	}
 	

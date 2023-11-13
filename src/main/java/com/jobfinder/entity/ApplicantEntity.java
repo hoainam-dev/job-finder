@@ -32,6 +32,19 @@ public class ApplicantEntity extends BaseEntity{
 								  inverseJoinColumns = @JoinColumn(name = "skill_id"))
 	private List<SkillEntity> applicantSkills = new ArrayList<>();
 	
+	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@JoinTable(name = "apply_job", joinColumns = @JoinColumn(name = "applicant_id"), inverseJoinColumns = @JoinColumn(name = "job_id"))
+	private List<JobEntity> appliedJobs = new ArrayList<>();
+
+	
+	public List<JobEntity> getAppliedJobs() {
+	    return appliedJobs;
+	}
+
+	public void setAppliedJobs(List<JobEntity> appliedJobs) {
+	    this.appliedJobs = appliedJobs;
+	}
+	
 
 	public List<SkillEntity> getSkills() {
 		return applicantSkills;
