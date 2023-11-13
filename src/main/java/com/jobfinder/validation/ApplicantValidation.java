@@ -1,5 +1,7 @@
 package com.jobfinder.validation;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
@@ -32,9 +34,9 @@ public class ApplicantValidation implements Validator{
 		String userName = applicant.getUserName();
         String password = applicant.getPassword();
         String confirmPassword = applicant.getConfirmPassword();
+        List<Long> skills = applicant.getSkills();
        
         //validation empty
-        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "skills", "applicant.skills.empty");
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "education", "applicant.education.empty");
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "experience", "applicant.experience.empty");
 
@@ -47,6 +49,9 @@ public class ApplicantValidation implements Validator{
         //Business validation
         if(!password.equals(confirmPassword)){//password khong khop
             errors.rejectValue("confirmPassword","user.confirmPassword.missMatch");
+        }
+        if(skills.size()==0){//khong chon skill
+            errors.rejectValue("skills","applicant.skills.size");
         }
         
         if(password.length()<8 || password.length()>15){//password qua ngan hoac qua dai

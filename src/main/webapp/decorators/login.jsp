@@ -58,24 +58,22 @@
 								<div class="main-menu">
 									<nav class="d-none d-lg-block">
 										<ul id="navigation">
-											<li><a href="/">Home</a></li>
-											<li><a href="job_listing.html">Find a Jobs </a></li>
-											<li><a href="about.html">About</a></li>
-											<li><a href="#">Page</a>
-												<ul class="submenu">
-													<li><a href="blog.html">Blog</a></li>
-													<li><a href="single-blog.html">Blog Details</a></li>
-													<li><a href="elements.html">Elements</a></li>
-													<li><a href="job_details.html">job Details</a></li>
-												</ul></li>
-											<li><a href="contact.html">Contact</a></li>
+											<li><a href="/">Trang chủ</a></li>
+										<li><a href="/viec-lam/danh-sach?page=1&limit=10">Tìm việc</a></li>
+										<li><a href="#">Công ty</a>
+											<ul class="submenu">
+												<li><a href="#">Danh sách công ty</a></li>
+												<li><a href="#">Top công ty</a></li>
+											</ul></li>
+										<li><a href="#">Liên hệ</a></li>
+										<li><a href="#">Trợ giúp</a></li>
 										</ul>
 									</nav>
 								</div>
 								<!-- Header-btn -->
 								<div class="header-btn d-none f-right d-lg-block">
-									<a href="dang-ky" class="btn head-btn1">Register</a> 
-									<a href="dang-nhap" class="btn head-btn2">Login</a>
+									<a href="dang-ky" class="btn head-btn1">Đăng ký</a> 
+									<a href="dang-nhap" class="btn head-btn2">Đăng nhập</a>
 								</div>
 							</div>
 						</div>
@@ -170,34 +168,6 @@
 									</div>
 								</div>
 							</div>
-						</div>
-					</div>
-				</div>
-				<!--  -->
-				<div class="row footer-wejed justify-content-between">
-					<div class="col-xl-3 col-lg-3 col-md-4 col-sm-6">
-						<!-- logo -->
-						<div class="footer-logo mb-20">
-							<a href="/"><img src="./template/web/img/logo/logo2_footer.png" alt=""></a>
-						</div>
-					</div>
-					<div class="col-xl-3 col-lg-3 col-md-4 col-sm-5">
-						<div class="footer-tittle-bottom">
-							<span>5000+</span>
-							<p>Talented Hunter</p>
-						</div>
-					</div>
-					<div class="col-xl-3 col-lg-3 col-md-4 col-sm-5">
-						<div class="footer-tittle-bottom">
-							<span>451</span>
-							<p>Talented Hunter</p>
-						</div>
-					</div>
-					<div class="col-xl-3 col-lg-3 col-md-4 col-sm-5">
-						<!-- Footer Bottom Tittle -->
-						<div class="footer-tittle-bottom">
-							<span>568</span>
-							<p>Talented Hunter</p>
 						</div>
 					</div>
 				</div>

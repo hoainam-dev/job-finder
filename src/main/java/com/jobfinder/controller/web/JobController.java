@@ -1,69 +1,84 @@
 package com.jobfinder.controller.web;
-import java.security.Principal;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import com.jobfinder.service.IApplicantService;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-import com.jobfinder.entity.ApplicantEntity;
-import com.jobfinder.dto.ApplicantDTO;
-import com.jobfinder.dto.CategoryDTO;
-import com.jobfinder.dto.JobDTO;
-import com.jobfinder.service.ICategoryService;
-import com.jobfinder.service.IJobService;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import com.jobfinder.dto.ApplicantDTO;
+import com.jobfinder.dto.JobDTO;
+import com.jobfinder.service.IApplicantService;
+import com.jobfinder.service.ICategoryService;
+import com.jobfinder.service.IEmployerService;
+import com.jobfinder.service.IJobService;
+import com.jobfinder.service.ISkillService;
+import com.jobfinder.service.IUserService;
 
 @Controller
 @RequestMapping("/viec-lam")
 public class JobController {
-	private static final Logger logger = LoggerFactory.getLogger(JobController.class);
-	@Value("${upload.dir}")
-	private String uploadDir = System.getProperty("user.home") + "/Desktop/image";
-
 	@Autowired
 	private IJobService jobService;
 
 	@Autowired
 	private ICategoryService categoryService;
-		
+
+	@Autowired
+	private IUserService userService;
+
+	@Autowired
+	private IEmployerService employerService;
 	
+	@Autowired
+	private ISkillService skillService;
 	
 	@Autowired
 	private IApplicantService applicantService;
 
+	/**
+	 * method get mapping to return list job
+	 * @author nhannn
+	 * 
+	 * @param model
+	 * @param categoryId
+	 * @param type
+	 * @param salary
+	 * @param location
+	 * @return view jsp
+	 */
 	@RequestMapping(value = "/danh-sach", method = RequestMethod.GET)
-	public String jobsList(Model model) {
-		List<JobDTO> jobs = jobService.findAll();
-		List<CategoryDTO> categories = categoryService.findAll();
-		model.addAttribute("jobs", jobs);
-		model.addAttribute("categories", categories);
-		return "web/list-job";
-	}
-
-	@RequestMapping(value = "/chi-tiet-bai-viet/{id}", method = RequestMethod.GET)
-	public String showJobDetail(@PathVariable("id") Long jobId, Model model) {
-		JobDTO job = jobService.findById(jobId);
-		model.addAttribute("job", job);
-		return "web/job-detail";
-	}
-
-	@RequestMapping(value = "/tim-kiem", method = RequestMethod.GET)
-	public String search(@RequestParam(name = "keyword", required = false) String keyword,
-			@RequestParam(name = "category", required = false) Long categoryId, Model model) {
-		List<JobDTO> jobs = jobService.search(keyword, categoryId);
-		model.addAttribute("jobs", jobs);
+	public String jobsList(Model model, @RequestParam(name = "page") int page,
+			@RequestParam(name = "limit") int limit,
+			@RequestParam(name = "category", required=false) Long categoryId,
+			@RequestParam(name = "type", required=false) String type,
+			@RequestParam(name = "salary", required=false) Integer salary,
+			@RequestParam(name = "location", required=false) String location) {
+		JobDTO jobDTO = new JobDTO();
+		jobDTO.setPage(page);
+		jobDTO.setLimit(limit);
+		Pageable pageable = new PageRequest(page - 1, limit);
+		jobDTO.setListResult(jobService.findAll(pageable));//get all job
+		jobDTO.setTotalItem(jobService.getTotalItem());
+		jobDTO.setTotalPage((int) Math.ceil((double) jobDTO.getTotalItem()/jobDTO.getLimit()));
+		
+		if(categoryId!= null || type!=null || salary!=null || location!=null) {
+			//filter job by categoryId, type, salary, location
+			jobDTO.setListResult(jobService.filter(pageable, categoryId, type, salary, location));
+		}
+		model.addAttribute("jobs", jobDTO);//push jobs to view
+		model.addAttribute("categories", categoryService.findAll());//push categories to view
+		model.addAttribute("employers", employerService.findAll());//push employers to view
+		model.addAttribute("applicants", applicantService.findAll());// push employers to view
+		model.addAttribute("users", userService.findAll());// push users to view
 		return "web/list-job";
 	}
 
@@ -124,4 +139,24 @@ public class JobController {
 	    return "web/applied-jobs";
 	}
 
+	/**
+	 * method get mapping to return detail job page
+	 * @author nhannn
+	 * 
+	 * @param jobId
+	 * @param model
+	 * @return view jsp
+	 */
+	@RequestMapping(value = "/chi-tiet-viec-lam/{id}", method = RequestMethod.GET)
+	public String showJobDetail(@PathVariable("id") Long jobId, Model model) {
+		JobDTO job = jobService.findById(jobId);//get job by id
+		
+		model.addAttribute("categories", categoryService.findAll());//push categories to view
+		model.addAttribute("skills", skillService.findAll());//push skills to view
+		model.addAttribute("users", userService.findAll());//push users to view
+		model.addAttribute("job", job);//push job to view
+		model.addAttribute("employers", employerService.findAll());//push employers to view
+		model.addAttribute("applicants", applicantService.findAll());// push employers to view
+		return "web/job-detail";
+	}
 }

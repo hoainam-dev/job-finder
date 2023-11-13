@@ -8,7 +8,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.jobfinder.converter.UserConverter;
+import com.jobfinder.dto.EmployerDTO;
 import com.jobfinder.dto.UserDTO;
+import com.jobfinder.entity.EmployerEntity;
 import com.jobfinder.entity.RoleEntity;
 import com.jobfinder.entity.UserEntity;
 import com.jobfinder.repository.RoleRepository;
@@ -79,7 +81,9 @@ public class UserService implements IUserService {
 			userEntity = userConverter.toEntity(dto);
 			
 			List<RoleEntity> roles = new ArrayList<>();
-			roles.add(roleRepository.findOne(dto.getRoleId()));
+			for(Long id: dto.getRoleId()) {
+				roles.add(roleRepository.findOne(id));
+			}
 			userEntity.setRoles(roles);
 			
 			userEntity.setStatus(1);
@@ -116,5 +120,26 @@ public class UserService implements IUserService {
         }
         return null;
     }
+
+	@Override
+	public UserDTO findByUserName(String userName) {
+		UserEntity userEntity = userRepository.findByUserName(userName);
+		return userConverter.toDto(userEntity);
+	}
+	
+	@Override
+	public void updateUser(UserDTO userDTO) {
+		UserEntity userEntity = userRepository.findByUserName(userDTO.getUserName());
+//		if (userEntity != null) {
+//	        userEntity.setFirstName(userDTO.getFirstName());
+//	        userRepository.save(userEntity);
+//	    } 
+		userEntity.setFirstName(userDTO.getFirstName());
+		userEntity.setLastName(userDTO.getLastName());
+		userEntity.setPhone(userDTO.getPhone());
+		userEntity.setAddress(userDTO.getAddress());
+		userEntity.setEmail(userDTO.getEmail());
+		userRepository.save(userEntity);
+	}
 
 }

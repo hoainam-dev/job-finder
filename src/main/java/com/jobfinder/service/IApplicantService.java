@@ -7,11 +7,6 @@ import com.jobfinder.dto.ApplicantDTO;
 import com.jobfinder.dto.JobDTO;
 
 public interface IApplicantService {
-    ApplicantDTO findById(long id);
-    List<ApplicantDTO> findAll();
-    ApplicantDTO save(ApplicantDTO dto);
-    void delete(long[] ids);
-    
     ApplicantDTO findByPrincipal(Principal principal);
   
     boolean hasAlreadyApplied(Long applicantId, Long jobId);
@@ -21,5 +16,9 @@ public interface IApplicantService {
     ApplicantDTO findByUsername(String username);
     
     
-    
+	ApplicantDTO findById(Long id);
+	ApplicantDTO findByUserId(Long id);
+	List<ApplicantDTO> findAll();
+	ApplicantDTO save(ApplicantDTO dto);
+	void delete(long[] ids);
 }

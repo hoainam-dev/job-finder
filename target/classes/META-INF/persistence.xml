@@ -7,6 +7,9 @@
         <class>com.jobfinder.entity.ApplicantEntity</class>
         <class>com.jobfinder.entity.JobEntity</class>
         <class>com.jobfinder.entity.CategoryEntity</class>
+        <class>com.jobfinder.entity.ServiceEntity</class>
+        <class>com.jobfinder.entity.PositionEntity</class>
+        <class>com.jobfinder.entity.SkillEntity</class>
     </persistence-unit>
 </persistence>
 

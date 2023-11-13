@@ -3,8 +3,9 @@ package com.jobfinder.service.impl;
 import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -18,17 +19,16 @@ import com.jobfinder.dto.UserDTO;
 import com.jobfinder.entity.ApplicantEntity;
 import com.jobfinder.entity.JobEntity;
 import com.jobfinder.entity.RoleEntity;
+import com.jobfinder.entity.SkillEntity;
 import com.jobfinder.entity.UserEntity;
 import com.jobfinder.repository.ApplicantRepository;
 import com.jobfinder.repository.JobRepository;
 import com.jobfinder.repository.RoleRepository;
+import com.jobfinder.repository.SkillRepository;
 import com.jobfinder.repository.UserRepository;
 import com.jobfinder.service.IApplicantService;
 
 import javassist.bytecode.stackmap.TypeData.ClassName;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 @Service
 public class ApplicantService implements IApplicantService{
@@ -54,11 +54,14 @@ public class ApplicantService implements IApplicantService{
 	 
 	 @Autowired
 	 private JobConverter jobConverter;
+	 
+	 @Autowired
+	 private SkillRepository skillRepository;
 	 	
 
 	 @Override
 	    public ApplicantDTO findByUsername(String username) {
-	        UserEntity userEntity = userRepository.findOneByUserName(username);
+	        UserEntity userEntity = userRepository.findByUserName(username);
 	        if (userEntity != null) {
 	            return applicantConverter.toDto(userEntity.getApplicant());
 	        }
@@ -69,7 +72,7 @@ public class ApplicantService implements IApplicantService{
 	 @Override
 	    public ApplicantDTO findByPrincipal(Principal principal) {
 	        String username = principal.getName();
-	        UserEntity userEntity = userRepository.findOneByUserName(username);
+	        UserEntity userEntity = userRepository.findByUserName(username);
 	        ApplicantEntity applicantEntity = applicantRepository.findByUser(userEntity);
 	        return applicantConverter.toDto(applicantEntity);
 	    }
@@ -108,7 +111,7 @@ public class ApplicantService implements IApplicantService{
 	     } 
 	     return jobDTOList;
 	 }
-
+	
 	@Override
 	public List<ApplicantDTO> findAll() {
 		List<ApplicantDTO> models = new ArrayList<>();
@@ -121,9 +124,13 @@ public class ApplicantService implements IApplicantService{
 	}
 	
 	@Override
-	public ApplicantDTO findById(long id) {
-		ApplicantEntity entity = applicantRepository.findOne(id);
-		return applicantConverter.toDto(entity);
+	public ApplicantDTO findById(Long id) {
+		return applicantConverter.toDto(applicantRepository.findOne(id));
+	}
+	
+	@Override
+	public ApplicantDTO findByUserId(Long id) {
+		return applicantConverter.toDto(applicantRepository.findByUserId(id));
 	}
 	
 	@Override
@@ -131,12 +138,17 @@ public class ApplicantService implements IApplicantService{
 	public ApplicantDTO save(ApplicantDTO dto) {
 		ApplicantEntity applicantEntity = new ApplicantEntity();
 		UserEntity userEntity = new UserEntity();
-		if (dto.getId() != null) {
+		if (dto.getId() != null) {//update applicant
 			ApplicantEntity oldApplicant = applicantRepository.findOne(dto.getId());
 			applicantEntity = applicantConverter.toEntity(oldApplicant, dto);
-		} else {
+		} else {//create applicant
 			applicantEntity = applicantConverter.toEntity(dto);
 			
+			List<SkillEntity> skills = new ArrayList<>();
+			for(Long skillId: dto.getSkills()) {
+				skills.add(skillRepository.findOne(skillId));
+			}
+			applicantEntity.setSkills(skills);
 			UserDTO userDTO = new UserDTO();
 			userDTO.setUserName(dto.getUserName());
 			userDTO.setPassword(dto.getPassword());

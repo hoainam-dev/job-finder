@@ -12,13 +12,15 @@
 .error {
 	color: red;
 }
+body{
+ background: #eaedff;
 </style>
 	<!-- slider Area Start-->
 	<div class="slider-area ">
 		<!-- Mobile Menu -->
 		<div class="slider-active">
 			<div class="single-slider slider-height d-flex align-items-center"
-				data-background="./template/web/img/hero/h1_hero.jpg">
+				data-background="./template/web/img/hero/h1_hero.png">
 				<div class="container">
 					<div class="section-top-border">
 						<form:form action="dang-ky-nha-tuyen-dung" method="POST" modelAttribute="employerDTO">
@@ -96,20 +98,12 @@
 										<span><form:errors cssClass="error"
 												path="companyAddress" /></span>
 									</div>
-									<!-- <div class="input-group-icon mt-10">
-										<div class="icon">
-											<i class="fa fa-plane" aria-hidden="true"></i>
-										</div>
-										<div class="form-select" id="default-select"">
-											<select>
-												<option value=" 1">City</option>
-												<option value="1">Dhaka</option>
-												<option value="1">Dilli</option>
-												<option value="1">Newyork</option>
-												<option value="1">Islamabad</option>
-											</select>
-										</div>
-									</div> -->
+									<div class="mt-10">
+										<label>Giới thiệu về công ty (*)</label>
+										<form:textarea path="companyIntroduce" rows="7"
+											class="single-textarea" placeholder="Introduce" />
+										<span><form:errors cssClass="error" path="companyIntroduce" /></span>
+									</div>
 									<div class="single-element-widget mt-30">
 										<div class="switch-wrap d-flex">
 											<div class="primary-checkbox">

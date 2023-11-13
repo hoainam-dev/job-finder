@@ -41,6 +41,12 @@ public class UserEntity extends BaseEntity {
 	@Column
 	private Integer status;
 
+	
+	@OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
+	private EmployerEntity employer;
+	
+	
+
 	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
 	private List<RoleEntity> roles = new ArrayList<>();
@@ -128,4 +134,13 @@ public class UserEntity extends BaseEntity {
 		this.roles = roles;
 	}
 
+
+	public EmployerEntity getEmployer() {
+		return employer;
+	}
+
+	public void setEmployer(EmployerEntity employer) {
+		this.employer = employer;
+	}
+	
 }

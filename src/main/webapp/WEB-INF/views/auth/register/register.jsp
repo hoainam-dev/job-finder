@@ -8,13 +8,17 @@
 <title>Đăng ký</title>
 </head>
 <body>
+<style>
+body{
+ background: #eaedff;
+</style>
 	<main>
 		<!-- slider Area Start-->
 		<div class="slider-area ">
 			<!-- Mobile Menu -->
 			<div class="slider-active">
 				<div class="single-slider slider-height d-flex align-items-center"
-					data-background="./template/web/img/hero/h1_hero.jpg">
+					data-background="./template/web/img/hero/h1_hero.png">
 					<div class="container">
 						<div class="section-top-border">
 							<div class="row">

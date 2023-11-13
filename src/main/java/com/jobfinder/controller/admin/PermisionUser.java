@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.jobfinder.service.IJobService;
 import com.jobfinder.service.IRoleService;
@@ -26,22 +27,23 @@ public class PermisionUser {
 	private IJobService jobService ;
 	
 	@RequestMapping(value="/blockUser/{userId}", method = RequestMethod.GET)
-    public String blockUser(@PathVariable Long userId) {
+    public String blockUser(@PathVariable Long userId, RedirectAttributes redirectAttributes) {
         userService.blockUser(userId);
+        redirectAttributes.addFlashAttribute("message", "Thực hiện thành công!");
         return "redirect:/quan-tri/nguoi-tim-viec";
     }
 
-@RequestMapping(value="/unblockUser/{userId}",method = RequestMethod.GET)
-    public String unblockUser(@PathVariable Long userId) {
+    @RequestMapping(value="/unblockUser/{userId}",method = RequestMethod.GET)
+    public String unblockUser(@PathVariable Long userId, RedirectAttributes redirectAttributes) {
         userService.unblockUser(userId);
+        redirectAttributes.addFlashAttribute("message", "Thực hiện thành công!");
         return "redirect:/quan-tri/nguoi-tim-viec";
     }
 
-	
-	
-    @PostMapping("/role/{userId}")
-    public String updateRole(@PathVariable Long userId, @RequestParam Long roleId) {
+    @RequestMapping(value="/role/{userId}/{roleId}",method = RequestMethod.GET)
+    public String updateRole(@PathVariable("userId") Long userId, @RequestParam (value = "roleId", required = false) Long roleId, RedirectAttributes redirectAttributes) {
         roleService.updateRole(userId, roleId);
+        redirectAttributes.addFlashAttribute("message", "Thực hiện thành công!");
         return "redirect:/quan-tri/nguoi-tim-viec";
     }
 

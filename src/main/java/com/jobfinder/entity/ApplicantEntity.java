@@ -17,9 +17,6 @@ import javax.persistence.Table;
 @Table(name = "applicant")
 public class ApplicantEntity extends BaseEntity{
 	
-	@Column(name = "skills", columnDefinition = "TEXT")
-	private String skills;
-	
 	@Column(name = "experience", columnDefinition = "TEXT")
 	private String experience;
 	
@@ -42,13 +39,19 @@ public class ApplicantEntity extends BaseEntity{
 	public void setAppliedJobs(List<JobEntity> appliedJobs) {
 	    this.appliedJobs = appliedJobs;
 	}
+
+	@JoinTable(name = "applicant_skill", joinColumns = @JoinColumn(name = "applicant_id"), 
+								  inverseJoinColumns = @JoinColumn(name = "skill_id"))
+	private List<SkillEntity> applicantSkills = new ArrayList<>();
+
 	
-	public String getSkills() {
-		return skills;
+
+	public List<SkillEntity> getSkills() {
+		return applicantSkills;
 	}
 
-	public void setSkills(String skills) {
-		this.skills = skills;
+	public void setSkills(List<SkillEntity> applicantSkills) {
+		this.applicantSkills = applicantSkills;
 	}
 
 	public String getExperience() {

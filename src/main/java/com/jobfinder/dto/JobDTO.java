@@ -1,12 +1,20 @@
 	package com.jobfinder.dto;
 
+import java.util.List;
+
 public class JobDTO extends AbstractDTO<JobDTO>{
 	
 	private String title;
 	
+	private String type;
+	
 	private String description;
 	
 	private String requirements;
+	
+	private String benefit;
+	
+	private String deadline;
 	
 	private int salary;
 	
@@ -14,16 +22,27 @@ public class JobDTO extends AbstractDTO<JobDTO>{
 	
 	private String position;
 	
+	private List<Long> skills;
+	
 	private Long category_id;
 	
 	private Long employer_id;
 
+	
 	public String getTitle() {
 		return title;
 	}
 
 	public void setTitle(String title) {
 		this.title = title;
+	}
+
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
 	}
 
 	public String getDescription() {
@@ -40,6 +59,22 @@ public class JobDTO extends AbstractDTO<JobDTO>{
 
 	public void setRequirements(String requirements) {
 		this.requirements = requirements;
+	}
+
+	public String getBenefit() {
+		return benefit;
+	}
+
+	public void setBenefit(String benefit) {
+		this.benefit = benefit;
+	}
+
+	public String getDeadline() {
+		return deadline;
+	}
+
+	public void setDeadline(String deadline) {
+		this.deadline = deadline;
 	}
 
 	public int getSalary() {
@@ -65,6 +100,14 @@ public class JobDTO extends AbstractDTO<JobDTO>{
 	public void setPosition(String position) {
 		this.position = position;
 	}
+	
+	public List<Long> getSkills() {
+		return skills;
+	}
+
+	public void setSkills(List<Long> skills) {
+		this.skills = skills;
+	}
 
 	public Long getCategory_id() {
 		return category_id;
@@ -82,6 +125,4 @@ public class JobDTO extends AbstractDTO<JobDTO>{
 		this.employer_id = employer_id;
 	}
 	
-	
-
 }

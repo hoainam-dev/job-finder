@@ -1,12 +1,14 @@
 package com.jobfinder.dto;
 
+import java.util.List;
+
 public class ApplicantDTO extends AbstractDTO<UserDTO>{
 	
 	private String address ;
 	
 	private String phone ;
 	
-	private String skills;
+	private List<Long> skills;
 	
 	private String experience;
 	
@@ -44,10 +46,10 @@ public class ApplicantDTO extends AbstractDTO<UserDTO>{
 	public void setPhone(String phone) {
 		this.phone = phone;
 	}
-	public String getSkills() {
+	public List<Long> getSkills() {
 		return skills;
 	}
-	public void setSkills(String skills) {
+	public void setSkills(List<Long> skills) {
 		this.skills = skills;
 	}
 	public String getExperience() {

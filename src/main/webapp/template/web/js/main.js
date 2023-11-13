@@ -10,17 +10,6 @@
     });
 
 
-/* 2. slick Nav */
-// mobile_menu
-    var menu = $('ul#navigation');
-    if(menu.length){
-      menu.slicknav({
-        prependTo: ".mobile_menu",
-        closedSymbol: '+',
-        openedSymbol:'-'
-      });
-    };
-
 
 /* 3. MainSlider-1 */
     function mainSlider() {
@@ -163,12 +152,6 @@
       });
     }
 
-
-/* 6. Nice Selectorp  */
-  var nice_Select = $('select');
-    if(nice_Select.length){
-      nice_Select.niceSelect();
-    }
 
 /* 7.  Custom Sticky Menu  */
     $(window).on('scroll', function () {

@@ -24,8 +24,14 @@
             <link rel="stylesheet" href="<c:url value='/template/web/css/slick.css' />">
             <link rel="stylesheet" href="<c:url value='/template/web/css/nice-select.css' />">
             <link rel="stylesheet" href="<c:url value='/template/web/css/style.css' />">
+            <link rel="stylesheet" href="<c:url value='/template/web/css/custom.css' />">
    </head>
 <body>
+<style>
+.header-bg{
+	background: #fff;
+}
+</style>
 <!-- Preloader Start -->
 	<div id="preloader-active">
 		<div
@@ -41,7 +47,7 @@
 	<!-- Preloader Start -->
 	<header>
 		<!-- Header Start -->
-		<div class="header-area header-transparrent">
+		<div class="header-area header-bg header-transparrent">
 			<div class="headder-top header-sticky">
 				<div class="container">
 					<div class="row align-items-center">
@@ -58,24 +64,22 @@
 								<div class="main-menu">
 									<nav class="d-none d-lg-block">
 										<ul id="navigation">
-											<li><a href="/">Home</a></li>
-											<li><a href="job_listing.html">Find a Jobs </a></li>
-											<li><a href="about.html">About</a></li>
-											<li><a href="#">Page</a>
-												<ul class="submenu">
-													<li><a href="blog.html">Blog</a></li>
-													<li><a href="single-blog.html">Blog Details</a></li>
-													<li><a href="elements.html">Elements</a></li>
-													<li><a href="job_details.html">job Details</a></li>
-												</ul></li>
-											<li><a href="contact.html">Contact</a></li>
+											<li><a href="/">Trang chủ</a></li>
+										<li><a href="/viec-lam/danh-sach?page=1&limit=10">Tìm việc</a></li>
+										<li><a href="#">Công ty</a>
+											<ul class="submenu">
+												<li><a href="#">Danh sách công ty</a></li>
+												<li><a href="#">Top công ty</a></li>
+											</ul></li>
+										<li><a href="#">Liên hệ</a></li>
+										<li><a href="#">Trợ giúp</a></li>
 										</ul>
 									</nav>
 								</div>
 								<!-- Header-btn -->
 								<div class="header-btn d-none f-right d-lg-block">
-									<a href="dang-ky" class="btn head-btn1">Register</a> 
-									<a href="dang-nhap" class="btn head-btn2">Login</a>
+									<a href="dang-ky" class="btn head-btn1">Đăng ký</a> 
+									<a href="dang-nhap" class="btn head-btn2">Đăng nhập</a>
 								</div>
 							</div>
 						</div>
@@ -173,34 +177,6 @@
 						</div>
 					</div>
 				</div>
-				<!--  -->
-				<div class="row footer-wejed justify-content-between">
-					<div class="col-xl-3 col-lg-3 col-md-4 col-sm-6">
-						<!-- logo -->
-						<div class="footer-logo mb-20">
-							<a href="/"><img src="./template/web/img/logo/logo2_footer.png" alt=""></a>
-						</div>
-					</div>
-					<div class="col-xl-3 col-lg-3 col-md-4 col-sm-5">
-						<div class="footer-tittle-bottom">
-							<span>5000+</span>
-							<p>Talented Hunter</p>
-						</div>
-					</div>
-					<div class="col-xl-3 col-lg-3 col-md-4 col-sm-5">
-						<div class="footer-tittle-bottom">
-							<span>451</span>
-							<p>Talented Hunter</p>
-						</div>
-					</div>
-					<div class="col-xl-3 col-lg-3 col-md-4 col-sm-5">
-						<!-- Footer Bottom Tittle -->
-						<div class="footer-tittle-bottom">
-							<span>568</span>
-							<p>Talented Hunter</p>
-						</div>
-					</div>
-				</div>
 			</div>
 		</div>
 		<!-- footer-bottom area -->
@@ -214,8 +190,7 @@
 									<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
 									Copyright &copy;
 									<script>
-										document
-												.write(new Date().getFullYear());
+										document.write(new Date().getFullYear());
 									</script>
 									All rights reserved | This template is made with <i
 										class="fa fa-heart" aria-hidden="true"></i> by <a
@@ -238,6 +213,7 @@
 		</div>
 		<!-- Footer End-->
 	</footer>
+		<script src="./template/web/js/applicant.js"></script>
 	
 	<!-- All JS Custom Plugins Link Here here -->
         <script src="./template/web/js/vendor/modernizr-3.5.0.min.js"></script>
@@ -245,8 +221,6 @@
 		<script src="./template/web/js/vendor/jquery-1.12.4.min.js"></script>
         <script src="./template/web/js/popper.min.js"></script>
         <script src="./template/web/js/bootstrap.min.js"></script>
-	    <!-- Jquery Mobile Menu -->
-        <script src="./template/web/js/jquery.slicknav.min.js"></script>
 
 		<!-- Jquery Slick , Owl-Carousel Plugins -->
         <script src="./template/web/js/owl.carousel.min.js"></script>
