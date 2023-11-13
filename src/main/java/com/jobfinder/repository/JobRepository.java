@@ -15,4 +15,5 @@ public interface JobRepository extends JpaRepository<JobEntity, Long>{
 	List<JobEntity> findByLocation(String location);
 	List<JobEntity> findByType(String type);
 	List<JobEntity> findByTitleContaining(String keyword);
+	
 }

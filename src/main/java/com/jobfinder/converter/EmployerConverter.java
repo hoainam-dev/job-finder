@@ -16,6 +16,12 @@ public class EmployerConverter {
 		result.setCompanyName(entity.getCompanyName());
 		result.setCompanyAddress(entity.getCompanyAddress());
 		result.setPosition(entity.getPosition());
+		if(entity.getServices() != null) {
+			result.setService(entity.getServices().getName());
+		} else {
+			result.setService("Chưa Đăng Ký");
+		}
+		
 		if (entity.getUser() != null) {
 			result.setUser_id(entity.getUser().getId());
 			result.setEmail(entity.getUser().getEmail());
@@ -23,6 +29,7 @@ public class EmployerConverter {
 			result.setLastName(entity.getUser().getLastName());
 			result.setPhone(entity.getUser().getPhone());
 			result.setUserName(entity.getUser().getUserName());
+			
 		}
 		result.setCreateAt(formatter.format(entity.getCreate_at().getTime()));
 		result.setUpdateAt(formatter.format(entity.getUpdate_at().getTime()));

@@ -15,5 +15,5 @@ public interface IJobService {
 	List<JobDTO> filter(Long categoryId, String type, int salary, String location);
 
 	List<JobDTO> findByTitle(String keyword);
-	
+	void deleteJobs(List<Long> jobIds);
 }

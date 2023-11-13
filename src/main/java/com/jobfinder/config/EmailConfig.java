@@ -6,7 +6,10 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
+import org.springframework.ui.freemarker.FreeMarkerConfigurationFactoryBean;
 import org.springframework.web.multipart.commons.CommonsMultipartResolver;
+import org.springframework.web.servlet.ViewResolver;
+import org.springframework.web.servlet.view.InternalResourceViewResolver;
 @Configuration
 public class EmailConfig {
 	@Bean 
@@ -33,4 +36,19 @@ public class EmailConfig {
 	    multipartResolver.setMaxUploadSize(20848820);
 	    return multipartResolver;
 	}
+	@Bean 
+	ViewResolver viewResolver() {
+	  InternalResourceViewResolver resolver = new InternalResourceViewResolver();
+	  resolver.setPrefix("/WEB-INF/views/");
+	  resolver.setSuffix(".jsp");
+	  return resolver;
+	}
+	@Bean
+    public FreeMarkerConfigurationFactoryBean freeMarkerConfiguration() {
+        FreeMarkerConfigurationFactoryBean factoryBean = new FreeMarkerConfigurationFactoryBean();
+        factoryBean.setDefaultEncoding("UTF-8");
+        factoryBean.setTemplateLoaderPath("/WEB-INF/views/"); // Set your template loader path
+        return factoryBean;
+    }
+
 }

@@ -142,4 +142,12 @@ public class JobService implements IJobService {
 		}
 		return jobfiltered;
 	}
+
+	@Override
+	public void deleteJobs(List<Long> jobIds) {
+		for(Long jobId   : jobIds ) {
+			jobRepository.delete(jobId);
+		}
+		
+	}
 }

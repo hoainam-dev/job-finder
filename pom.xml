@@ -259,7 +259,12 @@
             <artifactId>commons-io</artifactId>
             <version>2.5</version>
         </dependency>
-		
+		<!-- https://mvnrepository.com/artifact/org.freemarker/freemarker -->
+		<dependency>
+		    <groupId>org.freemarker</groupId>
+		    <artifactId>freemarker</artifactId>
+		    <version>2.3.31</version>
+		</dependency>
 		<!-- gson -->
 		<dependency>
 		    <groupId>com.google.code.gson</groupId>

@@ -49,16 +49,16 @@ public class JPAConfig {
 		dataSource.setDriverClassName("com.mysql.jdbc.Driver");
 		dataSource.setUrl("jdbc:mysql://127.0.0.1:3306/jobfinder");
 		dataSource.setUsername("root");
-		dataSource.setPassword("410101");
+		dataSource.setPassword("15102002");
 		return dataSource;
 	}
 	
 	Properties additionalProperties() {
 		Properties properties = new Properties();
-		properties.setProperty("hibernate.hbm2ddl.auto", "create-drop");
-		properties.setProperty("hibernate.hbm2ddl.auto", "create");
-//		properties.setProperty("hibernate.hbm2ddl.auto", "none");
-//		properties.setProperty("hibernate.enable_lazy_load_no_trans", "true");
+//		properties.setProperty("hibernate.hbm2ddl.auto", "create-drop");
+//		properties.setProperty("hibernate.hbm2ddl.auto", "create");
+		properties.setProperty("hibernate.hbm2ddl.auto", "none");
+		properties.setProperty("hibernate.enable_lazy_load_no_trans", "true");
 		return properties;
 	}
 }

@@ -21,7 +21,7 @@
 	              <div class="row">
 	                <div class="col-8">
 	                  <div class="numbers">
-	                    <p class="text-sm mb-0 text-capitalize font-weight-bold">Employer</p>
+	                    <p class="text-sm mb-0 text-capitalize font-weight-bold">Nhà Tuyển Dụng</p>
 	                    <h5 class="font-weight-bolder mb-0">
 	                      ${countEmployer }
 	                      <span class="text-success text-sm font-weight-bolder">+55%</span>
@@ -43,7 +43,7 @@
 	              <div class="row">
 	                <div class="col-8">
 	                  <div class="numbers">
-	                    <p class="text-sm mb-0 text-capitalize font-weight-bold">Total Users</p>
+	                    <p class="text-sm mb-0 text-capitalize font-weight-bold">Người Dùng</p>
 	                    <h5 class="font-weight-bolder mb-0">
 	                      ${countUser}
 	                      <span class="text-success text-sm font-weight-bolder">+3%</span>
@@ -65,9 +65,9 @@
 	              <div class="row">
 	                <div class="col-8">
 	                  <div class="numbers">
-	                    <p class="text-sm mb-0 text-capitalize font-weight-bold">Job Application</p>
+	                    <p class="text-sm mb-0 text-capitalize font-weight-bold">Ứng Viên</p>
 	                    <h5 class="font-weight-bolder mb-0">
-	                      30
+	                      ${countUser}
 	                      <span class="text-danger text-sm font-weight-bolder">-2%</span>
 	                    </h5>
 	                  </div>
@@ -87,7 +87,7 @@
 	              <div class="row">
 	                <div class="col-8">
 	                  <div class="numbers">
-	                    <p class="text-sm mb-0 text-capitalize font-weight-bold">Jobs</p>
+	                    <p class="text-sm mb-0 text-capitalize font-weight-bold">Công Việc</p>
 	                    <h5 class="font-weight-bolder mb-0">
 	                   		${countJob}
 	                      <span class="text-success text-sm font-weight-bolder">+5%</span>
@@ -111,9 +111,9 @@
               <div class="row">
                 <div class="col-lg-6">
                   <div class="d-flex flex-column h-100">
-                    <p class="mb-1 pt-2 text-bold">Quality work</p>
+                    <p class="mb-1 pt-2 text-bold">Công việc chất lượng</p>
                     <h5 class="font-weight-bolder">Job Finder Dashboard</h5>
-                    <p class="mb-5">Job Finder management page for admins</p>
+                    <p class="mb-5">Trang quản lý danh cho admin</p>
                     <a class="text-body text-sm font-weight-bold mb-0 icon-move-right mt-auto" href="javascript:;">
                       <i class="fas fa-arrow-right text-sm ms-1" aria-hidden="true"></i>
                     </a>
@@ -136,8 +136,8 @@
             <div class="overflow-hidden position-relative border-radius-lg bg-cover h-100" style="background-image: url('../template/admin/img/ivancik.jpg');">
               <span class="mask bg-gradient-dark"></span>
               <div class="card-body position-relative z-index-1 d-flex flex-column h-100 p-3">
-                <h5 class="text-white font-weight-bolder mb-4 pt-2">Work with a comfortable mind</h5>
-                <p class="text-white">Please manage the admin page well and don't forget you are helping many people.</p>
+                <h5 class="text-white font-weight-bolder mb-4 pt-2">Làm việc với tinh thân thoải mái nhất </h5>
+                <p class="text-white">Hãy quản lý tốt công việc của bạn, đừng quên bạn đang giúp ích cho rất nhiều người.</p>
                 <a class="text-white text-sm font-weight-bold mb-0 icon-move-right mt-auto" href="javascript:;">
                   <i class="fas fa-arrow-right text-sm ms-1" aria-hidden="true"></i>
                 </a>
@@ -155,8 +155,8 @@
                   <canvas id="chart-bars" class="chart-canvas" height="170"></canvas>
                 </div>
               </div>
-              <h6 class="ms-2 mt-4 mb-0"> Active Users </h6>
-              <p class="text-sm ms-2"> (<span class="font-weight-bolder">+23%</span>) than last week </p>
+              <h6 class="ms-2 mt-4 mb-0"> Người dùng hoạt động </h6>
+              <p class="text-sm ms-2"> (<span class="font-weight-bolder">+23%</span>) tuần trước </p>
               <div class="container border-radius-lg">
                 <div class="row">
                   <div class="col-3 py-3 ps-0">
@@ -176,7 +176,7 @@
                           </g>
                         </svg>
                       </div>
-                      <p class="text-xs mt-1 mb-0 font-weight-bold">Users</p>
+                      <p class="text-xs mt-1 mb-0 font-weight-bold">Người dùng</p>
                     </div>
                     <h4 class="font-weight-bolder">${countUser}</h4>
                     <div class="progress w-75">
@@ -202,7 +202,7 @@
                           </g>
                         </svg>
                       </div>
-                      <p class="text-xs mt-1 mb-0 font-weight-bold">Jobs</p>
+                      <p class="text-xs mt-1 mb-0 font-weight-bold">Công việc</p>
                     </div>
                     <h4 class="font-weight-bolder">${countJob}</h4>
                     <div class="progress w-75">
@@ -226,9 +226,9 @@
                           </g>
                         </svg>
                       </div>
-                      <p class="text-xs mt-1 mb-0 font-weight-bold">Apply</p>
+                      <p class="text-xs mt-1 mb-0 font-weight-bold">Ứng viên</p>
                     </div>
-                    <h4 class="font-weight-bolder">20</h4>
+                    <h4 class="font-weight-bolder">${countUser}</h4>
                     <div class="progress w-75">
                       <div class="progress-bar bg-dark w-30" role="progressbar" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100"></div>
                     </div>
@@ -251,7 +251,7 @@
                           </g>
                         </svg>
                       </div>
-                      <p class="text-xs mt-1 mb-0 font-weight-bold">Employer</p>
+                      <p class="text-xs mt-1 mb-0 font-weight-bold">Nhà  tuyển dụng</p>
                     </div>
                     <h4 class="font-weight-bolder">${countEmployer}</h4>
                     <div class="progress w-75">
@@ -266,10 +266,10 @@
         <div class="col-lg-7">
           <div class="card z-index-2">
             <div class="card-header pb-0">
-              <h6>Jobs overview</h6>
+              <h6>Tổng quan</h6>
               <p class="text-sm">
                 <i class="fa fa-arrow-up text-success"></i>
-                <span class="font-weight-bold">4% more</span> in 2021
+                <span class="font-weight-bold">+4% so với</span> năm  2022
               </p>
             </div>
             <div class="card-body p-3">
@@ -286,10 +286,10 @@
             <div class="card-header pb-0">
               <div class="row">
                 <div class="col-lg-6 col-7">
-                  <h6>Top Company</h6>
+                  <h6>Công ty hàng đâu</h6>
                   <p class="text-sm mb-0">
                     <i class="fa fa-check text-info" aria-hidden="true"></i>
-                    <span class="font-weight-bold ms-1">more than 30 jobs</span> this month
+                    <span class="font-weight-bold ms-1">hơn  30 bài đăng</span> tháng này
                   </p>
                 </div>
                 <div class="col-lg-6 col-5 my-auto text-end">

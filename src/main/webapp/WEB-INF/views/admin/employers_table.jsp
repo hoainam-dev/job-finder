@@ -10,9 +10,27 @@
 <body class="g-sidenav-show  bg-gray-100">
 	<!-- Left SideBar -->
 	<%@ include file="/common/admin/header.jsp" %>
+
 	<main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
 		<!-- Navbar -->
 		<%@ include file="/common/admin/navbar.jsp" %>
+			<div class="container-fluid py-4">
+		<%-- Kiểm tra nếu có tin nhắn --%>
+			<c:if test="${not empty message}">
+			  <%-- Tạo phần tử div với lớp và vai trò tương ứng --%>
+			  <div class="alert alert-success" role="alert">
+			    <%-- Hiển thị tin nhắn --%>
+			    <h6>${message}</h6>
+			  </div>
+			
+			  <%-- Đặt thời gian tự động xóa sau 5 giây --%>
+			  <script>
+			    setTimeout(function() {
+			      var alertDiv = document.querySelector(".alert");
+			      alertDiv.parentNode.removeChild(alertDiv);
+			    }, 3000);
+			  </script>
+			</c:if>
 		<div class="container-fluid py-4">
 	     <div class="row">
         <div class="col-12">
@@ -25,11 +43,11 @@
                 <table class="table align-items-center mb-0">
                   <thead>
                     <tr>
-                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Name</th>
-                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Company</th>
-                      <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Status</th>
-                      <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Company Address</th>
-                      <th class="text-secondary opacity-7"></th>
+                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Tên</th>
+                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Công ty</th>
+                      <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Dịch Vụ</th>
+                      <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Địa chỉ Công ty</th>
+                      <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Liên Hệ</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -51,16 +69,24 @@
                         <p class="text-xs text-secondary mb-0">${employer.position}</p>
                       </td>
                       <td class="align-middle text-center text-sm">
-                        <span class="badge badge-sm bg-gradient-success">Online</span>
+                        <c:choose>
+					    <c:when test="${empty employer.service}">
+					        <span class="badge badge-sm bg-gradient-danger">Chưa đăng ký</span>
+					    </c:when>
+					    <c:otherwise>
+					        <span class="badge badge-sm bg-gradient-success">${employer.service}</span>
+					    </c:otherwise>
+					</c:choose>
                       </td>
                       <td class="align-middle text-center">
                         <span class="text-secondary text-xs font-weight-bold">${employer.companyAddress}</span>
                       </td>
-                      <td class="align-middle">
-                        <a href="javascript:;" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user">
-                          Edit
-                        </a>
-                      </td>
+                   <td class="align-middle text-center text-sm">
+					  <a href="${pageContext.request.contextPath}/quan-tri/sendEmail/${employer.id}" class="text-secondary" data-toggle="tooltip" data-original-title="Send">
+					    <i class="fas fa-paper-plane text-xs"></i>
+					    <span class="text-xs">💌 Gửi Email</span>
+					  </a>
+					</td>
                     </tr>
                     </c:forEach>
                   </tbody>
