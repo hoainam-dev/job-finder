@@ -82,7 +82,7 @@
                               <li>Application date : <span></span></li>
                           </ul>
                          <div class="apply-btn2">
-                            <a href="#" class="btn">Apply Now</a>
+                            <a href="/viec-lam/apply-form/${job.id}" class="btn">Apply Now</a>
                          </div>
                        </div>
                         <div class="post-details4  mb-50">

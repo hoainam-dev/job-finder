@@ -1,9 +1,15 @@
 package com.jobfinder.entity;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -24,6 +30,18 @@ public class ApplicantEntity extends BaseEntity{
     @JoinColumn(name = "user_id", referencedColumnName = "id")
     private UserEntity user;
 	
+	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@JoinTable(name = "apply_job", joinColumns = @JoinColumn(name = "applicant_id"), inverseJoinColumns = @JoinColumn(name = "job_id"))
+	private List<JobEntity> appliedJobs = new ArrayList<>();
+
+	
+	public List<JobEntity> getAppliedJobs() {
+	    return appliedJobs;
+	}
+
+	public void setAppliedJobs(List<JobEntity> appliedJobs) {
+	    this.appliedJobs = appliedJobs;
+	}
 	
 	public String getSkills() {
 		return skills;

@@ -32,7 +32,7 @@ public class JobService implements IJobService{
 	
 	@Autowired
 	private JobConverter jobConverter;
-	
+
 	@Autowired
 	private CategoryRepository categoryRepository;
 	
@@ -42,6 +42,15 @@ public class JobService implements IJobService{
 	public JobService(JobRepository jobRepository) {
 		this.jobRepository = jobRepository;
 	}
+	 @Override
+	    public List<JobDTO> findAllAppliedJobs() {
+	        List<JobEntity> jobEntities = jobRepository.findAllAppliedJobs(); 
+	        List<JobDTO> jobDTOs = new ArrayList<>();
+	        for (JobEntity jobEntity : jobEntities) {
+	            jobDTOs.add(jobConverter.toDto(jobEntity));
+	        }
+	        return jobDTOs;
+	    }
 	
 	@Override
 	public List<JobDTO> findByCategoryId(Long categoryId) {

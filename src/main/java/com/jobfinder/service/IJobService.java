@@ -15,4 +15,6 @@ public interface IJobService {
 	List<JobDTO> search(String keyword, Long categoryId);
 	JobDTO save(JobDTO dto);
 	List<JobDTO> findAll();
+//test showall apply-job
+	List<JobDTO> findAllAppliedJobs();
 }

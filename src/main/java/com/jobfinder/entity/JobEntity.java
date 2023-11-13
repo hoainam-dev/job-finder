@@ -1,9 +1,13 @@
 package com.jobfinder	.entity;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
@@ -39,6 +43,20 @@ public class JobEntity extends BaseEntity{
 	@JoinColumn(name = "category_id")
 	private CategoryEntity category;
 
+	@ManyToMany(mappedBy = "appliedJobs")
+	
+	
+	private List<ApplicantEntity> applicants = new ArrayList<>();
+	
+	public List<ApplicantEntity> getApplicants() {
+	    return applicants;
+	}
+
+	public void setApplicants(List<ApplicantEntity> applicants) {
+	    this.applicants = applicants;
+	}
+	
+	
 	public String getTitle() {
 		return title;
 	}
