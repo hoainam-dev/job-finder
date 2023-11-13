@@ -144,28 +144,6 @@ public class EmployerService implements IEmployerService{
         
         return employerDTO;
 	}
-
-//	@Override
-//	@Transactional
-//	public void updateEmployerProfile(Long id, EmployerDTO employerDTO) {
-//		
-//		EmployerEntity employer = employerRepository.findByUserId(id);
-//		
-//		UserEntity user = employer.getUser();
-//	
-//		employerDTO.setCompanyName(employer.getCompanyName());
-//		employerDTO.setCompanyAddress(employer.getCompanyAddress());
-//		employerDTO.setPosition(employer.getPosition());
-//		
-//		employerDTO.setEmail(user.getEmail());
-//        employerDTO.setFirstName(user.getFirstName());
-//        employerDTO.setLastName(user.getLastName());
-//        employerDTO.setPhone(user.getPhone());
-//        
-//        userRepository.save(user);
-//        employerRepository.save(employer);
-//		
-//	}
 	
 	@Override
     @Transactional
@@ -192,6 +170,5 @@ public class EmployerService implements IEmployerService{
         }
     }
 
-	
 	
 }

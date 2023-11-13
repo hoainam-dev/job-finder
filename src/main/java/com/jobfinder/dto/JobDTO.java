@@ -1,4 +1,4 @@
-package com.jobfinder.dto;
+	package com.jobfinder.dto;
 
 import java.util.List;
 

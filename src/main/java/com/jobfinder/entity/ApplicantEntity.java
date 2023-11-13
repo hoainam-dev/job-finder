@@ -28,9 +28,22 @@ public class ApplicantEntity extends BaseEntity{
     private UserEntity user;
 	
 	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@JoinTable(name = "apply_job", joinColumns = @JoinColumn(name = "applicant_id"), inverseJoinColumns = @JoinColumn(name = "job_id"))
+	private List<JobEntity> appliedJobs = new ArrayList<>();
+
+	
+	public List<JobEntity> getAppliedJobs() {
+	    return appliedJobs;
+	}
+
+	public void setAppliedJobs(List<JobEntity> appliedJobs) {
+	    this.appliedJobs = appliedJobs;
+	}
+
 	@JoinTable(name = "applicant_skill", joinColumns = @JoinColumn(name = "applicant_id"), 
 								  inverseJoinColumns = @JoinColumn(name = "skill_id"))
 	private List<SkillEntity> applicantSkills = new ArrayList<>();
+
 	
 
 	public List<SkillEntity> getSkills() {

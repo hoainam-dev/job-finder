@@ -13,6 +13,8 @@ public interface IJobService {
 	JobDTO save(JobDTO dto);
 	
 	List<JobDTO> findAll();
+
+	List<JobDTO> findAllAppliedJobs();
 	
 	List<JobDTO> findAll(Pageable pageable);
 	

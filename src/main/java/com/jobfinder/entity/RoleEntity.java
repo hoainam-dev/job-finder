@@ -11,15 +11,15 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "role")
 public class RoleEntity extends BaseEntity {
-	
+
 	@Column(name = "role_name")
 	private String role_name;
-	
+
 	@Column(name = "code")
 	private String code;
-	
+
 	@ManyToMany(mappedBy = "roles")
-    private List<UserEntity> users = new ArrayList<>();
+	private List<UserEntity> users = new ArrayList<>();
 
 	public String getRole_name() {
 		return role_name;
@@ -28,7 +28,7 @@ public class RoleEntity extends BaseEntity {
 	public void setRole_name(String role_name) {
 		this.role_name = role_name;
 	}
-	
+
 	public String getCode() {
 		return code;
 	}
@@ -44,5 +44,5 @@ public class RoleEntity extends BaseEntity {
 	public void setUsers(List<UserEntity> users) {
 		this.users = users;
 	}
-	
+
 }

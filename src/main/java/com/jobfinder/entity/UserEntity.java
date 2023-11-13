@@ -22,16 +22,16 @@ public class UserEntity extends BaseEntity {
 
 	@Column(name = "password")
 	private String password;
-	
+
 	@Column(name = "email")
 	private String email;
-	
+
 	@Column(name = "firstName")
 	private String firstName;
-	
+
 	@Column(name = "lastName")
 	private String lastName;
-	
+
 	@Column(name = "address")
 	private String address;
 
@@ -40,16 +40,27 @@ public class UserEntity extends BaseEntity {
 
 	@Column
 	private Integer status;
+
 	
 	@OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
 	private EmployerEntity employer;
 	
 	
+
 	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	@JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"), 
-								  inverseJoinColumns = @JoinColumn(name = "role_id"))
+	@JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
 	private List<RoleEntity> roles = new ArrayList<>();
 
+	@OneToOne(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	private ApplicantEntity applicant;
+
+	public ApplicantEntity getApplicant() {
+		return applicant;
+	}
+
+	public void setApplicant(ApplicantEntity applicant) {
+		this.applicant = applicant;
+	}
 
 	public String getUserName() {
 		return userName;
@@ -94,7 +105,7 @@ public class UserEntity extends BaseEntity {
 	public Integer getStatus() {
 		return status;
 	}
-	
+
 	public String getAddress() {
 		return address;
 	}
@@ -123,6 +134,7 @@ public class UserEntity extends BaseEntity {
 		this.roles = roles;
 	}
 
+
 	public EmployerEntity getEmployer() {
 		return employer;
 	}
@@ -130,6 +142,5 @@ public class UserEntity extends BaseEntity {
 	public void setEmployer(EmployerEntity employer) {
 		this.employer = employer;
 	}
-	
 	
 }

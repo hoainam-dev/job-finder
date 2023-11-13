@@ -32,21 +32,24 @@ import com.jobfinder.validation.JobValidation;
 @Controller(value = "homeControllerOfEmployer")
 @RequestMapping("/nha-tuyen-dung")
 public class HomeController {
-	
+
 	@Autowired
 	private IUserService userService;
-	
+
 	@Autowired
 	private IJobService jobService;
-	
+
 	@Autowired
 	private IEmployerService employerService;
-	
+
 	@Autowired
 	private ICategoryService categoryService;
-	
+
 	@Autowired
 	private IPositionService positionService;
+
+	SecurityUtils user = new SecurityUtils();
+
 	
 	@Autowired
 	private ISkillService skillService;
