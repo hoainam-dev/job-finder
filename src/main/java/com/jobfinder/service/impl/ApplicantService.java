@@ -8,14 +8,18 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.jobfinder.converter.ApplicantConverter;
+import com.jobfinder.converter.JobConverter;
 import com.jobfinder.converter.UserConverter;
 import com.jobfinder.dto.ApplicantDTO;
+import com.jobfinder.dto.JobDTO;
 import com.jobfinder.dto.UserDTO;
 import com.jobfinder.entity.ApplicantEntity;
+import com.jobfinder.entity.JobEntity;
 import com.jobfinder.entity.RoleEntity;
 import com.jobfinder.entity.SkillEntity;
 import com.jobfinder.entity.UserEntity;
 import com.jobfinder.repository.ApplicantRepository;
+import com.jobfinder.repository.JobRepository;
 import com.jobfinder.repository.RoleRepository;
 import com.jobfinder.repository.SkillRepository;
 import com.jobfinder.repository.UserRepository;
@@ -42,6 +46,12 @@ public class ApplicantService implements IApplicantService{
 	@Autowired
 	private SkillRepository skillRepository;
 	
+	 @Autowired
+	 private JobRepository jobRepository;
+
+	@Autowired
+	private JobConverter jobConverter;
+	 
 	@Override
 	public List<ApplicantDTO> findAll() {
 		List<ApplicantDTO> models = new ArrayList<>();
@@ -108,4 +118,50 @@ public class ApplicantService implements IApplicantService{
 			applicantRepository.delete(id);
 		}
 	}
+	
+	 @Override
+	    public ApplicantDTO findByUsername(String username) {
+	        UserEntity userEntity = userRepository.findOneByUserName(username);
+	        if (userEntity != null) {
+	            return applicantConverter.toDto(userEntity.getApplicant());
+	        }
+	        return null;
+	    }
+	 @Override
+	    public boolean hasAlreadyApplied(Long applicantId, Long jobId) {
+	        ApplicantEntity applicantEntity = applicantRepository.findOne(applicantId);
+	        JobEntity jobEntity = jobRepository.findOne(jobId);
+
+	        return applicantEntity.getAppliedJobs().contains(jobEntity);
+	    }
+	 
+	 @Override
+	    @Transactional
+	    public boolean applyForJob(ApplicantDTO applicantDTO, JobDTO jobDTO) {
+	        if (hasAlreadyApplied(applicantDTO.getId(), jobDTO.getId())) {
+	            return false;
+	        }
+	        ApplicantEntity applicantEntity = applicantRepository.findOne(applicantDTO.getId());
+	        JobEntity jobEntity = jobRepository.findOne(jobDTO.getId());
+	        List<JobEntity> jobs = new ArrayList<>();
+	        jobs.add(jobEntity);
+	        applicantEntity.setAppliedJobs(jobs);
+	        applicantRepository.save(applicantEntity);
+
+	        return true;
+	    }
+	 
+
+	 @Override
+	 public List<JobDTO> findAppliedJobs(Long applicantId) {
+	     List<JobDTO> jobDTOList = new ArrayList<>();
+	     ApplicantEntity applicant = applicantRepository.findOne(applicantId); 
+	     if (applicant != null) {
+	         List<JobEntity> appliedJobs = applicant.getAppliedJobs();
+	         for (JobEntity job : appliedJobs) {
+	             jobDTOList.add(jobConverter.toDto(job));
+	         }
+	     } 
+	     return jobDTOList;
+	 }
 }

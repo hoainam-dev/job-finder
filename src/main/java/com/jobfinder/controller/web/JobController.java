@@ -1,6 +1,10 @@
 package com.jobfinder.controller.web;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import java.util.List;
+import org.springframework.security.authentication.AnonymousAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
@@ -10,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.jobfinder.dto.ApplicantDTO;
 import com.jobfinder.dto.JobDTO;
 import com.jobfinder.service.IApplicantService;
 import com.jobfinder.service.ICategoryService;
@@ -98,5 +103,55 @@ public class JobController {
 		model.addAttribute("employers", employerService.findAll());//push employers to view
 		model.addAttribute("applicants", applicantService.findAll());// push employers to view
 		return "web/job-detail";
+	}
+	
+	@RequestMapping(value = "/apply-form/{id}", method = RequestMethod.GET)
+	public String showApplyForm(@PathVariable("id") Long jobId, Model model) {
+		JobDTO job = jobService.findById(jobId);
+		model.addAttribute("job", job);
+		return "web/apply-form";
+	}
+	
+	@RequestMapping(value = "/applied-jobs", method = RequestMethod.GET)
+	public String showAppliedJobs(Model model) {
+	    Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+	    if (authentication != null && !(authentication instanceof AnonymousAuthenticationToken)) {
+	        String username = authentication.getName();
+	        ApplicantDTO applicant = applicantService.findByUsername(username);
+
+	        if (applicant != null) {
+	            List<JobDTO> appliedJobs = applicantService.findAppliedJobs(applicant.getId());
+	            model.addAttribute("appliedJobs", appliedJobs);
+
+	            model.addAttribute("debugMessage", "Applicant found with ID: " + applicant.getId());
+	        } else {
+	            model.addAttribute("errorMessage", "Applicant information not found.");
+	        }
+	    } else {
+	        model.addAttribute("errorMessage", "You must be logged in to view applied jobs.");
+	    }
+	    return "web/applied-jobs";
+	}
+	
+	@RequestMapping(value = "/nop-ho-so-ung-tuyen/{jobId}", method = RequestMethod.POST)
+	public String applyForJob(@PathVariable("jobId") Long jobId) {
+	    try {
+	        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+	        if (authentication != null && !(authentication instanceof AnonymousAuthenticationToken)) {
+	            String username = authentication.getName();
+	            ApplicantDTO applicant = applicantService.findByUsername(username);
+	            JobDTO job = jobService.findById(jobId);
+	            boolean isApplied = applicantService.applyForJob(applicant, job);
+	            if (isApplied) {
+	                return "redirect:/viec-lam/applied-jobs";
+	            } else {
+	                return "redirect:/viec-lam/chi-tiet-bai-viet/" + jobId;
+	            }
+	        } else {
+	            return "redirect:/dang-nhap";
+	        }
+	    } catch (Exception e) {
+	        return "redirect:/viec-lam/chi-tiet-bai-viet/" + jobId;
+	    }
 	}
 }

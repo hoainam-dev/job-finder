@@ -140,7 +140,7 @@ p{
 								<li>Mức lương: <span class="salary">${job.salary} - ${job.salary+5} triệu</span></li>
 							</ul>
 							<div class="apply-btn2">
-								<a href="#" class="btn">Ứng tuyển</a>
+								<a href="/viec-lam/apply-form/${job.id}" class="btn">Ứng tuyển</a>
 							</div>
 						</div>
 						<div class="post-details4  mb-50">
