@@ -176,4 +176,5 @@ public class JobService implements IJobService {
 	public int getTotalItem() {
 		return (int) jobRepository.count();
 	}
+
 }
