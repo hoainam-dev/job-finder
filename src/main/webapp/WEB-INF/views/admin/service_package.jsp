@@ -248,25 +248,5 @@ a {
 	</style>
     </main>
 </body>
-<script>
-  $(document).ready(function() {
-    $('.pricingTable-signup').click(function() {
-        var price = $(this).closest('.pricingTable').find('.amount').data('price');
-        console.log(price);
 
-        // Send a request to the server
-        $.ajax({
-            type: 'GET',
-            url: '/create-payment-intent', // Use JSTL to get the context path
-            data: {
-                amount: price
-            },
-            success: function(response) {
-                console.log(response);
-            }
-        });
-    });
-});
-    
-  </script>
 </html>

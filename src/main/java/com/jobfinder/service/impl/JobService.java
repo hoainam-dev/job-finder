@@ -158,6 +158,12 @@ public class JobService implements IJobService {
 	}
 
 	@Override
+	public void deleteJobs(List<Long> jobIds) {
+		for(Long jobId   : jobIds ) {
+			jobRepository.delete(jobId);
+		}
+	}
+		
 	public List<JobDTO> findByEmployerId(Long employer_id) {
 		List<JobDTO> result = new ArrayList<>();
 		for(JobEntity job: jobRepository.findByEmployerId(employer_id)) {

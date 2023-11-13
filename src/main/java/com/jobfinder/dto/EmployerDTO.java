@@ -19,6 +19,7 @@ public class EmployerDTO extends AbstractDTO<UserDTO>{
 	private String confirmPassword;
 	private String phone;
 	private	Long user_id;
+	private String service;
 	
 	
 	public Long getId() {
@@ -112,7 +113,13 @@ public class EmployerDTO extends AbstractDTO<UserDTO>{
 		this.confirmPassword = confirmPassword;
 	}
 	
-	 public void updateEmployerInfo(UserEntity user) {
+	 public String getService() {
+		return service;
+	}
+	public void setService(String service) {
+		this.service = service;
+	}
+	public void updateEmployerInfo(UserEntity user) {
 	        // Cập nhật thông tin của employer từ các thuộc tính trong UserEntity
 	        this.setEmail(user.getEmail());
 	        this.setFirstName(user.getFirstName());
