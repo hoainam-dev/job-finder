@@ -25,7 +25,7 @@
 				<form id="applyForm"
 					action="/viec-lam/nop-ho-so-ung-tuyen/${job.id}" method="POST">
 					
-<!-- Import thông tin -->
+					<!-- Import thông tin -->
 					<!--  
 					<div class="form-group">
 						<label for="fullName">Full Name</label> <input type="text"
@@ -41,9 +41,10 @@
 							required>
 					</div>
 					-->
-<!-- Import thông tin -->
-					<a href="/viec-lam/chi-tiet-bai-viet/${job.id}"><button
-							type="button" class="btn btn-secondary mr-2">Hủy</button></a>
+					<!-- Import thông tin -->
+					<a href="/viec-lam/chi-tiet-viec-lam/${job.id}">
+						<button type="button" class="btn btn-secondary mr-2">Hủy</button>
+					</a>
 					<button type="submit" class="btn btn-primary">Nộp hồ sơ ứng tuyển</button>
 
 				</form>
