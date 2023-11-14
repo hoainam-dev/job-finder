@@ -29,8 +29,6 @@
 									alt="Admin" class="rounded-circle" width="150">
 								<div class="mt-3">
 									<h4>${employer.userName}</h4>
-									<button class="btn btn-primary">Follow</button>
-									<button class="btn btn-outline-primary">Message</button>
 								</div>
 							</div>
 						</div>

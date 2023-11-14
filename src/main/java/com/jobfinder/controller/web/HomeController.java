@@ -136,22 +136,23 @@ public class HomeController {
 	}
 	
 	@RequestMapping(value = "/thong-tin-ca-nhan", method = RequestMethod.GET)
-	public String showEditForm(@RequestParam(value = "id") Long id, Model model) {
+	public String showEditForm(@RequestParam(value = "id") Long id, Model model,
+			RedirectAttributes redirectAttributes) {
 		// Kiểm tra xem người dùng đã đăng nhập hay chưa
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		if(!authentication.getName().equals("anonymousUser")) {
-			if(isApplicant()){//kiem tra nguoi dung
+			if(isApplicant()){//kiem tra nguoi dung co duoc quyen thay doi thong tin khong
 				model.addAttribute("user", userService.findById(id));
 				model.addAttribute("applicant", applicantService.findByUserId(id));
 				return "web/user-profile";
 			}
-			model.addAttribute("message", "Tài khoản của bạn không có quyền truy cập!");
-			model.addAttribute("alert", "danger");
-			return "auth/login/login";
+			redirectAttributes.addFlashAttribute("message", "Tài khoản của bạn không có quyền truy cập!");//truyen message thanh cong toi trang dang nhap
+			redirectAttributes.addFlashAttribute("alert", "danger");//truyen type message toi trang dang nhap
+			return "redirect:/dang-nhap";
 		}
-		model.addAttribute("message", "Bạn phải đăng nhập trước!");
-		model.addAttribute("alert", "danger");
-		return "auth/login/login";
+		redirectAttributes.addFlashAttribute("message", "Bạn phải đăng nhập");//truyen message thanh cong toi trang dang nhap
+		redirectAttributes.addFlashAttribute("alert", "danger");//truyen type message toi trang dang nhap
+		return "redirect:/dang-nhap";
 	}
 
 	@RequestMapping(value = "/thong-tin-ca-nhan", method = RequestMethod.POST)

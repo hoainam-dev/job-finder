@@ -2,7 +2,6 @@ package com.jobfinder.controller.admin;
 
 
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
@@ -21,8 +20,6 @@ import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.io.ClassPathResource;
-import org.springframework.core.io.InputStreamSource;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.mail.javamail.MimeMessagePreparator;
@@ -35,12 +32,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-import org.springframework.web.servlet.support.RequestContext;
 
 import com.jobfinder.config.PaymentConfig;
 import com.jobfinder.dto.EmployerDTO;
 import com.jobfinder.dto.ServiceDTO;
-import com.jobfinder.dto.UserDTO;
 import com.jobfinder.entity.PaymentMessage;
 import com.jobfinder.service.IEmployerService;
 import com.jobfinder.service.IPackageService;

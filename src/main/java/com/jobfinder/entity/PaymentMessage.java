@@ -1,7 +1,5 @@
 package com.jobfinder.entity;
 
-import java.sql.Date;
-
 public class PaymentMessage {
 
   private String name;

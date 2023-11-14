@@ -47,7 +47,7 @@
 											<div class="mt-3">
 												<div class="col-lg-4 col-md-4 mt-sm-30">
 													<div class="single-element-widget">
-														<span><a style="color: #000" href="#">Quên mật khẩu</a></span>
+														<span><a style="color: #000" href="/quen-mat-khau">Quên mật khẩu</a></span>
 													</div>
 												</div>
 											</div>

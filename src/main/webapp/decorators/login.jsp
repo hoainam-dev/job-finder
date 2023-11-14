@@ -9,7 +9,7 @@
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="manifest" href="site.webmanifest">
-		<link rel="shortcut icon" type="image/x-icon" href="<c:url value='./template/web/img/favicon.ico' />">
+		<link rel="shortcut icon" type="image/x-icon" href="<c:url value='/template/web/img/favicon.ico' />">
 
 		<!-- CSS here -->
             <link rel="stylesheet" href="<c:url value='/template/web/css/bootstrap.min.css' />">
@@ -26,6 +26,12 @@
             <link rel="stylesheet" href="<c:url value='/template/web/css/style.css' />">
    </head>
 <body>
+<style>
+	input{
+		background: #eaedfe;
+		boder: 1px soild #eaedfe;
+	}
+</style>
 <!-- Preloader Start -->
 	<div id="preloader-active">
 		<div
@@ -33,7 +39,7 @@
 			<div class="preloader-inner position-relative">
 				<div class="preloader-circle"></div>
 				<div class="preloader-img pere-text">
-					<img src="./template/web/img/logo/logo.png" alt="">
+					<img src="/template/web/img/logo/logo.png" alt="">
 				</div>
 			</div>
 		</div>
@@ -48,7 +54,7 @@
 						<div class="col-lg-3 col-md-2">
 							<!-- Logo -->
 							<div class="logo">
-								<a href="/"><img src="./template/web/img/logo/logo.png"
+								<a href="/"><img src="/template/web/img/logo/logo.png"
 									alt=""></a>
 							</div>
 						</div>
@@ -72,8 +78,8 @@
 								</div>
 								<!-- Header-btn -->
 								<div class="header-btn d-none f-right d-lg-block">
-									<a href="dang-ky" class="btn head-btn1">Đăng ký</a> 
-									<a href="dang-nhap" class="btn head-btn2">Đăng nhập</a>
+									<a href="/dang-ky" class="btn head-btn1">Đăng ký</a> 
+									<a href="/dang-nhap" class="btn head-btn2">Đăng nhập</a>
 								</div>
 							</div>
 						</div>
@@ -210,38 +216,38 @@
 	</footer>
 	
 	<!-- All JS Custom Plugins Link Here here -->
-        <script src="./template/web/js/vendor/modernizr-3.5.0.min.js"></script>
+        <script src="/template/web/js/vendor/modernizr-3.5.0.min.js"></script>
 		<!-- Jquery, Popper, Bootstrap -->
-		<script src="./template/web/js/vendor/jquery-1.12.4.min.js"></script>
-        <script src="./template/web/js/popper.min.js"></script>
-        <script src="./template/web/js/bootstrap.min.js"></script>
+		<script src="/template/web/js/vendor/jquery-1.12.4.min.js"></script>
+        <script src="/template/web/js/popper.min.js"></script>
+        <script src="/template/web/js/bootstrap.min.js"></script>
 	    <!-- Jquery Mobile Menu -->
-        <script src="./template/web/js/jquery.slicknav.min.js"></script>
+        <script src="/template/web/js/jquery.slicknav.min.js"></script>
 
 		<!-- Jquery Slick , Owl-Carousel Plugins -->
-        <script src="./template/web/js/owl.carousel.min.js"></script>
-        <script src="./template/web/js/slick.min.js"></script>
-        <script src="./template/web/js/price_rangs.js"></script>
+        <script src="/template/web/js/owl.carousel.min.js"></script>
+        <script src="/template/web/js/slick.min.js"></script>
+        <script src="/template/web/js/price_rangs.js"></script>
         
 		<!-- One Page, Animated-HeadLin -->
-        <script src="./template/web/js/wow.min.js"></script>
-		<script src="./template/web/js/animated.headline.js"></script>
-        <script src="./template/web/js/jquery.magnific-popup.js"></script>
+        <script src="/template/web/js/wow.min.js"></script>
+		<script src="/template/web/js/animated.headline.js"></script>
+        <script src="/template/web/js/jquery.magnific-popup.js"></script>
 
 		<!-- Scrollup, nice-select, sticky -->
-        <script src="./template/web/js/jquery.scrollUp.min.js"></script>
-        <script src="./template/web/js/jquery.nice-select.min.js"></script>
-		<script src="./template/web/js/jquery.sticky.js"></script>
+        <script src="/template/web/js/jquery.scrollUp.min.js"></script>
+        <script src="/template/web/js/jquery.nice-select.min.js"></script>
+		<script src="/template/web/js/jquery.sticky.js"></script>
         
         <!-- contact js -->
-        <script src="./template/web/js/contact.js"></script>
-        <script src="./template/web/js/jquery.form.js"></script>
-        <script src="./template/web/js/jquery.validate.min.js"></script>
-        <script src="./template/web/js/mail-script.js"></script>
-        <script src="./template/web/js/jquery.ajaxchimp.min.js"></script>
+        <script src="/template/web/js/contact.js"></script>
+        <script src="/template/web/js/jquery.form.js"></script>
+        <script src="/template/web/js/jquery.validate.min.js"></script>
+        <script src="/template/web/js/mail-script.js"></script>
+        <script src="/template/web/js/jquery.ajaxchimp.min.js"></script>
         
 		<!-- Jquery Plugins, main Jquery -->	
-        <script src="./template/web/js/plugins.js"></script>
-        <script src="./template/web/js/main.js"></script>
+        <script src="/template/web/js/plugins.js"></script>
+        <script src="/template/web/js/main.js"></script>
 </body>
 </html>

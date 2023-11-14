@@ -201,6 +201,7 @@ public class HomeController {
 		EmployerDTO employerDTO = employerService.getEmployerProfile(id);
 		model.addAttribute("employer", employerDTO);
 		UserDTO userDTO = userService.findById(id);
+		model.addAttribute("users", userService.findAll());//push users to view
 		model.addAttribute("user", userDTO);
 		model.addAttribute("title", "Thông tin cá nhân");//push title to view
 		return "employer/profile";
@@ -233,7 +234,7 @@ public class HomeController {
             model.addAttribute("title", "Cập nhật thông tin");//push title to view
             model.addAttribute("employer", employerDTO);
             model.addAttribute("user", user);
-            
+            model.addAttribute("users", userService.findAll());//push users to view
             return "employer/update-profile";
         } else {
             return null;
