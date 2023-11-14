@@ -1,12 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ include file="/common/taglib.jsp"%>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Thông tin cá nhân</title>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+<title>Quản lý tài khoản</title>
 </head>
 <body>
 <style>
@@ -28,6 +28,9 @@
 	.account-link:hover {
 	    background-color: #dd1958;
 	}
+	.error{
+		color: red;
+	}
 </style>
 	<main> 
 	<!-- Navigation --> 
@@ -38,17 +41,9 @@
 			<a href="/" class="account-link">
 		        <i class="fas fa-angle-double-left"></i>Trang chủ
 			</a>
-			<div class="row mt-4">
-				<a href="/quan-ly-tai-khoan?id=${user.id}" class="account-link">
-			        <i class="fas fa-user"></i>Cài đặt tài khoản
-			    </a>
-			    <a href="/viec-lam/ung-tuyen-cong-viec" class="account-link">
-			        <i class="fas fa-address-book"></i>Tin đã ứng tuyển
-			    </a>
-			</div>
 			<div class="row">
 				<div class="col-md-12 text-center">
-					<h3>Thông tin cá nhân</h3>
+					<h3>Quản lý tài khoản</h3>
 					<c:if test="${not empty message}">
 						<div class="alert alert-${alert}">${message}</div>
 					</c:if>
@@ -56,7 +51,7 @@
 				
 			</div>
 			<hr/>
-			<form id="contact-form" role="form" action="/thong-tin-ca-nhan?id=${user.id}" method="post">
+			<form:form modelAttribute="userDTO" action="/quan-ly-tai-khoan?id=${user.id}" method="post">
 				<input name="id" value="${user.id}" type="hidden">
 				<div class="controls">
 					<div class="row">
@@ -71,56 +66,46 @@
 					<div class="row">
 						<div class="col-md-12">
 							<div class="form-group">
-								<label for="form_email">Tên tài khoản</label> 
-								<input id="form_email" type="text" disabled="disabled"
+								<label for="form_email">Email</label> 
+								<input id="form_email" disabled="disabled"
 									class="form-control" value="${user.email}">
 							</div>
 						</div>
 					</div>
 					<div class="row">
-						<div class="col-md-6">
+						<div class="col-md-12">
 							<div class="form-group">
-								<label for="form_firstName">Họ *</label> <input
-									id="form_firstName" type="text" name="firstName"
-									class="form-control" value="${user.firstName}"
-									required="required" data-error="Firstname is required.">
-
-							</div>
-						</div>
-						<div class="col-md-6">
-							<div class="form-group">
-								<label for="form_lastName">Tên *</label> <input
-									id="form_lastName" type="text" name="lastName"
-									class="form-control" value="${user.lastName}"
-									required="required" data-error="Lastname is required.">
+								<label for="form_passwordOld">Mật khẩu cũ *</label> 
+								<input type="password" id="form_passwordOld" name="passwordOld" class="form-control">
+								<c:if test="${not empty notmatch}">
+									<span class="error">${notmatch}</span>
+								</c:if>
 							</div>
 						</div>
 					</div>
 					<div class="row">
 						<div class="col-md-6">
 							<div class="form-group">
-								<label for="form_phone">Số điện thoại *</label> <input id="form_phone"
-									type="text" name="phone" class="form-control"
-									value="${user.phone}" required="required"
-									data-error="phone is required.">
+								<label for="form_passwordNew">Mật khẩu mới *</label> 
+								<input type="password" id="form_passwordNew" name="password" class="form-control">
+								<span><form:errors cssClass="error" path="password" /></span>
 							</div>
 						</div>
 						<div class="col-md-6">
 							<div class="form-group">
-								<label for="form_address">Địa chỉ *</label> <input
-									id="form_address" name="address" class="form-control"
-									value="${user.address}" required="required"
-									data-error="Please, leave us a message.">
+								<label for="form_confirmPassword">Nhập lại khẩu mới *</label>
+								<input type="password" id="form_confirmPassword" name="confirmPassword" class="form-control">
+								<span><form:errors cssClass="error" path="confirmPassword" /></span>
 							</div>
 						</div>
 					</div>
 					<div class="row">
 						<div class="col-md-12 text-center">
-							<input type="submit" class="btn" value="Cập nhật thông tin">
+							<input type="submit" class="btn" value="Cập nhật tài khoản">
 						</div>
 					</div>
 				</div>
-			</form>
+			</form:form>
 		</div>
 	</div>
 	</main>

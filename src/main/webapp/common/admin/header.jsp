@@ -65,7 +65,7 @@
                   </g>
                 </g>
               </svg>
-					</div> <span class="nav-link-text ms-1">Job Seeker</span>
+					</div> <span class="nav-link-text ms-1">Nguời tìm việc</span>
 			</a></li>
 			<li class="nav-item"><a class="nav-link active" href="<c:url value='/quan-tri/cong-ty' />">
 					<div
@@ -89,7 +89,7 @@
                   </g>
                 </g>
               </svg>
-					</div> <span class="nav-link-text ms-1">Companies</span>
+					</div> <span class="nav-link-text ms-1">Nhà tuyển dụng</span>
 			</a></li>
 			<li class="nav-item"><a class="nav-link active" href="<c:url value='/quan-tri/cong-viec' />">
 					<div
@@ -115,9 +115,9 @@
                   </g>
                 </g>
               </svg>
-					</div> <span class="nav-link-text ms-1">Jobs</span>
+					</div> <span class="nav-link-text ms-1">Tin tuyển dụng</span>
 			</a></li>
-			<li class="nav-item"><a class="nav-link active " href="<c:url value='/quan-tri/doanh-thu' />">
+			<li class="nav-item"><a class="nav-link active " href="<c:url value='https://sandbox.vnpayment.vn/merchantv2/Users/Login.htm' />">
 					<div
 						class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
 						<svg width="12px" height="12px" viewBox="0 0 40 40" version="1.1"
@@ -141,7 +141,7 @@
                   </g>
                 </g>
               </svg>
-					</div> <span class="nav-link-text ms-1">Accounting</span>
+					</div> <span class="nav-link-text ms-1">Doanh thu</span>
 			</a></li>
 			<li class="nav-item mt-3">
 				<h6
@@ -171,7 +171,7 @@
                   </g>
                 </g>
               </svg>
-						</div> <span class="nav-link-text ms-1">Sign In</span>
+						</div> <span class="nav-link-text ms-1">Đăng nhập</span>
 				</a></li>
 				<li class="nav-item"><a class="nav-link  " href="/dang nhap">
 						<div
@@ -199,7 +199,7 @@
                   </g>
                 </g>
               </svg>
-						</div> <span class="nav-link-text ms-1">Sign Up</span>
+						</div> <span class="nav-link-text ms-1">Đăng ký</span>
 				</a></li>
 			</security:authorize>
 			<security:authorize access="isAuthenticated()">
@@ -227,7 +227,7 @@
                   </g>
                 </g>
               </svg>
-						</div> <span class="nav-link-text ms-1">Profile</span>
+						</div> <span class="nav-link-text ms-1">Thông tin cá nhân</span>
 				</a></li>
 				<li class="nav-item"><a class="nav-link  " href="/thoat">
 						<div
@@ -251,7 +251,7 @@
                   </g>
                 </g>
               </svg>
-						</div> <span class="nav-link-text ms-1">Thoat</span>
+						</div> <span class="nav-link-text ms-1">Thoát</span>
 				</a></li>
 			</security:authorize>
 		</ul>

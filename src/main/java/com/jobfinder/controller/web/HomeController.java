@@ -3,6 +3,8 @@ package com.jobfinder.controller.web;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -10,6 +12,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -21,12 +24,14 @@ import com.jobfinder.dto.CategoryDTO;
 import com.jobfinder.dto.EmployerDTO;
 import com.jobfinder.dto.JobDTO;
 import com.jobfinder.dto.UserDTO;
+import com.jobfinder.security.BcryptPassword;
 import com.jobfinder.service.IApplicantService;
 import com.jobfinder.service.ICategoryService;
 import com.jobfinder.service.IEmployerService;
 import com.jobfinder.service.IJobService;
 import com.jobfinder.service.IUserService;
 import com.jobfinder.util.SecurityUtils;
+import com.jobfinder.validation.ResetPassValidation;
 
 @Controller(value = "homeControllerOfWeb")
 public class HomeController {
@@ -143,6 +148,7 @@ public class HomeController {
 		if(!authentication.getName().equals("anonymousUser")) {
 			if(isApplicant()){//kiem tra nguoi dung co duoc quyen thay doi thong tin khong
 				model.addAttribute("user", userService.findById(id));
+				model.addAttribute("users", userService.findAll());// push users to view
 				model.addAttribute("applicant", applicantService.findByUserId(id));
 				return "web/user-profile";
 			}
@@ -162,6 +168,53 @@ public class HomeController {
 		redirectAttributes.addFlashAttribute("message", "Đổi thông tin thành công");//truyen message thanh cong toi trang dang nhap
 		redirectAttributes.addFlashAttribute("alert", "success");//truyen type message toi trang dang nhap
 		return "redirect:/thong-tin-ca-nhan?id=" + userId;
+	}
+	
+	@RequestMapping(value = "/quan-ly-tai-khoan", method = RequestMethod.GET)
+	public String accountManager(@RequestParam(value = "id") Long id, Model model,
+			RedirectAttributes redirectAttributes) {
+		// Kiểm tra xem người dùng đã đăng nhập hay chưa
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		if(!authentication.getName().equals("anonymousUser")) {
+			if(isApplicant()){//kiem tra nguoi dung co duoc quyen thay doi thong tin khong
+				model.addAttribute("user", userService.findById(id));
+				model.addAttribute("userDTO", new UserDTO());// push users to view
+				model.addAttribute("users", userService.findAll());// push users to view
+				model.addAttribute("applicant", applicantService.findByUserId(id));
+				return "web/account";
+			}
+			redirectAttributes.addFlashAttribute("message", "Tài khoản của bạn không có quyền truy cập!");//truyen message thanh cong toi trang dang nhap
+			redirectAttributes.addFlashAttribute("alert", "danger");//truyen type message toi trang dang nhap
+			return "redirect:/dang-nhap";
+		}
+		redirectAttributes.addFlashAttribute("message", "Bạn phải đăng nhập");//truyen message thanh cong toi trang dang nhap
+		redirectAttributes.addFlashAttribute("alert", "danger");//truyen type message toi trang dang nhap
+		return "redirect:/dang-nhap";
+	}
+
+	@RequestMapping(value = "/quan-ly-tai-khoan", method = RequestMethod.POST)
+	public String accountManager(@RequestParam(value = "id") Long id, @Valid UserDTO userDTO
+			, RedirectAttributes redirectAttributes, BindingResult bindingResult, Model model) {
+		ResetPassValidation passValidation = new ResetPassValidation();
+		BcryptPassword bcryptPassword = new BcryptPassword();
+		
+		passValidation.validate(userDTO, bindingResult);
+		if (!bcryptPassword.checkPassowrd(userService.findById(userDTO.getId()).getPassword(), userDTO.getPasswordOld())||
+				bindingResult.hasErrors()) {
+			//neu co loi return ve lai form va hien thi loi
+			model.addAttribute("user", userService.findById(id));
+			model.addAttribute("users", userService.findAll());// push users to view
+			model.addAttribute("applicant", applicantService.findByUserId(id));
+			if(!bcryptPassword.checkPassowrd(userService.findById(userDTO.getId()).getPassword(), userDTO.getPasswordOld())) {
+				model.addAttribute("notmatch", "Mật khẩu không đúng!");
+			}
+			return "web/account";
+		}
+		
+		userService.resetPassword(userDTO);
+		redirectAttributes.addFlashAttribute("message", "Đổi mật khẩu thành công");//truyen message thanh cong toi trang dang nhap
+		redirectAttributes.addFlashAttribute("alert", "success");//truyen type message toi trang dang nhap
+		return "redirect:/quan-ly-tai-khoan?id=" + id;
 	}
 	
 	@RequestMapping(value = "/tim-kiem", method = RequestMethod.GET)
@@ -188,6 +241,7 @@ public class HomeController {
 	public String showCompanyList(Model model) {
 	    List<EmployerDTO> companies = employerService.findAll(); // Fetch the list of companies
 	    model.addAttribute("companies", companies); // Add the list to the model
+	    model.addAttribute("users", userService.findAll());// push users to view
 	    return "web/company-list";
 	}
 }

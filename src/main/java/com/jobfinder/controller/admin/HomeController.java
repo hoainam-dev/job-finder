@@ -29,6 +29,7 @@ import com.jobfinder.service.IApplicantService;
 import com.jobfinder.service.ICategoryService;
 import com.jobfinder.service.IEmployerService;
 import com.jobfinder.service.IJobService;
+import com.jobfinder.service.ISkillService;
 import com.jobfinder.service.IUserService;
 
 
@@ -40,10 +41,15 @@ public class HomeController {
 	
 	@Autowired
 	private IJobService jobService ;
+	
 	@Autowired
 	private ICategoryService categoryService;
+	
 	@Autowired 
 	private IEmployerService employerService ;
+	
+	@Autowired 
+	private ISkillService skillService ;
 	
 	@Autowired
 	private IApplicantService applicantService;
@@ -75,10 +81,13 @@ public class HomeController {
 		model.addAttribute("countUser", countUser);
 		return "admin/users_table";
 	}
+	
 	@RequestMapping(value = "/quan-tri/nguoi-tim-viec/{id}", method = RequestMethod.GET)
 	public String detailProfileApplicant(@PathVariable Long id, Model model) {
+		model.addAttribute("skills", skillService.findAll());//push skills to view
 	    ApplicantDTO applicant = applicantService.findById(id);
 	    model.addAttribute("applicant", applicant);
+		model.addAttribute("skills", skillService.findAll());//push skills to view
 	    return "admin/detail_profile_applicant";
 	}
 

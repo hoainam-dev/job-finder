@@ -70,10 +70,18 @@
 
   <div class="progress">
     <div class="progress-bar">
-      ${applicant.skills} 
+    <ul>
+        <c:forEach var="skill" items="${skills}">
+		<c:forEach var="jobSkill" items="${applicant.skills}">
+			<c:if test="${skill.id==jobSkill}">
+				<li><p>${skill.name}</p></li>
+			</c:if>
+		</c:forEach>
+	</c:forEach>
+	</ul>
     </div>
   </div>
-
+	
   <div class="education">
     <h5>Học vấn</h5>
     

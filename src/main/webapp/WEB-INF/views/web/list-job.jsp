@@ -38,6 +38,24 @@
 	<div class="job-listing-area pt-50 pb-50">
 		<div class="container">
 			<div class="row">
+				<div class="col-xl-9 col-lg-9 col-md-8">
+					<!-- Search Box -->
+					<div class="row">
+						<div class="col-xl-12">
+							<!-- form -->
+							<form action="/tim-kiem" class="search-box" method="GET">
+								<div class="input-form">
+									<input type="text" name="keyword" placeholder="Nhập từ khóa">
+									<input type="hidden" value="1" class="page" name="page"/>
+									<input type="hidden" value="10" class="limit" name="limit"/>
+								</div>
+								<button type="submit" class="btn btn-primary search-form"> Tìm kiếm</button>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div><hr/>
+			<div class="row">
 				<!-- Left content -->
 				<div class="left-content col-xl-3 col-lg-3 col-md-4">
 					<div class="row">

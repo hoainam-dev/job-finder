@@ -6,6 +6,7 @@ public class UserDTO extends AbstractDTO<UserDTO>{
 	private String userName;
 	private String password;
 	private String confirmPassword;
+	private String passwordOld;
 	private String firstName;
 	private String lastName;
 	private String email;
@@ -33,6 +34,12 @@ public class UserDTO extends AbstractDTO<UserDTO>{
 	}
 	public void setConfirmPassword(String confirmPassword) {
 		this.confirmPassword = confirmPassword;
+	}
+	public String getPasswordOld() {
+		return passwordOld;
+	}
+	public void setPasswordOld(String passwordOld) {
+		this.passwordOld = passwordOld;
 	}
 	public String getFirstName() {
 		return firstName;

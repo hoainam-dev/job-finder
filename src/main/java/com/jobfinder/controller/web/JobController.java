@@ -121,7 +121,7 @@ public class JobController {
 	        if (applicant != null) {
 	            List<JobDTO> appliedJobs = applicantService.findAppliedJobs(applicant.getId());
 	            model.addAttribute("appliedJobs", appliedJobs);
-
+	            model.addAttribute("users", userService.findAll());// push users to view
 	            return "web/applied-jobs";
 	        }
 	    }

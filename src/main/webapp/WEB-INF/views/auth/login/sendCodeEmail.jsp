@@ -31,9 +31,6 @@
         .content p {
             font-size: 16px;
         }
-        .content b {
-            font-weight: bold;
-        }
         .content span{
         	font-weight: bold;
         }

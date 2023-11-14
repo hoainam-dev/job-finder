@@ -79,7 +79,7 @@
                                                 </a> ${job.createBy}
                                                 <ul class="list-unstyled">
                                                     <li><i class="fas fa-map-marker-alt"></i> ${job.location}</li>
-                                                    <li>$ ${job.salary}</li>
+                                                    <li>${job.salary} - ${job.salary} triệu</li>
                                                     <li><i class="far fa-clock"></i> ${job.createAt}</li>
                                                 </ul>
                                             </div>
