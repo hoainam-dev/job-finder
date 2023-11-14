@@ -11,6 +11,7 @@ public interface IUserService {
 	UserDTO findOneByUserNameAndStatus(String userName, int status);
 	UserDTO findOneByEmailAndStatus(String email, int status);
 	UserDTO save(UserDTO dto);
+	void resetPassword(UserDTO dto);
 	void delete(long[] ids);
 	UserEntity blockUser(Long userId);
 	UserEntity unblockUser(Long userId);

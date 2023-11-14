@@ -18,7 +18,6 @@
 	<div class="container">
 		<!-- Body form -->
 		<div class="row">
-
 			<div class="container">
 				<form id="contact-form" role="form"
 					action="/nha-tuyen-dung/cap-nhat-thong-tin?id=${user.id}" method="POST">

@@ -5,6 +5,7 @@ import java.util.List;
 public class UserDTO extends AbstractDTO<UserDTO>{
 	private String userName;
 	private String password;
+	private String confirmPassword;
 	private String firstName;
 	private String lastName;
 	private String email;
@@ -26,6 +27,12 @@ public class UserDTO extends AbstractDTO<UserDTO>{
 	}
 	public void setPassword(String password) {
 		this.password = password;
+	}
+	public String getConfirmPassword() {
+		return confirmPassword;
+	}
+	public void setConfirmPassword(String confirmPassword) {
+		this.confirmPassword = confirmPassword;
 	}
 	public String getFirstName() {
 		return firstName;
