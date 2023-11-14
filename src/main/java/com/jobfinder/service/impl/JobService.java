@@ -12,15 +12,22 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import com.jobfinder.converter.ApplicantConverter;
 import com.jobfinder.converter.JobConverter;
+import com.jobfinder.converter.UserConverter;
+import com.jobfinder.dto.ApplicantDTO;
 import com.jobfinder.dto.JobDTO;
+import com.jobfinder.dto.UserDTO;
+import com.jobfinder.entity.ApplicantEntity;
 import com.jobfinder.entity.JobEntity;
 import com.jobfinder.entity.SkillEntity;
+import com.jobfinder.entity.UserEntity;
 import com.jobfinder.repository.CategoryRepository;
 import com.jobfinder.repository.EmployerRepository;
 import com.jobfinder.repository.JobRepository;
 import com.jobfinder.repository.SkillRepository;
 import com.jobfinder.service.IJobService;
+import com.jobfinder.service.IUserService;
 import com.jobfinder.util.SearchUtils;
 
 @Service
@@ -42,6 +49,15 @@ public class JobService implements IJobService {
 	@Autowired
 	private SkillRepository skillRepository;
 
+	@Autowired
+	private ApplicantConverter applicantConverter;
+	
+	@Autowired
+	private UserConverter userConverter;
+	
+	@Autowired
+	private IUserService userService;
+	
 	public JobService(JobRepository jobRepository) {
 		this.jobRepository = jobRepository;
 	}
@@ -177,4 +193,46 @@ public class JobService implements IJobService {
 		return (int) jobRepository.count();
 	}
 
+
+	@Override
+	public List<ApplicantDTO> findApplicantsForJob(Long jobId) {
+	    List<ApplicantDTO> applicantDTOList = new ArrayList<>();
+	    JobEntity job = jobRepository.findOne(jobId);
+
+	    if (job != null) {
+	        List<ApplicantEntity> applicants = job.getApplicants();
+	        for (ApplicantEntity applicant : applicants) {
+	            UserEntity users = applicant.getUser();
+	            if (users != null) {
+	                ApplicantDTO applicantDTO = applicantConverter.toDto(applicant);
+	                UserDTO userDTO = userConverter.toDto(users);
+	                
+	                applicantDTO.setUser(userDTO);
+	                
+	                applicantDTOList.add(applicantDTO);
+	            }
+	        }
+	    }
+	    return applicantDTOList;
+	}
+
+
+
+
+
+//	@Override
+//	public List<ApplicantDTO> findApplicantsForJob(Long jobId) {
+//		List<ApplicantDTO> applicantDTOList = new ArrayList<>();
+//		JobEntity job = jobRepository.findOne(jobId);
+//		
+//		if (job != null) {
+//            List<ApplicantEntity> applicants = job.getApplicants();
+//            for (ApplicantEntity applicant : applicants) {
+//            	
+//                applicantDTOList.add(applicantConverter.toDto(applicant));
+//            }
+//        }
+//		return applicantDTOList;
+//	}
+	
 }

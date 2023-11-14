@@ -14,7 +14,12 @@
 	
 	<div class="job-post-company pt-50 pb-50">
 		<div class="container">
-			<a class="btn btn-infor" href="#">Cài đặt tài khoản</a>
+			<div class="row">
+				<a class="btn btn-infor" href="viec-lam/ung-tuyen-cong-viec">Công việc của tôi</a>
+			</div>
+			<div class="row mt-4">
+				<a class="btn btn-infor" href="#">Cài đặt tài khoản</a>
+			</div>
 			<div class="row">
 				<div class="col-md-12 text-center">
 					<h3>Thông tin cá nhân</h3>

@@ -60,7 +60,6 @@ public class JobEntity extends BaseEntity{
 	private List<SkillEntity> jobSkills = new ArrayList<>();
 	
 	@ManyToMany(mappedBy = "appliedJobs")
-	
 	private List<ApplicantEntity> applicants = new ArrayList<>();
 	
 	public List<ApplicantEntity> getApplicants() {

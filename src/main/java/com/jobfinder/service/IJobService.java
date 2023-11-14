@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.data.domain.Pageable;
 
+import com.jobfinder.dto.ApplicantDTO;
 import com.jobfinder.dto.JobDTO;
 
 public interface IJobService {
@@ -25,5 +26,7 @@ public interface IJobService {
 	List<JobDTO> findByTitle(Pageable pageable, String keyword);
 	
 	List<JobDTO> findByEmployerId(Long employer_id);
+	
+	List<ApplicantDTO> findApplicantsForJob(Long jobId);
 	
 }

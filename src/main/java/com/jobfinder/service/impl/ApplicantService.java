@@ -142,12 +142,11 @@ public class ApplicantService implements IApplicantService{
 	            return false;
 	        }
 	        ApplicantEntity applicantEntity = applicantRepository.findOne(applicantDTO.getId());
-	        JobEntity jobEntity = jobRepository.findOne(jobDTO.getId());
-	        List<JobEntity> jobs = new ArrayList<>();
-	        jobs.add(jobEntity);
-	        applicantEntity.setAppliedJobs(jobs);
-	        applicantRepository.save(applicantEntity);
-
+	        List<JobEntity> appliedJobs = applicantEntity.getAppliedJobs();// Lay danh sach cong viec dk truoc 
+	        JobEntity jobEntity = jobRepository.findOne(jobDTO.getId());// add cv vao danh sach
+	        appliedJobs.add(jobEntity);
+	        applicantEntity.setAppliedJobs(appliedJobs); // update job applyed
+	        applicantRepository.save(applicantEntity);// save in database
 	        return true;
 	    }
 	 

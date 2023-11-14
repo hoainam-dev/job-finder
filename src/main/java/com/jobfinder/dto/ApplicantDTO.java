@@ -32,7 +32,15 @@ public class ApplicantDTO extends AbstractDTO<UserDTO>{
 	
 	private	Long user_id;
 	
+	private UserDTO user;
 	
+	 public UserDTO getUser() {
+	        return user;
+	    }
+
+	    public void setUser(UserDTO user) {
+	        this.user = user;
+	    }
 	
 	public String getAddress() {
 		return address;

@@ -24,24 +24,6 @@
 				<!-- Your form goes here -->
 				<form id="applyForm"
 					action="/viec-lam/nop-ho-so-ung-tuyen/${job.id}" method="POST">
-					
-					<!-- Import thông tin -->
-					<!--  
-					<div class="form-group">
-						<label for="fullName">Full Name</label> <input type="text"
-							class="form-control" id="fullName" name="fullName" required>
-					</div>
-					<div class="form-group">
-						<label for="email">Email</label> <input type="email"
-							class="form-control" id="email" name="email" required>
-					</div>
-					<div class="form-group">
-						<label for="resume">Resume (PDF only)</label> <input type="file"
-							class="form-control-file" id="resume" name="resume" accept=".pdf"
-							required>
-					</div>
-					-->
-					<!-- Import thông tin -->
 					<a href="/viec-lam/chi-tiet-viec-lam/${job.id}">
 						<button type="button" class="btn btn-secondary mr-2">Hủy</button>
 					</a>

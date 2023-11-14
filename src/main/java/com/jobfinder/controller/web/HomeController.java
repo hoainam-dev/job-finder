@@ -182,4 +182,5 @@ public class HomeController {
 		model.addAttribute("users", userService.findAll());// push users to view
 		return "web/list-job";
 	}
+	
 }
