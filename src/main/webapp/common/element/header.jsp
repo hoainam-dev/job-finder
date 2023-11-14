@@ -38,7 +38,7 @@
 										<li><a href="/viec-lam/danh-sach?page=1&limit=10">Tìm việc</a></li>
 										<li><a href="#">Công ty</a>
 											<ul class="submenu">
-												<li><a href="/trang-chu/cong-ty">Danh sách công ty</a></li>
+												<li><a href="/cong-ty">Danh sách công ty</a></li>
 												<li><a href="#">Top công ty</a></li>
 											</ul></li>
 										<li><a href="#">Liên hệ</a></li>

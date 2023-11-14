@@ -183,4 +183,10 @@ public class HomeController {
 		return "web/list-job";
 	}
 	
+	@RequestMapping(value = "/cong-ty", method = RequestMethod.GET)
+	public String showCompanyList(Model model) {
+	    List<EmployerDTO> companies = employerService.findAll(); // Fetch the list of companies
+	    model.addAttribute("companies", companies); // Add the list to the model
+	    return "web/company-list";
+	}
 }
