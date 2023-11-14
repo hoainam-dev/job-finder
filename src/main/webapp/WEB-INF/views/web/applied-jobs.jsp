@@ -15,61 +15,91 @@
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 </head>
 <body>
-	<main> <!-- Apply_job_start -->
-	<section class="featured-job-area">
-		<div class="container">
-			<!-- Section Tittle -->
-			<div class="row">
-				<div class="col-lg-12">
-					<div class="section-tittle text-center">
-						<h2>Công việc đã ứng tuyển</h2>
+<style>
+    .job-card {
+        border-radius: 20px; /* Adjust the radius as needed */
+        transition: transform 0.3s ease; /* Add a smooth transition effect */
+    }
+
+    .job-card:hover {
+        transform: scale(1.03); /* Scale up the card on hover for a subtle effect */
+    }
+</style>
+
+	<main> 
+	<!-- Navigation --> 
+	<%@ include file="/common/element/header.jsp"%>
+		<!-- Hero Area Start-->
+		<div class="slider-area ">
+			<div
+				class="single-slider section-overly slider-height2 d-flex align-items-center"
+				data-background='<c:url value="/template/web/img/hero/h1_hero.png"/>'>
+				<div class="container">
+					<div class="row">
+						<div class="col-xl-12">
+							<div class="hero-cap text-center">
+								<h2>Công việc đã ứng tuyển</h2>
+							</div>
+						</div>
 					</div>
 				</div>
 			</div>
-			<!-- JOBS -->
-			<c:if test="${empty appliedJobs}">
-				<div class="alert alert-info">You have not applied for any
-					jobs yet.</div>
-			</c:if>
-			<c:if test="${not empty appliedJobs}">
-				<ul class="list-group">
-					<c:forEach var="job" items="${appliedJobs}">
-						<div class="row justify-content-center">
-							<div class="col-xl-10">
-								<!-- single-job-content -->
-								<div class="single-job-items mb-30">
-									<div class="job-items">
-										<div class="company-img">
-											<a href="/viec-lam/chi-tiet-bai-viet/${job.id}"> <img
-												src="./template/web/img/icon/job-list1.png" alt=""></a>
-										</div>
-										<div class="job-tittle">
-											<a href="/viec-lam/chi-tiet-bai-viet/${job.id}">
-												<h4>${job.title}</h4>
-											</a> ${job.createBy }
-											<ul>
-												<li><i class="fas fa-map-marker-alt"></i>${job.location }</li>
-												<li>$ ${job.salary}</li>
-												<li><i class="fa fa-regular fa-clock"></i>${job.createAt}</li>
-											</ul>
-										</div>
-									</div>
-									<div class="items-link f-right">
-										<a href="/viec-lam/chi-tiet-bai-viet/${job.id}">Show
-											Detail</a>
-									</div>
-								</div>
-							</div>
-						</div>
-					</c:forEach>
-				</ul>
-			</c:if>
-			<!-- JOBS -->
 		</div>
-	</section>
-	<!-- Apply_job_end --> 
-	<!-- Footer --> 
-	<%@ include file="/common/web/home-footer.jsp"%> </main>
+		<!-- Hero Area End -->
+		
+		<!-- Apply_job_start -->
+		<section class="featured-job-area mt-5">
+    <div class="container">
+        <!-- Section Tittle -->
+
+        <!-- JOBS -->
+        <c:if test="${empty appliedJobs}">
+            <div class="alert alert-info">Bạn chưa ứng tuyển công việc nào</div>
+        </c:if>
+        <c:if test="${not empty appliedJobs}">
+            <ul class="list-group">
+                <c:forEach var="job" items="${appliedJobs}">
+                    <div class="row justify-content-center">
+                        <div class="col-xl-10">
+                            <!-- single-job-content -->
+                            <div class="card mb-4 job-card">
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-md-2">
+                                            <div class="company-img">
+                                                <a href="/viec-lam/chi-tiet-viec-lam/${job.id}">
+                                                    <img src="/template/web/img/icon/job-list1.png" alt="" class="img-fluid">
+                                                </a>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-10">
+                                            <div class="job-tittle">
+                                                <a href="/viec-lam/chi-tiet-viec-lam/${job.id}">
+                                                    <h4 class="card-title">${job.title}</h4>
+                                                </a> ${job.createBy}
+                                                <ul class="list-unstyled">
+                                                    <li><i class="fas fa-map-marker-alt"></i> ${job.location}</li>
+                                                    <li>$ ${job.salary}</li>
+                                                    <li><i class="far fa-clock"></i> ${job.createAt}</li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </c:forEach>
+            </ul>
+        </c:if>
+        <!-- JOBS -->
+    </div>
+</section>
+
+		<!-- Apply_job_end --> 
+		
+		<!-- Footer --> 
+		<%@ include file="/common/element/footer.jsp"%>
 </body>
 
 

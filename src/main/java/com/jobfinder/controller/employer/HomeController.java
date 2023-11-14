@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.jobfinder.dto.ApplicantDTO;
 import com.jobfinder.dto.CategoryDTO;
 import com.jobfinder.dto.EmployerDTO;
 import com.jobfinder.dto.JobDTO;
@@ -53,7 +54,7 @@ public class HomeController {
 	
 	@Autowired
 	private JobValidation jobValidation;
-
+	
 	/**
 	 * function Get current employer logging in
 	 * 
@@ -116,6 +117,7 @@ public class HomeController {
 		mav.addObject("users", users);//push users to view
 		mav.addObject("jobs", jobs);//push jobs to view
 		mav.addObject("title", "Danh sách việc làm");//push title to view
+		
 		return mav;
 	}
 	
@@ -254,5 +256,16 @@ public class HomeController {
 		redirectAttributes.addFlashAttribute("message", "Đổi thông tin thành công");//truyen message thanh cong toi trang dang nhap
 		redirectAttributes.addFlashAttribute("alert", "success");//truyen type message toi trang dang nhap
 		return "redirect:/nha-tuyen-dung/thong-tin-ca-nhan?id=" + id;
+	}
+	
+	@RequestMapping(value = "/showApplicants", method = RequestMethod.GET)
+	public String showApplicants(@RequestParam Long jobId, Model model) {
+	    JobDTO job = jobService.findById(jobId);
+	    List<ApplicantDTO> applicants = jobService.findApplicantsForJob(jobId);
+
+	    model.addAttribute("job", job);
+	    model.addAttribute("applicants", applicants);
+
+	    return "employer/applicants-view";
 	}
 }

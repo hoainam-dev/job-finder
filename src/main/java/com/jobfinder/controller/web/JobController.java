@@ -105,17 +105,16 @@ public class JobController {
 		return "web/job-detail";
 	}
 	
-	@RequestMapping(value = "/apply-form/{id}", method = RequestMethod.GET)
+	@RequestMapping(value = "/ung-tuyen-cong-viec/{id}", method = RequestMethod.GET)
 	public String showApplyForm(@PathVariable("id") Long jobId, Model model) {
 		JobDTO job = jobService.findById(jobId);
 		model.addAttribute("job", job);
 		return "web/apply-form";
 	}
 	
-	@RequestMapping(value = "/applied-jobs", method = RequestMethod.GET)
-	public String showAppliedJobs(Model model) {
-	    Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-	    if (authentication != null && !(authentication instanceof AnonymousAuthenticationToken)) {
+	@RequestMapping(value = "/ung-tuyen-cong-viec", method = RequestMethod.GET)
+	public String showAppliedJobs(Model model, Authentication authentication) {
+	    if (authentication != null && authentication.isAuthenticated()) {
 	        String username = authentication.getName();
 	        ApplicantDTO applicant = applicantService.findByUsername(username);
 
@@ -123,15 +122,13 @@ public class JobController {
 	            List<JobDTO> appliedJobs = applicantService.findAppliedJobs(applicant.getId());
 	            model.addAttribute("appliedJobs", appliedJobs);
 
-	            model.addAttribute("debugMessage", "Applicant found with ID: " + applicant.getId());
-	        } else {
-	            model.addAttribute("errorMessage", "Applicant information not found.");
+	            return "web/applied-jobs";
 	        }
-	    } else {
-	        model.addAttribute("errorMessage", "You must be logged in to view applied jobs.");
 	    }
-	    return "web/applied-jobs";
+
+	    return "redirect:/dang-nhap";
 	}
+
 	
 	@RequestMapping(value = "/nop-ho-so-ung-tuyen/{jobId}", method = RequestMethod.POST)
 	public String applyForJob(@PathVariable("jobId") Long jobId) {
@@ -143,7 +140,7 @@ public class JobController {
 	            JobDTO job = jobService.findById(jobId);
 	            boolean isApplied = applicantService.applyForJob(applicant, job);
 	            if (isApplied) {
-	                return "redirect:/viec-lam/applied-jobs";
+	                return "redirect:/viec-lam/ung-tuyen-cong-viec";
 	            } else {
 	                return "redirect:/viec-lam/chi-tiet-bai-viet/" + jobId;
 	            }

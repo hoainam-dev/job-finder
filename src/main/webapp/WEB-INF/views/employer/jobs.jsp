@@ -91,8 +91,17 @@
 											<td class="align-middle text-center"><span
 												class="text-secondary text-xs font-weight-bold">${job.createAt}</span>
 											</td>
-											<td class="align-middle text-center text-sm"><span
-												class="badge badge-sm bg-gradient-success">Online</span></td>
+											
+											<!-- Trong phần cột "Trạng thái" -->
+											<td class="align-middle text-center text-sm">
+											    <a href="/nha-tuyen-dung/showApplicants?jobId=${job.id}" 
+											       class="badge badge-sm bg-gradient-success">Online</a>
+											</td>
+											
+											<!--  <td class="align-middle text-center text-sm"><span
+												class="badge badge-sm bg-gradient-success">Online</span>
+											</td>
+											-->
 											<td class="align-middle"><a href="javascript:;"
 												class="text-secondary font-weight-bold text-xs"
 												data-toggle="tooltip" data-original-title="Edit user">
