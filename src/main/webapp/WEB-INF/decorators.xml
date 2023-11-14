@@ -18,6 +18,7 @@
 
 	<decorator name="login" page="login.jsp">
 		<pattern>/dang-nhap</pattern>
+		<pattern>/quen-mat-khau*</pattern>
 	</decorator>
 
 	<decorator name="register" page="register.jsp">

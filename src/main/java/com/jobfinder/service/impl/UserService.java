@@ -8,13 +8,12 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.jobfinder.converter.UserConverter;
-import com.jobfinder.dto.EmployerDTO;
 import com.jobfinder.dto.UserDTO;
-import com.jobfinder.entity.EmployerEntity;
 import com.jobfinder.entity.RoleEntity;
 import com.jobfinder.entity.UserEntity;
 import com.jobfinder.repository.RoleRepository;
 import com.jobfinder.repository.UserRepository;
+import com.jobfinder.security.BcryptPassword;
 import com.jobfinder.service.IUserService;
 
 @Service
@@ -89,6 +88,15 @@ public class UserService implements IUserService {
 			userEntity.setStatus(1);
 		}
 		return userConverter.toDto(userRepository.save(userEntity));
+	}
+	
+	@Override
+	@Transactional
+	public void resetPassword(UserDTO dto) {
+		BcryptPassword bcryptPassword = new BcryptPassword();
+		UserEntity userEntity = userRepository.findOne(dto.getId());
+		userEntity.setPassword(bcryptPassword.BcryptPass(dto.getPassword()));
+		userRepository.save(userEntity);
 	}
 
 	@Override
