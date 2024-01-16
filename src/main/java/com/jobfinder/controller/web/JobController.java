@@ -1,7 +1,13 @@
 package com.jobfinder.controller.web;
 
 import org.springframework.beans.factory.annotation.Autowired;
+
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -13,6 +19,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.jobfinder.dto.ApplicantDTO;
 import com.jobfinder.dto.JobDTO;
@@ -109,6 +117,7 @@ public class JobController {
 	public String showApplyForm(@PathVariable("id") Long jobId, Model model) {
 		JobDTO job = jobService.findById(jobId);
 		model.addAttribute("job", job);
+		model.addAttribute("users", userService.findAll());
 		return "web/apply-form";
 	}
 	
@@ -139,6 +148,7 @@ public class JobController {
 	            ApplicantDTO applicant = applicantService.findByUsername(username);
 	            JobDTO job = jobService.findById(jobId);
 	            boolean isApplied = applicantService.applyForJob(applicant, job);
+	            
 	            if (isApplied) {
 	                return "redirect:/viec-lam/ung-tuyen-cong-viec";
 	            } else {

@@ -28,12 +28,12 @@ public class EmployerValidation implements Validator{
 		String userName = employer.getUserName();
         String password = employer.getPassword();
         String confirmPassword = employer.getConfirmPassword();
-        String conpanyIntroduce = employer.getCompanyIntroduce();
+        String companyIntroduce = employer.getCompanyIntroduce();
        
         //validation empty
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "companyName", "employer.companyName.empty");
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "companyAddress", "employer.companyAddress.empty");
-        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "conpanyIntroduce", "employer.conpanyIntroduce.empty");
+        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "companyIntroduce", "employer.companyIntroduce.empty");
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "position", "employer.position.empty");
 
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "firstName", "user.firstName.empty");
@@ -57,8 +57,8 @@ public class EmployerValidation implements Validator{
         if(userService.findOneByEmailAndStatus(email, 1)!=null&&email.length()>1){//email da ton tai
             errors.rejectValue("email","user.email.exist");
         }
-        if(conpanyIntroduce.length()<30 && conpanyIntroduce.length()>1){//truong conpany introduce qua ngan
-            errors.rejectValue("conpanyIntroduce","employer.conpanyIntroduce.size");
+        if(companyIntroduce.length()<30 && companyIntroduce.length()>1){//truong company introduce qua ngan
+            errors.rejectValue("companyIntroduce","employer.companyIntroduce.size");
         }
 	}
 

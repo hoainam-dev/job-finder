@@ -126,5 +126,4 @@ public class ApplicantDTO extends AbstractDTO<UserDTO>{
 	public void setConfirmPassword(String confirmPassword) {
 		this.confirmPassword = confirmPassword;
 	}
-	
 }

@@ -12,6 +12,7 @@ public class UserDTO extends AbstractDTO<UserDTO>{
 	private String email;
 	private String address;
 	private String phone;
+	private String cv;
 	private Integer status;
 	private List<Long> roleId;
 	private	Long applicant_id;
@@ -70,6 +71,12 @@ public class UserDTO extends AbstractDTO<UserDTO>{
 	}
 	public void setPhone(String phone) {
 		this.phone = phone;
+	}
+	public String getCv() {
+		return cv;
+	}
+	public void setCv(String cv) {
+		this.cv = cv;
 	}
 	public Integer getStatus() {
 		return status;

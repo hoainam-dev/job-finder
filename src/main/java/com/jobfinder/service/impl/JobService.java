@@ -122,6 +122,45 @@ public class JobService implements IJobService {
 		}
 		return jobConverter.toDto(jobRepository.save(jobEntity));
 	}
+	
+	@Override
+	@Transactional
+	public JobDTO update(JobDTO dto) {
+	    JobEntity jobEntity = null;
+	    if (dto.getId() != null) {
+	        jobEntity = jobRepository.findOne(dto.getId());
+	        jobEntity = jobConverter.toEntity(jobEntity, dto);
+	        List<SkillEntity> skills = new ArrayList<>();
+	        Date mysqlDate = null;
+	        try {
+	            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+	            java.util.Date date = sdf.parse(dto.getDeadline());
+	            mysqlDate = new Date(date.getTime());
+	        } catch (ParseException e) {
+	            e.printStackTrace();
+	        }
+	        jobEntity.setApplicationDeadline(mysqlDate);
+	        skills.clear();
+	        for (Long skillId : dto.getSkills()) {
+	            skills.add(skillRepository.findOne(skillId));
+	        }
+	        jobEntity.setSkills(skills);
+	        if (dto.getCategory_id() != null) {
+	            jobEntity.setCategory(categoryRepository.findOne(dto.getCategory_id()));
+	        }
+	        if (dto.getEmployer_id() != null) {
+	            jobEntity.setEmployer(employerRepository.findOne(dto.getEmployer_id()));
+	        }
+	    } else {
+	        // Handle case where ID is null (optional)
+	    }
+	    return jobConverter.toDto(jobRepository.save(jobEntity));
+	}
+	
+	@Override
+	public void deleteJob(Long jobId) {
+		jobRepository.delete(jobId);
+	}
 
 	@Override
 	public List<JobDTO> filter(Pageable pageable, Long categoryId, String type, int salary, String location) {

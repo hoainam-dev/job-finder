@@ -134,6 +134,7 @@ public class EmployerService implements IEmployerService{
 		employerDTO.setCompanyName(employer.getCompanyName());
 		employerDTO.setCompanyAddress(employer.getCompanyAddress());
 		employerDTO.setPosition(employer.getPosition());
+		employerDTO.setImg(employer.getImg());
 		
 		employerDTO.setUser_id(user.getId());
         employerDTO.setUserName(user.getUserName());
@@ -178,9 +179,10 @@ public class EmployerService implements IEmployerService{
             employer.setCompanyName(employerDTO.getCompanyName());
             employer.setCompanyAddress(employerDTO.getCompanyAddress());
             employer.setPosition(employerDTO.getPosition());
+            employer.setImg(employerDTO.getImg());
             // ...
             
-            // Cập nhật thông tin của user
+            // cập nhật thông tin của user
             user.setEmail(employerDTO.getEmail());
             user.setFirstName(employerDTO.getFirstName());
             user.setLastName(employerDTO.getLastName());

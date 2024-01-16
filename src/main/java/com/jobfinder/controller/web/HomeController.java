@@ -1,8 +1,11 @@
 package com.jobfinder.controller.web;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +19,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -163,8 +167,32 @@ public class HomeController {
 
 	@RequestMapping(value = "/thong-tin-ca-nhan", method = RequestMethod.POST)
 	public String updateUser(@RequestParam(value = "id") Long userId, UserDTO userDTO
-			, RedirectAttributes redirectAttributes) {
+			, RedirectAttributes redirectAttributes,
+			Model model, @RequestParam(value = "file") MultipartFile file, HttpServletRequest req) {
+		
+		if(file!=null) {
+
+			String uploadRootPath = req.getServletContext().getRealPath("resources/images");
+
+			File destination = new File(uploadRootPath+"/"+file.getOriginalFilename());
+
+			try {
+
+			file.transferTo(destination);
+
+			} catch (IllegalStateException | IOException e) {
+
+			e.printStackTrace();
+
+			}
+
+			userDTO.setCv("resources/images/"+file.getOriginalFilename());
+			System.out.println(destination);
+
+			}
+		
 		userService.save(userDTO);
+		
 		redirectAttributes.addFlashAttribute("message", "Đổi thông tin thành công");//truyen message thanh cong toi trang dang nhap
 		redirectAttributes.addFlashAttribute("alert", "success");//truyen type message toi trang dang nhap
 		return "redirect:/thong-tin-ca-nhan?id=" + userId;

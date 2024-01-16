@@ -22,6 +22,7 @@ public class UserConverter {
 		result.setEmail(entity.getEmail());
 		result.setAddress(entity.getAddress());
 		result.setPhone(entity.getPhone());
+		result.setCv(entity.getCv());
 		result.setCreateAt(formatter.format(entity.getCreate_at().getTime()));
 		result.setUpdateAt(formatter.format(entity.getUpdate_at().getTime()));
 		result.setEmployer_id(entity.getId());
@@ -40,6 +41,7 @@ public class UserConverter {
 		result.setEmail(dto.getEmail());
 		result.setAddress(dto.getAddress());
 		result.setPhone(dto.getPhone());
+		result.setCv(dto.getCv());
 		result.setId(dto.getEmployer_id());;
 		return result;
 	}
@@ -49,6 +51,7 @@ public class UserConverter {
 		result.setLastName(dto.getLastName());
 		result.setAddress(dto.getAddress());
 		result.setPhone(dto.getPhone());
+		result.setCv(dto.getCv());
 		return result;
 	}
 }

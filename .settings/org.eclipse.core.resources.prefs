@@ -11,6 +11,7 @@ encoding//src/main/java/com/jobfinder/controller/web/AuthController.java=UTF-8
 encoding//src/main/java/com/jobfinder/controller/web/HomeController.java=UTF-8
 encoding//src/main/java/com/jobfinder/controller/web/JobController.java=UTF-8
 encoding//src/main/java/com/jobfinder/converter/EmployerConverter.java=UTF-8
+encoding//src/main/java/com/jobfinder/service/impl/EmployerService.java=UTF-8
 encoding//src/main/webapp/WEB-INF/views/admin/checkout.jsp=UTF-8
 encoding//src/main/webapp/WEB-INF/views/admin/service_package.jsp=UTF-8
 encoding//src/main/webapp/WEB-INF/views/auth/login/sendCodeEmail.jsp=UTF-8

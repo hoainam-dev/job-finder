@@ -41,6 +41,9 @@ public class UserEntity extends BaseEntity {
 	@Column
 	private Integer status;
 	
+	@Column(name = "cv")
+	private String cv;
+	
 	@OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
 	private EmployerEntity employer;
 	
@@ -141,5 +144,12 @@ public class UserEntity extends BaseEntity {
 	public void setApplicant(ApplicantEntity applicant) {
 		this.applicant = applicant;
 	}
-	
+
+	public String getCv() {
+		return cv;
+	}
+
+	public void setCv(String cv) {
+		this.cv = cv;
+	}
 }

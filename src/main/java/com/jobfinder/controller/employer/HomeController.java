@@ -1,8 +1,11 @@
 package com.jobfinder.controller.employer;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,13 +13,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.jobfinder.dto.ApplicantDTO;
 import com.jobfinder.dto.CategoryDTO;
 import com.jobfinder.dto.EmployerDTO;
 import com.jobfinder.dto.JobDTO;
@@ -54,7 +58,7 @@ public class HomeController {
 	
 	@Autowired
 	private JobValidation jobValidation;
-	
+
 	/**
 	 * function Get current employer logging in
 	 * 
@@ -117,7 +121,6 @@ public class HomeController {
 		mav.addObject("users", users);//push users to view
 		mav.addObject("jobs", jobs);//push jobs to view
 		mav.addObject("title", "Danh sách việc làm");//push title to view
-		
 		return mav;
 	}
 	
@@ -159,7 +162,7 @@ public class HomeController {
 	 */
 	@RequestMapping(value = "/tao-viec-lam", method = RequestMethod.POST)
 	public String createJob(@Valid JobDTO jobDTO, BindingResult bindingResult,
-			RedirectAttributes redirectAttributes, Model model) {
+			RedirectAttributes redirectAttributes, Model model, @RequestParam("file") MultipartFile file, HttpServletRequest req) {
 		
 		//validation cho form dang ky nguoi tim viec
 		jobValidation.validate(jobDTO, bindingResult);
@@ -172,6 +175,27 @@ public class HomeController {
 		types.add("Part time");
 		types.add("Remote");
 		types.add("Freelance");
+		
+		if(file!=null) {
+
+			String uploadRootPath = req.getServletContext().getRealPath("resources/images");
+
+			File destination = new File(uploadRootPath+"/"+file.getOriginalFilename());
+
+			try {
+
+			file.transferTo(destination);
+
+			} catch (IllegalStateException | IOException e) {
+
+			e.printStackTrace();
+
+			}
+
+			jobDTO.setImage("resources/images/"+file.getOriginalFilename());
+			System.out.println(destination);
+
+			}
 		
 		if (bindingResult.hasErrors()) {
 			//neu co loi return ve lai form va hien thi loi
@@ -189,6 +213,82 @@ public class HomeController {
 		return "redirect:/nha-tuyen-dung/viec-lam";
 	}
 	
+	@RequestMapping(value = "/cap-nhat-viec-lam/{id}", method = RequestMethod.GET)
+	public String updateJobForm(@PathVariable Long id, Model model) {
+	    JobDTO jobDTO = jobService.findById(id);
+	    List<String> types = new ArrayList<>();
+	    types.add("Full time");
+	    types.add("Part time");
+	    types.add("Remote");
+	    types.add("Freelance");
+	    EmployerDTO employer = getCurrentEmployer(); //get current employer
+	    model.addAttribute("categories", categoryService.findAll());
+	    model.addAttribute("positions", positionService.findAll());
+	    model.addAttribute("types", types);
+	    model.addAttribute("skills", skillService.findAll());
+	    model.addAttribute("employer", employer);
+	    model.addAttribute("jobDTO", jobDTO);
+	    model.addAttribute("users", userService.findAll());
+	    model.addAttribute("title", "Cập nhật việc làm");
+	    return "employer/update-job";
+	}
+
+	/**
+	 * Function POST mapping to update job
+	 * 
+	 *  11102023 NamHH
+	 * 
+	 * @author NamHH
+	 */
+	@RequestMapping(value = "/cap-nhat-viec-lam/{id}", method = RequestMethod.POST)
+	public String updateJob(@PathVariable Long id, @Valid JobDTO jobDTO, BindingResult bindingResult,
+	        RedirectAttributes redirectAttributes, Model model, @RequestParam("file") MultipartFile file, HttpServletRequest req) {
+
+	    //validation cho form cập nhật công việc
+	    jobValidation.validate(jobDTO, bindingResult);
+
+	    EmployerDTO employer = getCurrentEmployer(); //get current employer
+
+	    List<String> types = new ArrayList<>();
+	    types.add("Full time");
+	    types.add("Part time");
+	    types.add("Remote");
+	    types.add("Freelance");
+
+	    if (file != null) {
+	        String uploadRootPath = req.getServletContext().getRealPath("resources/images");
+	        File destination = new File(uploadRootPath + "/" + file.getOriginalFilename());
+	        try {
+	            file.transferTo(destination);
+	        } catch (IllegalStateException | IOException e) {
+	            e.printStackTrace();
+	        }
+	        jobDTO.setImage("resources/images/" + file.getOriginalFilename());
+	        System.out.println(destination);
+	    }
+
+	    if (bindingResult.hasErrors()) {
+	        //nếu có lỗi thì trả về form và hiển thị lỗi
+	        model.addAttribute("categories", categoryService.findAll());
+	        model.addAttribute("employer", employer);
+	        model.addAttribute("positions", positionService.findAll());
+	        model.addAttribute("skills", skillService.findAll());
+	        model.addAttribute("types", types);
+	        return "employer/update-job";
+	    }
+
+	    jobDTO.setId(id); // set ID for the job
+	    jobService.update(jobDTO); //update in database
+	    redirectAttributes.addFlashAttribute("message", "Cập nhật thành công"); //truyền thông báo thành công
+	    redirectAttributes.addFlashAttribute("alert", "success"); //truyền loại thông báo cho trang chủ
+	    return "redirect:/nha-tuyen-dung/viec-lam";
+	}
+	
+	@RequestMapping(value = "/xoa-bai-viet/{jobId}", method = RequestMethod.DELETE)
+	public void deleteJob(@PathVariable Long jobId) {
+		jobService.deleteJob(jobId);
+	}
+	
 	/**
 	 * function GET mapping to show profile page
 	 * 
@@ -201,7 +301,6 @@ public class HomeController {
 		EmployerDTO employerDTO = employerService.getEmployerProfile(id);
 		model.addAttribute("employer", employerDTO);
 		UserDTO userDTO = userService.findById(id);
-		model.addAttribute("users", userService.findAll());//push users to view
 		model.addAttribute("user", userDTO);
 		model.addAttribute("title", "Thông tin cá nhân");//push title to view
 		return "employer/profile";
@@ -234,7 +333,7 @@ public class HomeController {
             model.addAttribute("title", "Cập nhật thông tin");//push title to view
             model.addAttribute("employer", employerDTO);
             model.addAttribute("user", user);
-            model.addAttribute("users", userService.findAll());//push users to view
+            
             return "employer/update-profile";
         } else {
             return null;
@@ -256,16 +355,5 @@ public class HomeController {
 		redirectAttributes.addFlashAttribute("message", "Đổi thông tin thành công");//truyen message thanh cong toi trang dang nhap
 		redirectAttributes.addFlashAttribute("alert", "success");//truyen type message toi trang dang nhap
 		return "redirect:/nha-tuyen-dung/thong-tin-ca-nhan?id=" + id;
-	}
-	
-	@RequestMapping(value = "/showApplicants", method = RequestMethod.GET)
-	public String showApplicants(@RequestParam Long jobId, Model model) {
-	    JobDTO job = jobService.findById(jobId);
-	    List<ApplicantDTO> applicants = jobService.findApplicantsForJob(jobId);
-
-	    model.addAttribute("job", job);
-	    model.addAttribute("applicants", applicants);
-
-	    return "employer/applicants-view";
 	}
 }
