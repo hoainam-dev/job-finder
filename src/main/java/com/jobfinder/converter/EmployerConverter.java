@@ -17,6 +17,7 @@ public class EmployerConverter {
 		result.setCompanyAddress(entity.getCompanyAddress());
 		result.setCompanyIntroduce(entity.getCompanyIntroduce());
 		result.setPosition(entity.getPosition());
+		result.setImg(entity.getImg());
 		if(entity.getServices() != null) {
 			result.setService(entity.getServices().getName());
 		} else {
@@ -45,6 +46,7 @@ public class EmployerConverter {
 		result.setCompanyAddress(dto.getCompanyAddress());
 		result.setCompanyIntroduce(dto.getCompanyIntroduce());
 		result.setPosition(dto.getPosition());
+		result.setImg(dto.getImg());
 		return result;
 	}
 	
@@ -53,6 +55,7 @@ public class EmployerConverter {
 		result.setCompanyAddress(dto.getCompanyAddress());
 		result.setCompanyIntroduce(dto.getCompanyIntroduce());
 		result.setPosition(dto.getPosition());
+		result.setImg(dto.getImg());
 		return result;
 	}
 }

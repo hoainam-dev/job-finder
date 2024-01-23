@@ -175,7 +175,7 @@
 			                                    <div class="job-items">
 			                                        <div class="company-img">
 			                                            <a href="/viec-lam/chi-tiet-viec-lam/${job.id}">
-			                                            	<img src="/template/web/img/icon/job-list1.png" alt="">
+			                                            	<img src="${pageContext.servletContext.contextPath}/${job.image}" width="50"/>
 			                                            </a>
 			                                        </div>
 			                                        <div class="job-tittle job-tittle2">

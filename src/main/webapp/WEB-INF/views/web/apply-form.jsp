@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ include file="/common/taglib.jsp"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -15,6 +16,8 @@
 </head>
 <body class="bg-light">
 
+	<%@ include file="/common/element/header.jsp"%>
+	
 	<div class="container mt-5">
 		<div class="card">
 			<div class="card-header">
@@ -22,14 +25,14 @@
 			</div>
 			<div class="card-body">
 				<!-- Your form goes here -->
-				<form id="applyForm"
-					action="/viec-lam/nop-ho-so-ung-tuyen/${job.id}" method="POST">
+				<form:form id="applyForm"
+					action="/viec-lam/nop-ho-so-ung-tuyen/${job.id}" method="POST" enctype="multipart/form-data" modelAttribute="applicantDTO">
 					<a href="/viec-lam/chi-tiet-viec-lam/${job.id}">
 						<button type="button" class="btn btn-secondary mr-2">Hủy</button>
 					</a>
 					<button type="submit" class="btn btn-primary">Nộp hồ sơ ứng tuyển</button>
 
-				</form>
+				</form:form>
 			</div>
 			<div class="card-footer text-muted">Your company name &copy;
 				2023</div>

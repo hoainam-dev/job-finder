@@ -26,6 +26,7 @@ public class JobConverter {
 		result.setLocation(entity.getLocation());
 		result.setId(entity.getId());
 		result.setTitle(entity.getTitle());
+		result.setImage(entity.getImage());
 		result.setType(entity.getType());
 		result.setDescription(entity.getDescription());
 		result.setRequirements(entity.getRequirements());
@@ -33,7 +34,6 @@ public class JobConverter {
 		result.setDeadline(formatter.format(entity.getApplicationDeadline().getTime()));
 		result.setSalary(entity.getSalary());
 		result.setPosition(entity.getPosition());
-		result.setType(entity.getType());
 		result.setSkills(skills);
 		if (entity.getCategory() != null) {
 			result.setCategory_id(entity.getCategory().getId());
@@ -51,6 +51,7 @@ public class JobConverter {
 	public JobEntity toEntity(JobDTO dto){
 		JobEntity result = new JobEntity();
 		result.setTitle(dto.getTitle());
+		result.setImage(dto.getImage());
 		result.setType(dto.getType());
 		result.setDescription(dto.getDescription());
 		result.setRequirements(dto.getRequirements());
@@ -64,6 +65,7 @@ public class JobConverter {
 	
 	public JobEntity toEntity(JobEntity result, JobDTO dto) {
 		result.setTitle(dto.getTitle());
+		result.setImage(dto.getImage());
 		result.setType(dto.getType());
 		result.setDescription(dto.getDescription());
 		result.setRequirements(dto.getRequirements());

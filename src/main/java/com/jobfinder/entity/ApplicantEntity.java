@@ -78,5 +78,4 @@ public class ApplicantEntity extends BaseEntity{
 		this.user = user;
 	}
 	
-	
 }

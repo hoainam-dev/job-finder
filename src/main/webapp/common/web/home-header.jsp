@@ -9,7 +9,7 @@
 		<div class="preloader-inner position-relative">
 			<div class="preloader-circle"></div>
 			<div class="preloader-img pere-text">
-				<img src="./template/web/img/logo/logo.png" alt="">
+				<img src="./template/web/img/logo/logo2.png" alt="">
 			</div>
 		</div>
 	</div>
@@ -23,9 +23,9 @@
 				<div class="row align-items-center">
 					<div class="col-lg-3 col-md-2">
 						<!-- Logo -->
-						<div class="logo">
-							<a href="/"><img src="./template/web/img/logo/logo.png"
-								alt=""></a>
+						<div class="logo" >
+							<a href="/"><img src="./template/web/img/logo/logo2.png" style="width:200px; padding-top:10px; padding-bottom:10px"					
+							alt=""></a>
 						</div>
 					</div>
 					<div class="col-lg-9 col-md-9">
@@ -36,13 +36,8 @@
 									<ul id="navigation">
 										<li><a href="/">Trang chủ</a></li>
 										<li><a href="/viec-lam/danh-sach?page=1&limit=10">Tìm việc</a></li>
-										<li><a href="#">Công ty</a>
-											<ul class="submenu">
-												<li><a href="/cong-ty">Danh sách công ty</a></li>
-												<li><a href="#">Top công ty</a></li>
-											</ul></li>
-										<li><a href="#">Liên hệ</a></li>
-										<li><a href="#">Trợ giúp</a></li>
+										<li><a href="/cong-ty">Công ty</a>
+										<li><a href="/viec-lam/ung-tuyen-cong-viec">Công việc ứng tuyển</a></li>
 									</ul>
 								</nav>
 							</div>

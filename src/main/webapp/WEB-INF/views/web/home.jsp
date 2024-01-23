@@ -89,7 +89,7 @@
 								<div class="single-job-items mb-30">
 									<div class="job-items">
 										<div class="company-img">
-											<a href="job_details.html"><img src="./template/web/img/icon/job-list1.png" alt=""></a>
+											<a href="job_details.html"><img src="${pageContext.servletContext.contextPath}/${job.image}" width="50"/></a>
 										</div>
 										<div class="job-tittle">
 											<a href="/viec-lam/chi-tiet-viec-lam/${job.id}">

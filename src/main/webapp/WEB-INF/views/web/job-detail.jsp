@@ -48,7 +48,7 @@ p{
 						<div class="single-job-items mb-50">
 							<div class="job-items">
 								<div class="company-img company-img-details">
-									<a href="#"><img src="/template/web/img/icon/job-list1.png" alt=""></a>
+									<a href="#"><img src="${pageContext.servletContext.contextPath}/${job.image}" width="100"/></a>
 								</div>
 								<div class="job-tittle">
 									<c:forEach var="employer" items="${employers}">
@@ -140,7 +140,8 @@ p{
 								<li>Mức lương: <span class="salary">${job.salary} - ${job.salary+5} triệu</span></li>
 							</ul>
 							<div class="apply-btn2">
-								<a href="/viec-lam/ung-tuyen-cong-viec/${job.id}" class="btn">Ứng tuyển</a>
+								<%-- <a href="/viec-lam/ung-tuyen-cong-viec/${job.id}" class="btn">Ứng tuyển</a> --%>
+								<a href="" class="btn">Ứng tuyển</a>
 							</div>
 						</div>
 						<div class="post-details4  mb-50">

@@ -6,6 +6,7 @@ import org.springframework.data.domain.Pageable;
 
 import com.jobfinder.dto.ApplicantDTO;
 import com.jobfinder.dto.JobDTO;
+import com.jobfinder.entity.JobEntity;
 
 public interface IJobService {
 	
@@ -28,5 +29,13 @@ public interface IJobService {
 	List<JobDTO> findByEmployerId(Long employer_id);
 	
 	List<ApplicantDTO> findApplicantsForJob(Long jobId);
+
+	JobDTO update(Long jobId);
+
+	JobDTO update(Long jobId, JobDTO jobDTO);
+
+	JobDTO update(JobDTO dto);
+
+	void deleteJob(Long jobId);
 	
 }

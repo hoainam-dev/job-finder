@@ -23,7 +23,7 @@ body{
 				data-background="./template/web/img/hero/h1_hero.png">
 				<div class="container">
 					<div class="section-top-border">
-						<form:form action="dang-ky-nha-tuyen-dung" method="POST" modelAttribute="employerDTO">
+						<form:form action="dang-ky-nha-tuyen-dung" method="POST" modelAttribute="employerDTO" enctype="multipart/form-data">
 							<div class="row">
 								<div class="col-lg-8 col-md-8">
 									<h3 class="mb-30">Tài khoản</h3>
@@ -84,6 +84,10 @@ body{
 										<label>Chức vụ</label>
 										<form:input type="text" class="single-input" path="position" />
 										<span><form:errors cssClass="error" path="position" /></span>
+									</div>
+									<div class="mt-10">
+										<label>Tải hình ảnh công ty: </label>
+										<input type="file" name="file"/>
 									</div>
 									<div class="mt-10">
 										<label>Tên công ty</label>

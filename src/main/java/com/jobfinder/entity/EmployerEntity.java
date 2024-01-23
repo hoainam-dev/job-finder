@@ -31,6 +31,9 @@ public class EmployerEntity extends BaseEntity {
 	@ManyToOne
     @JoinColumn(name = "dich_vu_id")
 	private ServiceEntity service;
+	
+	@Column(name = "img")
+	private String img;
 
 	
 	public String getCompanyName() {
@@ -90,6 +93,12 @@ public class EmployerEntity extends BaseEntity {
 		this.service.setId(id);
 	}
 
+	public String getImg() {
+		return img;
+	}
 
+	public void setImg(String img) {
+		this.img = img;
+	}
 	
 }

@@ -27,6 +27,16 @@
 	
 	<dec:body/>
 	
+	<!-- ChatBot AI -->
+		<script src="https://www.gstatic.com/dialogflow-console/fast/messenger/bootstrap.js?v=1"></script>
+		<df-messenger
+		  	intent="WELCOME"
+		  	chat-title="Chat_Job"
+		  	agent-id="d7a0e9ef-b7d8-4688-b1f4-93e69a07046f"
+		  	language-code="vi"
+		></df-messenger>
+	
+	
 	<!-- All JS Custom Plugins Link Here here -->
         <script src="./template/web/js/vendor/modernizr-3.5.0.min.js"></script>
 		<!-- Jquery, Popper, Bootstrap -->

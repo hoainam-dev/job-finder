@@ -21,6 +21,9 @@ public class JobEntity extends BaseEntity{
 	@Column(name = "title")
 	private String title;
 	
+	@Column(name = "image")
+	private String image;
+	
 	@Column(name = "type")
 	private String type;
 	
@@ -58,17 +61,6 @@ public class JobEntity extends BaseEntity{
 	@JoinTable(name = "job_skill", joinColumns = @JoinColumn(name = "job_id"), 
 								  inverseJoinColumns = @JoinColumn(name = "skill_id"))
 	private List<SkillEntity> jobSkills = new ArrayList<>();
-	
-	@ManyToMany(mappedBy = "appliedJobs")
-	private List<ApplicantEntity> applicants = new ArrayList<>();
-	
-	public List<ApplicantEntity> getApplicants() {
-	    return applicants;
-	}
-
-	public void setApplicants(List<ApplicantEntity> applicants) {
-	    this.applicants = applicants;
-	}
 
 	public String getTitle() {
 		return title;
@@ -76,6 +68,14 @@ public class JobEntity extends BaseEntity{
 
 	public void setTitle(String title) {
 		this.title = title;
+	}
+
+	public String getImage() {
+		return image;
+	}
+
+	public void setImage(String image) {
+		this.image = image;
 	}
 
 	public String getType() {

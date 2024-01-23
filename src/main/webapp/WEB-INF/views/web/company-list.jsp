@@ -42,7 +42,7 @@
                 <c:forEach var="company" items="${companies}">
                     <div class="col-md-4">
                         <div class="card company-card mt-5">
-                            <img src="/template/web/img/banner/dog.png" class="card-img-top" alt="Company Logo" >
+                            <img src="${pageContext.servletContext.contextPath}/${company.img}" class="card-img-top" alt="Company Logo" >
                             <div class="card-body">
                                 <h5 class="card-title" style="width: 261px; height: 40px;">${company.companyName}</h5>
                                 <p class="card-text">${company.companyAddress}</p>

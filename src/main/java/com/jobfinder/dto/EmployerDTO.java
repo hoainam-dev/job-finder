@@ -20,6 +20,7 @@ public class EmployerDTO extends AbstractDTO<UserDTO>{
 	private String phone;
 	private	Long user_id;
 	private String service;
+	private String img;
 	
 	
 	public Long getId() {
@@ -119,6 +120,13 @@ public class EmployerDTO extends AbstractDTO<UserDTO>{
 	public void setService(String service) {
 		this.service = service;
 	}
+	
+	public String getImg() {
+		return img;
+	}
+	public void setImg(String img) {
+		this.img = img;
+	}
 	public void updateEmployerInfo(UserEntity user) {
 	        // Cập nhật thông tin của employer từ các thuộc tính trong UserEntity
 	        this.setEmail(user.getEmail());
@@ -129,11 +137,13 @@ public class EmployerDTO extends AbstractDTO<UserDTO>{
 	    }
 	    
 	    // Phương thức để cập nhật thông tin của employer
-	    public void updateEmployerInfo(EmployerEntity employer) {
-	        // Cập nhật thông tin của employer từ các thuộc tính trong EmployerDTO
-	        employer.setCompanyName(this.getCompanyName());
-	        employer.setCompanyAddress(this.getCompanyAddress());
-	        employer.setPosition(this.getPosition());
-	        // ...
-	    }
+    public void updateEmployerInfo(EmployerEntity employer) {
+        // Cập nhật thông tin của employer từ các thuộc tính trong EmployerDTO
+        employer.setCompanyName(this.getCompanyName());
+        employer.setCompanyAddress(this.getCompanyAddress());
+        employer.setPosition(this.getPosition());
+        employer.setImg(this.getImg());
+        employer.setCompanyIntroduce(this.getCompanyIntroduce());
+        // ...
+    }
 }

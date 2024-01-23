@@ -1,5 +1,6 @@
 package com.jobfinder.controller.web;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
@@ -25,6 +26,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -327,8 +329,30 @@ public class AuthController {
 	 */
 	@RequestMapping(value = "/dang-ky-nha-tuyen-dung", method = RequestMethod.POST)
 	public String registerEmployer(@Valid EmployerDTO employerDTO, BindingResult bindingResult,
-			RedirectAttributes redirectAttributes) {
+			RedirectAttributes redirectAttributes , Model model, @RequestParam("file") MultipartFile file, HttpServletRequest req) {
 		employerValidation.validate(employerDTO, bindingResult);//validation cho form dang ky nha tuyen dung
+		
+		if(file!=null) {
+
+			String uploadRootPath = req.getServletContext().getRealPath("resources/images");
+
+			File destination = new File(uploadRootPath+"/"+file.getOriginalFilename());
+
+			try {
+
+			file.transferTo(destination);
+
+			} catch (IllegalStateException | IOException e) {
+
+			e.printStackTrace();
+
+			}
+
+			employerDTO.setImg("resources/images/"+file.getOriginalFilename());
+			System.out.println(destination);
+
+		}
+		
 		if (bindingResult.hasErrors()) {
 			//neu co loi return ve lai form va hien thi loi
 			return "auth/register/employer-register";

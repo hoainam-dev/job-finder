@@ -29,7 +29,7 @@
 								<div class="panel-body">
 									<form:form cssClass="form-horizontal"
 										action="/nha-tuyen-dung/tao-viec-lam" modelAttribute="jobDTO"
-										method="POST">
+										method="POST" enctype="multipart/form-data">
 										<input type="hidden" name="employer_id" value="${employer.id}" />
 										<!-- title // -->
 										<div class="form-group">
@@ -40,6 +40,10 @@
 													placeholder="Nhập tiêu đề tin tuyển dụng" />
 											</div>
 											<span><form:errors cssClass="error" path="title" /></span>
+										</div>
+										
+										<div class="form-group">
+											<label>Chọn file</label> <input type="file" name="file"/>
 										</div>
 
 										<!-- description // -->

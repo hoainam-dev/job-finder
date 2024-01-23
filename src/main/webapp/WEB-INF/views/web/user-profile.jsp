@@ -115,6 +115,9 @@
 						</div>
 					</div>
 					<div class="row">
+					 	<label>Chọn file</label> <input type="file" name="file"/>
+					 </div>
+					<div class="row">
 						<div class="col-md-12 text-center">
 							<input type="submit" class="btn" value="Cập nhật thông tin">
 						</div>

@@ -9,7 +9,7 @@
 		<div class="preloader-inner position-relative">
 			<div class="preloader-circle"></div>
 			<div class="preloader-img pere-text">
-				<img src="<c:url value='/template/web/img/logo/logo.png'/>">
+				<img src="<c:url value='/template/web/img/logo/logo2.png'/>">
 			</div>
 		</div>
 	</div>
@@ -24,7 +24,7 @@
 					<div class="col-lg-3 col-md-2">
 						<!-- Logo -->
 						<div class="logo">
-							<a href="/"><img src="/template/web/img/logo/logo.png"
+							<a href="/"><img src="/template/web/img/logo/logo2.png" style="width:200px; padding-top:10px; padding-bottom:10px"
 								alt=""></a>
 						</div>
 					</div>
